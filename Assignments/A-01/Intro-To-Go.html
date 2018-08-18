@@ -1,0 +1,582 @@
+<h1>Introduction to Programming in Go</h1>
+
+<ol>
+<li>Install Go</li>
+<li>Verify that you can compile and run (Hello-World.go) (5pts)</li>
+<li>Echo command line arguments (echo1.go) (5pts)</li>
+<li>Parse command line arguments (echo2.go) (5pts)</li>
+<li>Read and write JSON file (read-json1.go) (10pts)</li>
+<li>Test a simple library package (15pts)</li>
+<li>Printing (print1.go) (10pts)</li>
+<li>Copy a File (copy1.go, copy2.go) (20pts)</li>
+<li>Hash and a simple test in Go (test1.go) (30pts)</li>
+<li>Summary</li>
+</ol>
+
+<p>100 Points total.</p>
+
+<p>Item #8 and #9 will be the first auto-graded items.  I will use automated tests to check that the code works.</p>
+
+<h2>Install Go</h2>
+
+<p>Go runs on Windows, Mac and Linux (and a bunch of other systems too).  To install you will need to
+download the Go compiler for your system.  If you already have Go installed you will may have to
+delete the old version, then install the new version.   Go is super-stable - there is no reason
+to keep an old version of the compiler around.</p>
+
+<p>Search google for &ldquo;download golang&rdquo;.  Go is usually referred to as &ldquo;golang&rdquo; when you search for it.</p>
+
+<p>You should find: <a href="https://golang.org/dl/">https://golang.org/dl/</a>.  The page should look like
+<img src="go-download.png" alt="Go Download Page" /></p>
+
+<p>Install at least version 1.10.3 of the language.</p>
+
+<p>You will need to use an editor.  I don&rsquo;t usually use an IDE.  I do use vi (vim).</p>
+
+<p>If you need to create a portable USB drive with Go and VIM on it see me after class.</p>
+
+<p>Submit:</p>
+
+<ol>
+<li>run <code>go version</code> and cut/paste the output.  Submit a file with that in it.
+You should see a verison around <code>go1.10</code> or <code>go1.10.3</code>.</li>
+</ol>
+
+<h2>(1.2) Verify that you can compile and run (Hello-World.go) (5pts)</h2>
+
+<p>Cut and paste - or type in (probably better for you) the following program.   These instructions are
+also on the Go download page.</p>
+
+<pre><code class="language-Go">	package main
+
+	// Your Name - it is important if you want to get credit for your assignment.
+	// Assignment 1.2 hello world - This is important too.  If you want credit.`
+
+	import &quot;fmt&quot;
+
+	func main() {
+		fmt.Printf(&quot;Hello Wonderful World\n&quot;)
+	}
+</code></pre>
+
+<p>Submit:</p>
+
+<ol>
+<li>A copy of your code.</li>
+<li>Change the <code>fmt.Pr...</code> to <code>fmt.Println(&quot;Hello, 世界&quot;)</code> - re run the code and save the output.</li>
+</ol>
+
+<h3>References</h3>
+
+<ol>
+<li><a href="https://tour.golang.org/welcome/1">A Tour of Go</a></li>
+<li><a href="https://golangbot.com/hello-world/">Hello World Explained</a></li>
+</ol>
+
+<p>You may want to work through the <a href="https://tour.golang.org/welcome/1">A Tour of Go</a>.  That will
+help with this class.</p>
+
+<p>You will need a github.com account. Go and create one if you do not already have one.
+A free account will work.</p>
+
+<h3>Mac and Linux</h3>
+
+<pre><code>	$ export GOPATH=/Users/&lt;Your Github Username&gt;/go
+	$ mkdir -p ~/go/src/github.com/&lt;Your Github Username&gt;
+	$ cd ~/go/src/github.com/&lt;Your Github Username&gt;
+	$ mkdir hello-world
+	$ cd hello-world
+	$ vi hw.go
+	$ go build
+	$ ./hello-world
+	Hello Wonderful World
+</code></pre>
+
+<h3>PC</h3>
+
+<pre><code>	E:\ mkdir hello-world
+	E:\hello-world\ cd hello-world
+	E:\hello-world\ vim hw.go
+	E:\hello-world\ go build
+	E:\hello-world\ hello-world.exe
+	Hello Wonderful World
+</code></pre>
+
+<p>You will want to create a directory for each main program and under that directories for each package
+that you create in Go.</p>
+
+<h2>(1.3) Echo command line arguments (echo1.go) (5pts)</h2>
+
+<p>Echo should take the command line arguments (after the 0th one, the name of the command) and print them out.
+Cut and paste the following code.  Get it to run.  Compile with <code>go build</code>.   Run it with <code>go run &lt;your file&gt;.go Arguments</code>.</p>
+
+<pre><code class="language-Go">	package main
+
+	// Your Name - it is important if you want to get credit for your assignment.
+	// Assignment 1.3 echo command line arguments.
+
+	import (
+		&quot;fmt&quot;
+		&quot;os&quot;
+	)
+
+	func main() {
+		ags := os.Args[1:]
+		for ii, ag := range ags {
+			if ii &lt; len(ags) {
+				fmt.Printf(&quot;%s &quot;, ag)
+			} else {
+				fmt.Printf(&quot;%s&quot;, ag)
+			}
+		}
+		fmt.Printf(&quot;\n&quot;)
+	}
+</code></pre>
+
+<ol>
+<li><code>import</code> is a list</li>
+<li><code>os.Args[1:]</code> is a slice of an array</li>
+<li><code>range</code></li>
+<li>no semicolons</li>
+<li><code>:=</code> declares variables.</li>
+</ol>
+
+<p>Submit:</p>
+
+<ol>
+<li>A copy of your code with your name in it.</li>
+<li>An example (cut and paste) of running this with the arguments <code>aa BB cc</code>.</li>
+</ol>
+
+<h3>References</h3>
+
+<ol>
+<li><a href="https://golang.org/pkg/os/">os Package</a></li>
+</ol>
+
+<h2>(1.4) Parse command line arguments (echo2.go) (5pts)</h2>
+
+<p>Cut and paste the following code.  Get it to work.  Run it.
+Save the output - edit the code and change <code>Your Name</code>.
+Add your email address.</p>
+
+<p>Follow the reference link to the Go documentation and read the
+custom <code>Animal</code> marshal/unmarshal.  It is in the example at the
+top of the document.</p>
+
+<pre><code class="language-Go">	package main
+
+	// Your Name - it is important if you want to get credit for your assignment.
+	// Your Email Address 
+	// Assignment 1.4 echo command line arguments and parse arguments.
+
+	import (
+		&quot;encoding/json&quot;
+		&quot;flag&quot;
+		&quot;fmt&quot;
+		&quot;io/ioutil&quot;
+		&quot;os&quot;
+	)
+
+	type ConfigData struct {
+		Name  string
+		Value string `json:&quot;Year&quot;`
+	}
+
+	func main() {
+		var Cfg = flag.String(&quot;cfg&quot;, &quot;cfg.json&quot;, &quot;config file for this call&quot;)
+
+		flag.Parse() // Parse CLI arguments to this, --cfg &lt;name&gt;.json
+
+		fns := flag.Args()
+		if len(fns) != 0 {
+			fmt.Fprintf(os.Stderr, &quot;Usage: ./echo2 [-cfg cfg.json] [arg1 ...]\n&quot;)
+			os.Exit(1)
+		}
+
+		if Cfg == nil {
+			fmt.Printf(&quot;--cfg is a required parameter\n&quot;)
+			os.Exit(1)
+		}
+
+		gCfg, err := ReadConfig(*Cfg)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, &quot;Unable to read confguration: %s error %s\n&quot;, *Cfg, err)
+			os.Exit(1)
+		}
+
+		fmt.Printf(&quot;Congiguration: %+v\n&quot;, gCfg)
+		fmt.Printf(&quot;JSON: %+v\n&quot;, IndentJSON(gCfg))
+
+		for ii, ag := range fns {
+			if ii &lt; len(fns) {
+				fmt.Printf(&quot;%s &quot;, ag)
+			} else {
+				fmt.Printf(&quot;%s&quot;, ag)
+			}
+		}
+		fmt.Printf(&quot;\n&quot;)
+	}
+
+	func ReadConfig(filename string) (rv ConfigData, err error) {
+		var buf []byte
+		buf, err = ioutil.ReadFile(filename)
+		if err != nil {
+			return ConfigData{}, err
+		}
+		err = json.Unmarshal(buf, &amp;rv)
+		if err != nil {
+			return ConfigData{}, err
+		}
+		return
+	}
+
+	func IndentJSON(v interface{}) string {
+		s, err := json.MarshalIndent(v, &quot;&quot;, &quot;\t&quot;)
+		if err != nil {
+			return fmt.Sprintf(&quot;Error:%s&quot;, err)
+		} else {
+			return string(s)
+		}
+	}
+</code></pre>
+
+<pre><code class="language-JSON">{
+	&quot;Name&quot;: &quot;Corwin&quot;,
+	&quot;Year&quot;: &quot;100&quot;,
+	&quot;Value&quot;: &quot;200&quot;
+}
+</code></pre>
+
+<ol>
+<li><code>type ConfigData struct</code> Declare a struct.</li>
+<li><code>var Cfg =...</code> Declare a variable.  It will be a pointer to a string.</li>
+<li><code>flag.Parse()</code> use the <code>flag</code> package.  Parse the command line.</li>
+<li><code>fns := flag.Args()</code> pick off the arguments.</li>
+<li><code>ReadConfig</code> call a function.</li>
+<li><code>fmt.Print.... %+v</code> print out a structure with the field names.</li>
+<li><code>func ReadConfig</code> declare a function.  Note the multiple return values.</li>
+<li><code>return ConfigData{}, err</code> declare an empty <code>ConfigData{}</code> and return an error.</li>
+<li><code>func IndentJSON.... v interface{}</code> create a data type that can receive any type that is passed.</li>
+<li><code>json.MarshalIndent</code> marshal data into a string.</li>
+</ol>
+
+<p>Why did <code>100</code> print out.  What happened to <code>200</code>.  Create a new JSON file under a new name and
+set the year field to 2018.</p>
+
+<p>Submit:</p>
+
+<ol>
+<li>Your modified code.</li>
+<li>Your JSON file with the year.</li>
+</ol>
+
+<h3>References</h3>
+
+<ol>
+<li><a href="https://golang.org/pkg/encoding/json/">JSON in Go</a></li>
+</ol>
+
+<h2>(1.5) Read and write JSON file (read-json1.go) (10pts)</h2>
+
+<p>Use the following structure to read a JSON file.  Create a program that will read
+JSON in, print it, write it out in a new JSON file.   Get the file name for the input
+and output from the command line.</p>
+
+<p>Add a map/dictionary field in the JSON input that is</p>
+
+<pre><code>	&quot;MyName&quot;: &quot;Your actual Name&quot;,
+	&quot;MyEmail&quot;: &quot;Your email address&quot;,
+</code></pre>
+
+<p>Example Run:</p>
+
+<pre><code class="language-SH">	./read-json1 --input in.json --output out.json
+</code></pre>
+
+<p>The struct to include in your code.</p>
+
+<pre><code class="language-Go">	var TransactionType struct {
+		TxHash	string
+		TxIn	int
+		TxOut	int
+	}
+</code></pre>
+
+<p>You will need to use:</p>
+
+<ol>
+<li><code>ioutil.WriteFile</code> <a href="https://golang.org/pkg/io/ioutil/">ioutil package</a></li>
+<li><code>IndentJSON</code> from above.</li>
+</ol>
+
+<p>Submit:</p>
+
+<ol>
+<li>Your program.</li>
+<li>Your JSON input file.</li>
+<li>Your JSON output file.</li>
+</ol>
+
+<h3>References</h3>
+
+<ol>
+<li><a href="https://golang.org/pkg/io/ioutil/">ioutil package</a></li>
+</ol>
+
+<h2>(1.6) Test a simple library package (15pts)</h2>
+
+<p>Goal: create a go package and a test for that package.</p>
+
+<p>Create a new directory inside your github.com/username.   This example will use <code>pschlump</code> as the username.</p>
+
+<pre><code>	cd
+	mkdir -p ~/go/src/github.com/pschlump/mkPkg/test1
+	cd ~/go/src/github.com/pschlump/mkPkg/test1
+	vi test1.go
+</code></pre>
+
+<p>A simple example package.</p>
+
+<pre><code>	package test1
+
+	// Your Name
+
+	// DoubleValue returns twice the value passed.
+	func DoubleValue ( n int ) int {				// note the capital 'D' in double 
+		return n * 2
+	}
+
+	// add function TrippleValue
+</code></pre>
+
+<p>The capital letter at the beginning tells Go that you are exporting the name.</p>
+
+<p>The test code:</p>
+
+<pre><code>	package test1
+
+	// Your Name
+
+	func TestDouble(t *testing.T) {
+
+		tests := []struct {
+			in          int
+			expected    int
+		}{
+			{
+				in:          23,
+				expected:     46,
+			},
+			{
+				in:          1,
+				expected:     2,
+			},
+		}
+
+		for ii, test := range tests {
+			rr := DoubleValue ( test.in )
+			if rr != test.expected {
+				t.Errorf(&quot;Test %d, expected %d got %d\n&quot;, ii, test.expected, rr )
+			}
+		}
+
+	}
+
+	// add test for TripleValue at this point
+
+</code></pre>
+
+<p>to run this we:</p>
+
+<pre><code class="language-SH">	go test
+</code></pre>
+
+<p>It should print out &lsquo;PASS&rsquo; when the test work.</p>
+
+<p>It is really important that you understand how Go testing works.  This will be 1 of 2 ways
+in which your code will be graded.  You will be expected to develop your own unit tests.
+I will supply my grader with additional tests and those will be run with your code.</p>
+
+<p>We will create a simple main program that will use the package that <code>test1</code>.  Go up 1
+level to <code>~/go/src/github.com/pschlump/mkPkg</code>.</p>
+
+<p>Edit a main program:</p>
+
+<pre><code>	package main
+
+	// Your Name
+
+	import (
+		&quot;fmt&quot;
+
+		&quot;github.com/pschlump/myPkg/test1&quot;		// import package you created
+	)
+
+	func main() {
+		out := test1.DoubleValue ( 8 )			// Call function in your package
+		fmt.Printf ( &quot;out = %d\n&quot;, out )		 
+		// add call to TripleValue at this point
+	}
+</code></pre>
+
+<p>Submit:</p>
+
+<ol>
+<li>Your package.</li>
+<li>Your test code.</li>
+<li>Your main program.</li>
+</ol>
+
+<h3>References</h3>
+
+<ol>
+<li><a href="https://www.golang-book.com/books/intro/11">Intro to packages</a></li>
+<li><a href="https://blog.alexellis.io/golang-writing-unit-tests/">Intro to testing</a> is really good and has way more on testing.</li>
+</ol>
+
+<h2>(1.7) Printing (print1.go) (10pts)</h2>
+
+<p>The <code>fmt</code> package provides lots of useful output options. Go and read about <a href="https://golang.org/pkg/fmt/">fmt</a>.</p>
+
+<p>In the following program</p>
+
+<pre><code class="language-Go">
+</code></pre>
+
+<p>Add a print statement to show the type of the variables.</p>
+
+<p>Submit:</p>
+
+<ol>
+<li>Your program.</li>
+<li>Your output.</li>
+</ol>
+
+<h2>(1.8) Copy a File (copy1.go, copy2.go) (20pts)</h2>
+
+<p>Implement a simple program to copy a file.  See <a href="https://shapeshed.com/copy-a-file-in-go/">copy a file in go</a>
+and modify the code to take the input and output file names from the command line.   Go and read about
+<code>defer</code> and see how it is used.</p>
+
+<pre><code class="language-SH">	copy-file input-file-name output-file-name
+</code></pre>
+
+<p>There is a line in the example code, <code>_, err = io.Copy...</code>.  What is the <code>_</code> for?  Replace it with a
+statement like this:  (note the := that will declare test1)</p>
+
+<pre><code class="language-Go">	test1, err := io.Copy(to, from)
+</code></pre>
+
+<p>Recompile the code - what happens?</p>
+
+<p>Implement a copy file program that uses <code>ioutil.ReadFile</code> and <code>ioutil.WriteFile</code>.   What are the disadvantages
+of doing the copy in this way?
+Write a paragraph explaining the disadvantages of the <code>ioutil.ReadFile</code>, <code>ioutil.WriteFile</code> disadvantages.</p>
+
+<p>Submit:</p>
+
+<ol>
+<li>Both of your programs.</li>
+<li>Your written paragraph.</li>
+</ol>
+
+<h3>References</h3>
+
+<ol>
+<li><a href="https://tour.golang.org/flowcontrol/12">defer</a></li>
+<li><a href="https://golang.org/pkg/log/">log</a></li>
+</ol>
+
+<h2>(1.9) Hash and a simple test in Go (test1.go) (30pts)</h2>
+
+<p>This is the first set of code that we will directly use in building our blockchain.</p>
+
+<p>We will use a bunch of different hash functions.  All of the has functions have a
+similar interface in Go.   Today&rsquo;s function is Keccak256.  This is the hash that
+is used in Ethereum.   It is a Sha3 derivative.</p>
+
+<p>The Go documentation for sha3 includes keccak256.</p>
+
+<p>An example of using it is: <a href="https://gist.github.com/miguelmota/01d051b2208ea706a273dbf0dd673844">keccak256</a>
+Note that the example is wrong, the output will be in lower case.</p>
+
+<p>This Ethereum code includes a function that you will want to copy.  Lines 46 to 51.  Give credit where
+credit is due. (See Below - I copied it)</p>
+
+<p>Note that the Keccak256 function takes a slice of byte, <code>[]byte</code>, and returns a slice of byte.
+We will need to type-cast strings into this type to get it to work in the demo.</p>
+
+<p>Copy 1.8&rsquo;s ioutil.ReadFile version of the copy into a new directory called <code>ksum</code>.  We are goging to modify
+it to print out the keccak256 sum of a file.  This is like <a href="https://linux.die.net/man/1/md5sum">md5sum</a> or <a href="https://linux.die.net/man/1/sha1sum">sha1sum</a>.
+We will build the keccak256 sum program.  You don&rsquo;t need to implement any of the command line options like <code>-b/--binary</code>.  Just
+read more than one file and print out the results.</p>
+
+<pre><code>	$ ksum file1 file2.txt file3
+	file1 ecd67ca5a72802084fcea4883b6877ecfba7f95c0aece07ea504359d54eb4610
+	file2.txt 0695253b82a83d557392ab196ff309a1fedc6cbab0d7d4186d2664dcec92b5ff
+	file3 fb15d651aaf994584aa6da109b5dba096de83bf2f44da6a224cf41d8d5e92f14
+</code></pre>
+
+<p>Process as many files as are on the command line.</p>
+
+<p>So start out with:</p>
+
+<pre><code>	package main
+
+	import (
+		&quot;fmt&quot;
+
+		&quot;github.com/ethereum/go-ethereum/crypto/sha3&quot;
+	)
+
+	func main() {
+		fmt.Printf(&quot;%x\n&quot;, Keccak256([]byte(&quot;bob&quot;))) // type cast from string, &quot;bob&quot;, to slice of byte.
+	}
+
+	// Keccak256 calculates and returns the Keccak256 hash of the input data.
+	// From: https://github.com/ethereum/go-ethereum/blob/master/crypto/crypto.go lines 44...51.
+	func Keccak256(data ...[]byte) []byte {
+		d := sha3.NewKeccak256()
+		for _, b := range data {
+			d.Write(b)
+		}
+		return d.Sum(nil)
+	}
+
+</code></pre>
+
+<p>Add in the ability to process the command line.  <code>ioutil.ReadFile</code> returns a byte slice and an error.
+Report the error if it occurs.  You will not need a type cast to pass the byte slice to Keccak256.</p>
+
+<p><code>fmt.Printf</code> can print out in hex.  Note the <code>%x</code> format.</p>
+
+<p>Submit:</p>
+
+<ol>
+<li>test your code with <a href="file1">file1</a>, <a href="file2.txt">file2.txt</a>, <a href="file3">file3</a> . Save the output.  Submit the output with
+the hashes.</li>
+<li>your code for doing this (remember your name in the program)</li>
+</ol>
+
+<h2>(1.10) Summary</h2>
+
+<p>Go is a simple language that Google developed.  It is not an &ldquo;academic&rdquo; research language.  There are no new cool features.
+The good things about go are:</p>
+
+<ol>
+<li>The go compiler is really fast.</li>
+<li>The code is statically linked and optimized.</li>
+<li>The set of tools for the language extensive ( go vet, golint, testing, flame graphs etc. )</li>
+<li>The garbage collector is revolutionary.</li>
+<li>It matches with modern hardware.</li>
+<li>The language is industrial scale.</li>
+<li>Lots of really good documentation.</li>
+<li>Extensive library.</li>
+<li>Easy to learn.</li>
+</ol>
+
+<p>Go is missing generics and objects.  When I first started to use Go I thought that it would be a big deal to not have
+objects.  Turns out I really don&rsquo;t need or want objects.  Generics would be useful on rare occasions.</p>
+
+<p>Save your code from this assignment.  We will be using chunks of it in the next assignment.</p>
