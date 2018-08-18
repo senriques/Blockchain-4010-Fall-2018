@@ -1,13 +1,16 @@
-# UW-Blockchain-Class-01
+# University of Wyoming, Blockchain 4010 and 5010
 
 Class at UW (University of Wyoming) for blockchain.
-Class time: 12:00 (noon) till 12:50 PM, Monday, Wednesday, Friday.
+
+Class 4010 and 5010.
+
+Time: 12:00 (noon) till 12:50 PM, Monday, Wednesday, Friday.
 
 
 Overview
 -----------------
 
-### Lecture 00 - Aug 29 - Wednesday
+### Lecture 00 - Aug 29 - Wednesday - Class Overview
 
 1. A little bit of background on the instructor
 	1. pschlump@uwyo.edu
