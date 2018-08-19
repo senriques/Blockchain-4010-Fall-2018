@@ -229,6 +229,11 @@ values are created around lines 12 to 15.
 This process is called marshal/unmarshal.   The functions are called UnmarshallJSON
 and MarshallJSON.   You should cut-paste the code, put it into a directory and run it.
 
+Create the echo2 directory and `cd` into it.
+You should be in a directory `~/go/src/github.com/<YourGithubUsername>/echo2`.
+
+Edit main.go and put this code in it:
+
 ```Go
 	package main
 
@@ -246,13 +251,13 @@ and MarshallJSON.   You should cut-paste the code, put it into a directory and r
 
 	type ConfigData struct {
 		Name  string
-		Value string `json:"Year"`
+		Value string `json:"Year"` 
 	}
 
 	func main() {
 		var Cfg = flag.String("cfg", "cfg.json", "config file for this call")
 
-		flag.Parse() // Parse CLI arguments to this, --cfg <name>.json
+		flag.Parse() // Parse CLI arguments to this program, --cfg <name>.json
 
 		fns := flag.Args()
 		if len(fns) != 0 {
@@ -307,6 +312,8 @@ and MarshallJSON.   You should cut-paste the code, put it into a directory and r
 	}
 ```
 
+Create a 2nd file - call it cfg.json with:
+
 ```JSON
 {
 	"Name": "Corwin",
@@ -315,13 +322,17 @@ and MarshallJSON.   You should cut-paste the code, put it into a directory and r
 }
 ```
 
-1. `type ConfigData struct` Declare a struct.
-2. `var Cfg =...` Declare a variable.  It will be a pointer to a string.
-3. `flag.Parse()` use the `flag` package.  Parse the command line.
-4. `fns := flag.Args()` pick off the arguments.
-5. `ReadConfig` call a function.
-6. `fmt.Print.... %+v` print out a structure with the field names.
-7. `func ReadConfig` declare a function.  Note the multiple return values.
+### Read Code
+
+Go through this program and read and analyze the following things:
+
+1. `type ConfigData struct` read and understand that this will declare a struct.
+2. `var Cfg =...` Declare a variable.  It will be a pointer to a string because `flag.Stgring` returns a pointer to a string.
+3. `flag.Parse()` this uses the `flag` package to parse the command line arguments.
+4. `fns := flag.Args()` this will pick off the remaining arguments from the command line.  If you have `echo2 --cfg file.json A B C` this will be a slice, 3 long, with the strings `A`, `B`, `C` in it.
+5. `ReadConfig` call the `ReadConfig` function.  The function is declared later in the file.
+6. `fmt.Print.... %+v` print out a structure with the field names.  Very useful for debugging your program.
+7. `func ReadConfig` declares a function.  Note functions can return a set of values, not just one.
 8. `return ConfigData{}, err` declare an empty `ConfigData{}` and return an error.
 9. `func IndentJSON.... v interface{}` create a data type that can receive any type that is passed.
 10. `json.MarshalIndent` marshal data into a string.
@@ -329,10 +340,11 @@ and MarshallJSON.   You should cut-paste the code, put it into a directory and r
 Why did `100` print out.  What happened to `200`.  Create a new JSON file under a new name and
 set the year field to 2018.
 
+
 Submit:
 
-1. Your modified code.
-2. Your JSON file with the year.
+1. Your code.  Modify the comment in the code to have your name and assignment number. 
+2. Your JSON file with the year modified to 2018.
 
 ### References
 

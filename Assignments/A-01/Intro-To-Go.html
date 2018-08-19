@@ -17,6 +17,8 @@
 
 <p>Item #8 and #9 will be the first auto-graded items.  I will use automated tests to check that the code works.</p>
 
+<p>Note: Not all the assignments will be this long.  Don&rsquo;t Panic!</p>
+
 <h2>Install Go</h2>
 
 <p>Go runs on Windows, Mac and Linux (and a bunch of other systems too).  To install you will need to
@@ -29,28 +31,64 @@ to keep an old version of the compiler around.</p>
 <p>You should find: <a href="https://golang.org/dl/">https://golang.org/dl/</a>.  The page should look like
 <img src="go-download.png" alt="Go Download Page" /></p>
 
-<p>Install at least version 1.10.3 of the language.</p>
+<p>Install at least version 1.10.3 of the language.   On mac you download .pkg and click on it.
+On windows the .msi and run it (double click).  On Linux&hellip;  Follow the instructions on the
+download page for your flavor of Linux.</p>
 
-<p>You will need to use an editor.  I don&rsquo;t usually use an IDE.  I do use vi (vim).</p>
+<p>You will need to use an editor.  I don&rsquo;t usually use an IDE.  I do use vi (vim).  Pick
+a text editor that you like.</p>
 
 <p>If you need to create a portable USB drive with Go and VIM on it see me after class.</p>
+
+<p>You will need a github.com account. Go and create one if you do not already have one.
+A free account will work.</p>
+
+<h3>If you already had Go installed.</h3>
+
+<p>You only have to do this if you have an old version of Go installed.</p>
+
+<p>On a Mac go is by default installed in /usr/local/go, on windows in C:\go.  You will
+need to delete the old version of go.</p>
+
+<h4>Mac and Linux</h4>
+
+<pre><code class="language-sh">	$ cd /usr/local
+	$ ls 
+	$ sudo rm -rf go
+</code></pre>
+
+<h4>Windows</h4>
+
+<p>Bring up the file explorer.  Navigate to the C:\ drive.  Drag <code>go</code> folder into
+the trash.</p>
 
 <p>Submit:</p>
 
 <ol>
-<li>run <code>go version</code> and cut/paste the output.  Submit a file with that in it.
-You should see a verison around <code>go1.10</code> or <code>go1.10.3</code>.</li>
+<li>run <code>go version</code> at the command line and capture the output.   Submit a 1 line file with the output
+in it.  You can cut paste or pipe the output to a file.  You should see a version around <code>go1.10</code> or <code>go1.10.3</code>.</li>
 </ol>
 
 <h2>(1.2) Verify that you can compile and run (Hello-World.go) (5pts)</h2>
 
+<p>Let&rsquo;s put our code in the right place from the very start.  On a mac that is <code>~/go/src/github.com/[Your Github Account]/</code>.
+In this case go to that directory - or build it.  Then create a directory called <code>hello-world</code>.
+I used my username in this.  You need to use your github.com username.</p>
+
+<pre><code class="language-SH">	cd
+	mkdir -p ./go/src/github.com/pschlump
+	cd ./go/src/github.com/pschlump
+	mkdir hello-world
+	cd hello-world
+</code></pre>
+
 <p>Cut and paste - or type in (probably better for you) the following program.   These instructions are
-also on the Go download page.</p>
+also on the Go download page.  Put it into a file called <code>main.go</code>.</p>
 
 <pre><code class="language-Go">	package main
 
 	// Your Name - it is important if you want to get credit for your assignment.
-	// Assignment 1.2 hello world - This is important too.  If you want credit.`
+	// Assignment 1.2 hello world - This is important too.  If you want credit.
 
 	import &quot;fmt&quot;
 
@@ -59,11 +97,22 @@ also on the Go download page.</p>
 	}
 </code></pre>
 
+<p>To run it:</p>
+
+<pre><code class="language-SH">	go build 
+	./hello-world
+</code></pre>
+
+<p>If you get an error about access an un-exported function, then you failed to capitalize the first
+letter in a method call. Capital letters tell Go that the function is exported.  <code>fmt.printf</code>
+will cause this error.  <code>fmt.Printf</code> will work.</p>
+
 <p>Submit:</p>
 
 <ol>
 <li>A copy of your code.</li>
-<li>Change the <code>fmt.Pr...</code> to <code>fmt.Println(&quot;Hello, 世界&quot;)</code> - re run the code and save the output.</li>
+<li>Change the <code>fmt.Pr...</code> to <code>fmt.Println(&quot;Hello, 世界&quot;)</code> - re run the code and save the output.
+What is <code>世界</code>?</li>
 </ol>
 
 <h3>References</h3>
@@ -76,10 +125,9 @@ also on the Go download page.</p>
 <p>You may want to work through the <a href="https://tour.golang.org/welcome/1">A Tour of Go</a>.  That will
 help with this class.</p>
 
-<p>You will need a github.com account. Go and create one if you do not already have one.
-A free account will work.</p>
-
 <h3>Mac and Linux</h3>
+
+<p>This is the set of commands for setting up your Go environment.</p>
 
 <pre><code>	$ export GOPATH=/Users/&lt;Your Github Username&gt;/go
 	$ mkdir -p ~/go/src/github.com/&lt;Your Github Username&gt;
@@ -92,7 +140,7 @@ A free account will work.</p>
 	Hello Wonderful World
 </code></pre>
 
-<h3>PC</h3>
+<h3>PC / Windows</h3>
 
 <pre><code>	E:\ mkdir hello-world
 	E:\hello-world\ cd hello-world
@@ -104,6 +152,9 @@ A free account will work.</p>
 
 <p>You will want to create a directory for each main program and under that directories for each package
 that you create in Go.</p>
+
+<p>If you have a different text editor that you like better than vim - then install it - use it (Microsoft
+Word is not an editor!  It will not create files that you can compile with Go.)</p>
 
 <h2>(1.3) Echo command line arguments (echo1.go) (5pts)</h2>
 
@@ -160,9 +211,20 @@ Cut and paste the following code.  Get it to run.  Compile with <code>go build</
 Save the output - edit the code and change <code>Your Name</code>.
 Add your email address.</p>
 
-<p>Follow the reference link to the Go documentation and read the
-custom <code>Animal</code> marshal/unmarshal.  It is in the example at the
-top of the document.</p>
+<p>Follow THIS link, <a href="https://golang.org/pkg/encoding/json/">JSON in Go</a>.
+There is a section with an &ldquo;Example (CustomMarshalJSON)&rdquo; - Click on the example to open the
+example.  In the example an custom Go type called <code>Animal</code> is created (Around line 10).
+Custom code allows saving of the <code>Animal</code> type in a JSON file and re-loading the
+<code>Animal</code> type from the file.   In the JSON file it will be &ldquo;zebra&rdquo; &ldquo;gopher&rdquo; - in
+the Go code it will be an integer constant (like a C++ <code>enum</code>).  The Constant named
+values are created around lines 12 to 15.
+This process is called marshal/unmarshal.   The functions are called UnmarshallJSON
+and MarshallJSON.   You should cut-paste the code, put it into a directory and run it.</p>
+
+<p>Create the echo2 directory and <code>cd</code> into it.
+You should be in a directory <code>~/go/src/github.com/&lt;YourGithubUsername&gt;/echo2</code>.</p>
+
+<p>Edit main.go and put this code in it:</p>
 
 <pre><code class="language-Go">	package main
 
@@ -180,13 +242,13 @@ top of the document.</p>
 
 	type ConfigData struct {
 		Name  string
-		Value string `json:&quot;Year&quot;`
+		Value string `json:&quot;Year&quot;` 
 	}
 
 	func main() {
 		var Cfg = flag.String(&quot;cfg&quot;, &quot;cfg.json&quot;, &quot;config file for this call&quot;)
 
-		flag.Parse() // Parse CLI arguments to this, --cfg &lt;name&gt;.json
+		flag.Parse() // Parse CLI arguments to this program, --cfg &lt;name&gt;.json
 
 		fns := flag.Args()
 		if len(fns) != 0 {
@@ -241,6 +303,8 @@ top of the document.</p>
 	}
 </code></pre>
 
+<p>Create a 2nd file - call it cfg.json with:</p>
+
 <pre><code class="language-JSON">{
 	&quot;Name&quot;: &quot;Corwin&quot;,
 	&quot;Year&quot;: &quot;100&quot;,
@@ -248,14 +312,18 @@ top of the document.</p>
 }
 </code></pre>
 
+<h3>Read Code</h3>
+
+<p>Go through this program and read and analyze the following things:</p>
+
 <ol>
-<li><code>type ConfigData struct</code> Declare a struct.</li>
-<li><code>var Cfg =...</code> Declare a variable.  It will be a pointer to a string.</li>
-<li><code>flag.Parse()</code> use the <code>flag</code> package.  Parse the command line.</li>
-<li><code>fns := flag.Args()</code> pick off the arguments.</li>
-<li><code>ReadConfig</code> call a function.</li>
-<li><code>fmt.Print.... %+v</code> print out a structure with the field names.</li>
-<li><code>func ReadConfig</code> declare a function.  Note the multiple return values.</li>
+<li><code>type ConfigData struct</code> read and understand that this will declare a struct.</li>
+<li><code>var Cfg =...</code> Declare a variable.  It will be a pointer to a string because <code>flag.Stgring</code> returns a pointer to a string.</li>
+<li><code>flag.Parse()</code> this uses the <code>flag</code> package to parse the command line arguments.</li>
+<li><code>fns := flag.Args()</code> this will pick off the remaining arguments from the command line.  If you have <code>echo2 --cfg file.json A B C</code> this will be a slice, 3 long, with the strings <code>A</code>, <code>B</code>, <code>C</code> in it.</li>
+<li><code>ReadConfig</code> call the <code>ReadConfig</code> function.  The function is declared later in the file.</li>
+<li><code>fmt.Print.... %+v</code> print out a structure with the field names.  Very useful for debugging your program.</li>
+<li><code>func ReadConfig</code> declares a function.  Note functions can return a set of values, not just one.</li>
 <li><code>return ConfigData{}, err</code> declare an empty <code>ConfigData{}</code> and return an error.</li>
 <li><code>func IndentJSON.... v interface{}</code> create a data type that can receive any type that is passed.</li>
 <li><code>json.MarshalIndent</code> marshal data into a string.</li>
@@ -267,8 +335,8 @@ set the year field to 2018.</p>
 <p>Submit:</p>
 
 <ol>
-<li>Your modified code.</li>
-<li>Your JSON file with the year.</li>
+<li>Your code.  Modify the comment in the code to have your name and assignment number.</li>
+<li>Your JSON file with the year modified to 2018.</li>
 </ol>
 
 <h3>References</h3>
@@ -328,7 +396,8 @@ and output from the command line.</p>
 
 <p>Goal: create a go package and a test for that package.</p>
 
-<p>Create a new directory inside your github.com/username.   This example will use <code>pschlump</code> as the username.</p>
+<p>Create a new directory inside your github.com/username.   This example will use <code>pschlump</code> as the username.
+You need to substitute your github.com user name.</p>
 
 <pre><code>	cd
 	mkdir -p ~/go/src/github.com/pschlump/mkPkg/test1
@@ -356,35 +425,36 @@ and output from the command line.</p>
 
 <pre><code>	package test1
 
+	import &quot;testing&quot;
+
 	// Your Name
 
 	func TestDouble(t *testing.T) {
 
 		tests := []struct {
-			in          int
-			expected    int
+			in       int
+			expected int
 		}{
 			{
-				in:          23,
-				expected:     46,
+				in:       23,
+				expected: 46,
 			},
 			{
-				in:          1,
-				expected:     2,
+				in:       1,
+				expected: 2,
 			},
 		}
 
 		for ii, test := range tests {
-			rr := DoubleValue ( test.in )
+			rr := DoubleValue(test.in)
 			if rr != test.expected {
-				t.Errorf(&quot;Test %d, expected %d got %d\n&quot;, ii, test.expected, rr )
+				t.Errorf(&quot;Test %d, expected %d got %d\n&quot;, ii, test.expected, rr)
 			}
 		}
 
 	}
 
 	// add test for TripleValue at this point
-
 </code></pre>
 
 <p>to run this we:</p>
@@ -392,7 +462,7 @@ and output from the command line.</p>
 <pre><code class="language-SH">	go test
 </code></pre>
 
-<p>It should print out &lsquo;PASS&rsquo; when the test work.</p>
+<p>It should print out &lsquo;PASS&rsquo; when the test work.  If the test fails you should get errors.</p>
 
 <p>It is really important that you understand how Go testing works.  This will be 1 of 2 ways
 in which your code will be graded.  You will be expected to develop your own unit tests.
@@ -410,12 +480,12 @@ level to <code>~/go/src/github.com/pschlump/mkPkg</code>.</p>
 	import (
 		&quot;fmt&quot;
 
-		&quot;github.com/pschlump/myPkg/test1&quot;		// import package you created
+		&quot;github.com/pschlump/myPkg/test1&quot; // import package you created
 	)
 
 	func main() {
-		out := test1.DoubleValue ( 8 )			// Call function in your package
-		fmt.Printf ( &quot;out = %d\n&quot;, out )		 
+		out := test1.DoubleValue(8) 	// Call function in your package
+		fmt.Printf(&quot;out = %d\n&quot;, out) 	// should print &quot;out = 16&quot;
 		// add call to TripleValue at this point
 	}
 </code></pre>
@@ -546,6 +616,14 @@ read more than one file and print out the results.</p>
 
 </code></pre>
 
+<p>After you create/copy this code into a file you will need to</p>
+
+<pre><code>	go get
+</code></pre>
+
+<p>to have Go pull in <code>github.com/ethereum/go-ethereum</code> package and all it&rsquo;s sub
+packages including: <code>github.com/ethereum/go-ethereum/crypto/sha3</code>.</p>
+
 <p>Add in the ability to process the command line.  <code>ioutil.ReadFile</code> returns a byte slice and an error.
 Report the error if it occurs.  You will not need a type cast to pass the byte slice to Keccak256.</p>
 
@@ -574,6 +652,8 @@ The good things about go are:</p>
 <li>Lots of really good documentation.</li>
 <li>Extensive library.</li>
 <li>Easy to learn.</li>
+<li>Fun to program in.</li>
+<li>Reliable.</li>
 </ol>
 
 <p>Go is missing generics and objects.  When I first started to use Go I thought that it would be a big deal to not have
