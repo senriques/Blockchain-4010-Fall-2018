@@ -260,8 +260,8 @@ Edit main.go and put this code in it:
 		flag.Parse() // Parse CLI arguments to this program, --cfg <name>.json
 
 		fns := flag.Args()
-		if len(fns) != 0 {
-			fmt.Fprintf(os.Stderr, "Usage: ./echo2 [-cfg cfg.json] [arg1 ...]\n")
+		if len(fns) == 0 {
+			fmt.Fprintf(os.Stderr, "Usage: ./echo2 [-cfg cfg.json] arg1 ...\n")
 			os.Exit(1)
 		}
 
@@ -363,8 +363,11 @@ and output from the command line.
 Add a map/dictionary field in the JSON input that is
 
 ```
-	"MyName": "Your actual Name",
-	"MyEmail": "Your email address",
+	{
+		"TxHash": "Your actual Name",
+		"TxIn": 22,
+		"TxOut": 44
+	}
 ```
 
 Example Run:
@@ -376,7 +379,7 @@ Example Run:
 The struct to include in your code.
 
 ```Go
-	var TransactionType struct {
+	type TransactionType struct {
 		TxHash	string
 		TxIn	int
 		TxOut	int
@@ -417,7 +420,9 @@ You need to substitute your github.com user name.
 	vi test1.go
 ```
 
-A simple example package.
+In this case I created 2 directories, `mkPkg` and inside it `test1`.
+
+A simple example package in the `mkPkg/test1` directory edit a file, lets call it `test1.go`.
 
 ```
 	package test1
@@ -432,9 +437,12 @@ A simple example package.
 	// add function TrippleValue
 ```
 
-The capital letter at the beginning tells Go that you are exporting the name.
+It will make life simpler if you make the package name the same as the directory name.
+Don't put blanks in your directory names.
 
-The test code:
+The capital letter at the beginning of `DoubleValue` tells Go that you are exporting the name.
+
+The test code is placed into `mkPkg/test1` in the file `test1_test.go`.
 
 ```
 	package test1
@@ -471,7 +479,7 @@ The test code:
 	// add test for TripleValue at this point
 ```
 
-to run this we:
+to run the test in the directory `mkPkg/test1`:
 
 ```SH
 	go test
@@ -533,15 +541,77 @@ The `fmt` package provides lots of useful output options. Go and read about [fmt
 In the following program
 
 ```Go
+	package main
 
+	import (
+		"encoding/json"
+		"fmt"
+	)
+
+	var IVar int
+	var SVar string
+	var I64Var int64
+	var UIVar uint64
+
+	type Example17 struct {
+		A int
+		B string
+	}
+
+	var E17 Example17
+
+	// Add int64 and uint64 types
+	var SliceOfString []string
+	var MapOfString map[string]string
+	var MapOfBool map[string]bool
+
+	// init will initilize data before main() runs.  You can have more than one init() function.
+	func init() {
+		SliceOfString = make([]string, 0, 10)
+		MapOfString = make(map[string]string)
+		MapOfBool = make(map[string]bool)
+	}
+
+	func main() {
+		SliceOfString = append(SliceOfString, "AAA", "BBB")
+		MapOfString["mark"] = "first"
+		MapOfString["twain"] = "last"
+		MapOfBool["mark"] = true
+		MapOfBool["twain"] = false
+
+		fmt.Printf("IVar = %d, type of IVar %T\n", IVar, IVar)
+		fmt.Printf("IVar = %v, type of IVar %T\n", IVar, IVar)
+
+		// TODO: add prints for your int64 and uint64 types
+
+		fmt.Printf("SVar = %s, type of SVar %T\n", SVar, SVar)
+		fmt.Printf("Address of SVar = %s, type of SVar %T\n", &SVar, &SVar)
+		fmt.Printf("E17 = %s, type of E17 %T\n", &E17, &E17)
+		fmt.Printf("    E17 = %+v, E17 as JSON: %s\n", &E17, IndentJSON(E17))
+
+		// TODO: add prints for the other types above - so you can see them printed out.
+		// TODO: use a %s and a %T for SliceOfString
+		// TODO: use a %s and a %T for MapOfString
+		// TODO: use a %#v and a %T for MapOfBool
+		// TODO: Print out each of them with the IndentJSON function.
+	}
+
+	func IndentJSON(v interface{}) string {
+		s, err := json.MarshalIndent(v, "", "\t")
+		if err != nil {
+			return fmt.Sprintf("Error:%s", err)
+		} else {
+			return string(s)
+		}
+	}
 ```
 
-Add a print statement to show the type of the variables.
+Add a print statement to show the type of the variables. See the comments with TODO in the code.
 
 Submit:
 
-1. Your program.
-2. Your output.
+1. Your program with the extra print statements.
+2. The output from running the program with the extra print statements.
 
 
 
@@ -573,8 +643,10 @@ Write a paragraph explaining the disadvantages of the `ioutil.ReadFile`, `ioutil
 
 Submit:
 
-1. Both of your programs.
-1. Your written paragraph.
+1. Both of your programs.  The original with the `io.Copy(...)` in it and the one that uses `ioutil.ReadFile`.  
+Add a note that this is a copy from the website, [copy a file in go](https://shapeshed.com/copy-a-file-in-go/)
+and a note with your name and email address.
+1. Your written paragraph.   
 
 ### References
 
@@ -583,21 +655,31 @@ Submit:
 
 
 
-(1.9) Hash and a simple test in Go (test1.go) (30pts)
+(1.9) Hash and a simple test in Go (ksum.go) (30pts)
 -----------------------------------------------------------------------------------------------------------------------------
 
 This is the first set of code that we will directly use in building our blockchain.
 
+A hash is a number, usually large, that maps a set of data into a unique number.
+A different set of data will result in a different hash. The file `file1`
+will hash to `ecd67ca5a72802084fcea4883b6877ecfba7f95c0aece07ea504359d54eb4610`.
+That's a big number.  Note that the number is in base 16 when it was printed
+out (so it has `0..9` and `a..f` for digits). 
+It is possible that two different sets of data will produce the same
+value.  This is called a hash collision.  A good hash rarely has collisions.
+
 We will use a bunch of different hash functions.  All of the has functions have a
 similar interface in Go.   Today's function is Keccak256.  This is the hash that 
-is used in Ethereum.   It is a Sha3 derivative.
+is used in Ethereum.   It is a `sha3` derivative.
 
-The Go documentation for sha3 includes keccak256.
+The Go documentation for sha3 includes keccak256 but we will be using the one in
+the Go-Ethereum package.
 
 An example of using it is: [keccak256](https://gist.github.com/miguelmota/01d051b2208ea706a273dbf0dd673844)
-Note that the example is wrong, the output will be in lower case.
+Note that the example is wrong, the output will be in lower case.  The example shows it in upper case.
+Go and read the example.
 
-This Ethereum code includes a function that you will want to copy.  Lines 46 to 51.  Give credit where
+This Ethereum code includes a function that you will want to copy.  Lines 44 to 51.  Give credit where
 credit is due. (See Below - I copied it)
 
 Note that the Keccak256 function takes a slice of byte, `[]byte`, and returns a slice of byte.
@@ -605,8 +687,11 @@ We will need to type-cast strings into this type to get it to work in the demo.
 
 Copy 1.8's ioutil.ReadFile version of the copy into a new directory called `ksum`.  We are goging to modify
 it to print out the keccak256 sum of a file.  This is like [md5sum](https://linux.die.net/man/1/md5sum) or [sha1sum](https://linux.die.net/man/1/sha1sum).
+Go and read the documentation on these 2 command line utilities.
 We will build the keccak256 sum program.  You don't need to implement any of the command line options like `-b/--binary`.  Just
 read more than one file and print out the results.
+
+Sample Output: 
 
 ```
 	$ ksum file1 file2.txt file3
@@ -615,17 +700,20 @@ read more than one file and print out the results.
 	file3 fb15d651aaf994584aa6da109b5dba096de83bf2f44da6a224cf41d8d5e92f14
 ```
 
+I have supplied the fiels `file1`, `file2.txt`, and `file3`.
+
 Process as many files as are on the command line.
 
-So start out with:
 
-```
+So start out with an exampel - that just calculates the hash of the string `"bob"`:
+
+```Go
 	package main
 
 	import (
 		"fmt"
 
-		"github.com/ethereum/go-ethereum/crypto/sha3"
+		"github.com/ethereum/go-ethereum/crypto/sha3" // you can't click on this link in the HTML of this code.
 	)
 
 	func main() {
@@ -644,24 +732,37 @@ So start out with:
 
 ```
 
-After you create/copy this code into a file you will need to 
+After you create/copy this code into a file, in a directory called ksum, you will need to 
 
 ```
 	go get
 ```
 
 to have Go pull in `github.com/ethereum/go-ethereum` package and all it's sub
-packages including: `github.com/ethereum/go-ethereum/crypto/sha3`.
+packages including: `github.com/ethereum/go-ethereum/crypto/sha3`.  If you do not do the `go get` you 
+will get an error `cannot find package...`.  The `go get` will pull in the dependencies for this
+from github so it will take will take a little bit.
 
 Add in the ability to process the command line.  `ioutil.ReadFile` returns a byte slice and an error.
 Report the error if it occurs.  You will not need a type cast to pass the byte slice to Keccak256.
 
 `fmt.Printf` can print out in hex.  Note the `%x` format.
 
+### Pseudo-Code for your program.
+
+1. Process command line to get the file names.
+2. For each argument (file name from the command line)	
+	- read in the data in the file.
+	- calculate the hash for the data.
+	- print out file name and the hex string for the hash.
+
+
+
 Submit:
 
-1. test your code with [file1](file1), [file2.txt](file2.txt), [file3](file3) . Save the output.  Submit the output with
-the hashes.
+1. Test your code with [file1](file1), [file2.txt](file2.txt), [file3](file3) . Save the output.  Submit
+the output with the hashes.   Test your code with some other files of your choice.   Submit the output from
+that with the files that you used.
 2. your code for doing this (remember your name in the program)
 
 

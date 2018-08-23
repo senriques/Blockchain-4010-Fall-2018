@@ -20,13 +20,17 @@ Overview
 		in the Blockchain/Ethereum world.   There are students in this class
 		that are from other departments.  The class has been structured to 
 		take this into account.
+	5. Where the students are and the opportunity they have today.
+	6. Realizing Your Dreams
 
 2. Class policy - UW requires that I talk about cheating.
-	stackoverflow.com and Google are your fiends - give credit where
+	stackoverflow.com and Google are your fiends in this class - give credit where
 	credit is due.  warning: stackoverflow.com on ethereum/solidity
 	is badly out of date becuse the technology is changing really fast.
 	If you copy from the web - I expect a comment and a link (URL) to the
-	source of where you got your copy.  
+	source of where you got your copy.  I expect an explanation of what and 
+	why you are grabbing someting from the web.  I expect an analysis of
+	what license the content is under, MIT, GPL2, GPL3, CC, CC-BY etc.
 	
 3. Late Policy and (3) Late Coupons
 	I have a grader - most of the grading will be automated.  You get
@@ -81,7 +85,7 @@ Overview
 	3. Legal Ramifications.  ICOs 506(d), Subpart (s)
 	4. Programming - 1/2 in go, 1/2 in Solidity (Etherem) and Web front end (JavaScript/HTML/CSS).
 	5. Some Homework
-	5. Write a Paper
+	5. Write a Paper - How will blockchain effect the economy.
 	6. 2 tests (Midterm and Final)
 	7. Why Go
 	7. Enough Go to make it through this class (and be able to convincingly tell an employer that you have programmed in Go)
@@ -96,6 +100,10 @@ Overview
 ### Lecture 01 - Aug 31 - Friday
 
 1. Economics of Blockchain and Computer Technology - why this is important
+	1. How important is blockchain to the economy - **slide**
+	2. A $40 billion dollar example	- **website example, IBM thing**
+	3. Accounting / Banking
+	4. Supply Chain
 2. Overview of blockchain, bitcoin, EOS, ripple, lightning and Ethereum
 
 
@@ -111,6 +119,8 @@ Overview
 ### Lecture 03 - Sep 5 - Wednesday
 
 1. Go
+2. Learn Go
+3. Good and bad about Go
 
 
 
@@ -163,28 +173,28 @@ Assignments and Due Dates
 
 This is a tentative schedule:
 
-| Assignment                 | Due Date           | Points |
-|:---------------------------|:-------------------|:------:|
-| AS-01 Learn Go             | Sep 12             | 100    |
-| AS-02 Genisis Block        | Sep 19             | 100    |
-| AS-03 Merkle Trees         | Sep 26             | 200    |
-| AS-04 Transactions         | Oct 10             | 100    |
-| AS-05 Hasing               | Oct 17             | 100    |
-| AS-06 Mining               | Oct 24             | 100    |
-| Paper Due                  | Oct 26             | 100    |
-| Midterm and Demo Proj 1.   | Week of Oct 29     | 400    |
-| AS-07 Solidity & Truffle   | Nov 7              | 100    |
-| AS-08                      | Nov 14             | 100    |
-| AS-09                      | Nov 20             | 100    |
-| AS-10                      | Nov 28             | 100    |
-| AS-11                      | Dec 7              | 200    |
-| Demo Proj. 2 start Dec 5   |                    |        |
-| ends Dec 14                |                    |        |
-| Final                      |                    | 400    |
+| Assignment                     | Due Date           | Points |
+|:-------------------------------|:-------------------|:------:|
+| AS-01 Learn Go                 | Sep 12             | 100    |
+| AS-02 Block in Blockchain      | Sep 19             | 100    |
+| AS-03 Merkle Trees             | Sep 26             | 200    |
+| AS-04 Transactions             | Oct 3              | 100    |
+| AS-05 Wallets                  | Oct 10             | 100    |
+| AS-06 Mining                   | Oct 17             | 100    |
+| Paper Due                      | Oct 26             | 100    |
+| Midterm and Demo Proj 1.       | Week of Oct 29     | 400    |
+| AS-07 Solidity & Truffle       | Nov 7              | 100    |
+| AS-08 Open Zeppelin ERC20      | Nov 14             | 100    |
+| AS-09 Grades Contract          | Nov 20             | 100    |
+| AS-10 Web Front End (pt1)      | Nov 28             | 100    |
+| AS-11 Web Front End (pt2)      | Dec 7              | 200    |
+| Demo Proj. 2 start Dec 5       |                    |        |
+| ends Dec 14                    |                    |        |
+| Final                          |                    | 400    |
 
 
 Textbook
 ------------------
 
-[An Introduction to Programming in Go, pdf for free](https://www.golang-book.com/public/pdf/gobook.0.pdf)
+[An Introduction to Programming in Go,](https://www.golang-book.com/public/pdf/gobook.0.pdf)
 
