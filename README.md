@@ -6,22 +6,25 @@ Class 4010 and 5010.
 
 Time: 12:00 (noon) till 12:50 PM, Monday, Wednesday, Friday.
 
+Lecture 01 - Aug 29, 2018
+--------------------------
 
 Overview
 -----------------
 
-### Lecture 00 - Aug 29 - Wednesday - Class Overview
+### Lecture 01 - Aug 29 - Wednesday - Class Overview
 
 1. A little bit of background on the instructor
 	1. pschlump@uwyo.edu
-	2. (for emergencies between 7:00AM and 9:00PM) 720-209-7888 (cell)
+	1. https://github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018
+	2. (for emergencies between 7:00AM and 9:00PM) 720-209-7888 (cell) 
 	3. This is a "practical" class.
 	4. Class Goal - have every student in this class be able to work effectively
 		in the Blockchain/Ethereum world.   There are students in this class
 		that are from other departments.  The class has been structured to 
 		take this into account.
 	5. Where the students are and the opportunity they have today.
-	6. Realizing Your Dreams
+	6. Realizing Your Dreams.
 
 2. Class policy - UW requires that I talk about cheating.
 	stackoverflow.com and Google are your fiends in this class - give credit where
@@ -38,6 +41,8 @@ Overview
 	them for handing in homework 1 week after the due date.  Late 
 	coupons will be tracked on a semi-private Ethereum Blockchian
 	with a Smart Contract.	
+
+	Application: http://www.2c-why.com/UW-dApp/
 
 4. 70% from homework, 40% from tests.  Midterm and Final.
 	There will be 2 projects for the class.
@@ -81,23 +86,41 @@ Overview
 
 6. Class Overview
 	1. What is Blockchain - what is Bitcoin / Ethereum / Other token systems
-	2. Economics - Coin, ICO, Stocks Bonds, Tokens, Utility Tokens
-	3. Legal Ramifications.  ICOs 506(d), Subpart (s)
-	4. Programming - 1/2 in go, 1/2 in Solidity (Etherem) and Web front end (JavaScript/HTML/CSS).
-	5. Some Homework
-	5. Write a Paper - How will blockchain effect the economy.
-	6. 2 tests (Midterm and Final)
-	7. Why Go
-	7. Enough Go to make it through this class (and be able to convincingly tell an employer that you have programmed in Go)
-	8. Why Ethereum? Solidity?
-	9. dApp - what is that?  What is web3?
-	10. A detailed understanding of the security model behind Blockchain
-	11. Some advanced stuff on security - distributed computation and public/private keys, distributed key generation.
+	2. The worlds worst, most expensive database
+	3. What is the "hype" - what is real.
+	4. Economics - Coin, ICO, Stocks, Bonds, Tokens, Utility Tokens, A Security
+	5. Legal Ramifications.  ICOs 506(d), Subpart (s)
+	6. Programming - 1/2 in go, 1/2 in Solidity (Etherem) and Web front end (JavaScript/HTML/CSS).
+	7. Some Homework
+	8. Write a Paper - How will blockchain effect the economy.
+	9. 2 tests (Midterm and Final)
+	10. Why Go
+	11. Proof of work
+	12. Proof of stake
+	13. Enough Go to make it through this class (and be able to convincingly tell an employer that you have programmed in Go)
+	14. Why Ethereum? Solidity?
+	15. dApp - what is that?  What is web3?
+	16. A detailed understanding of the security model behind Blockchain
+	17. Some advanced stuff on security - distributed computation and public/private keys, distributed key generation.
+	18. What is a "tangle"
+	19. Why is blockchain so slow?
+	20. How to explain "blockchain" to people - the 30 second elevator pitch.
+
+
+
+7. De-Hype Blockchain
+	1. Successes
+		- Show URLs
+		- Forcast
+	2. Failures
+		- Over 1/2 of ICOs are proably fraud
 
 
 
 
-### Lecture 01 - Aug 31 - Friday
+
+
+### Lecture 02 - Aug 31 - Friday
 
 1. Economics of Blockchain and Computer Technology - why this is important
 	1. How important is blockchain to the economy - **slide**
@@ -105,30 +128,32 @@ Overview
 	3. Accounting / Banking
 	4. Supply Chain
 2. Overview of blockchain, bitcoin, EOS, ripple, lightning and Ethereum
+3. Good and bad about Go
+4. Go
 
 
 
-### Lecture 02 - Sep 3 - Monday
+### Lecture 03 - Sep 3 - Monday
 
 1. What is a Wallet
 2. What is a Smart Contact
 3. Into the Grunge - how to implement a blockchain
+4. More Go
+5. Overview of Blocks / Transactions / Storage for our blockchain
 
 
 
-### Lecture 03 - Sep 5 - Wednesday
+### Lecture 04 - Sep 5 - Wednesday
 
-1. Go
-2. Learn Go
-3. Good and bad about Go
+1. Mining - what is it?
+2. Smart Contracts - what are tye?
 
 
 
 ### Lecture 04 - Sep 7 - Friday
 
-1. More on Go
-2. Overview of Blocks / Transactions / Storage for our blockchain
-3. What is a blockchain?
+1. Overview of Blocks / Transactions / Storage for our blockchain
+2. What is a blockchain?
 
 
 
