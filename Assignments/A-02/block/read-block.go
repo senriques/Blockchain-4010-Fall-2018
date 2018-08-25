@@ -23,3 +23,23 @@ func ReadBlock(fn string) (bk *BlockType, err error) {
 	}
 	return bk, nil
 }
+
+// WriteBlock read i;n a block from a file.
+func WriteBlock(fn string, bk *BlockType) (err error) {
+
+	data := IndentJSON(bk)
+
+	err = ioutil.WriteFile(fn, []byte(data), 0644)
+
+	return
+}
+
+// IndentJSON converts data to JSON format and returns it as a string.
+func IndentJSON(v interface{}) string {
+	s, err := json.MarshalIndent(v, "", "\t")
+	if err != nil {
+		return fmt.Sprintf("Error:%s", err)
+	} else {
+		return string(s)
+	}
+}

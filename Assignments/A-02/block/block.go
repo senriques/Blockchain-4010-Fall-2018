@@ -18,7 +18,11 @@ type BlockType struct {
 	PrevBlockHash hash.BlockHashType // This is 0 length if this is a "genesis" block
 	Nonce         uint64             //
 	Seal          hash.SealType      //
-	// Add Transactions to Block Later, (AS-03 will do this)
+
+	// Add Merkle Hash to Block Later, (AS-03 will do this)
+	// MerkleHash hash.BlockHashType
+
+	// Add Transactions to Block Later, (AS-04 will do this)
 }
 
 // InitGenesisBlock create and return a genesis block.   This is a special
@@ -31,7 +35,11 @@ func InitGenesisBlock() (gb *BlockType) {
 		PrevBlockHash: []byte{},
 		Nonce:         0,
 		Seal:          []byte{},
+
 		// Add fields in AS-03
+		// MerkleHash:          []byte{},
+
+		// Add fields in AS-04
 	}
 	gb.ThisBlockHash = hash.HashOf(SearalizeBlock(gb))
 	return
@@ -46,6 +54,10 @@ func InitBlock(ii int, dd string, prev hash.BlockHashType) (bk *BlockType) {
 		PrevBlockHash: prev,
 		Nonce:         0,
 		Seal:          []byte{},
+
+		// Add fields in AS-03
+		// MerkleHash:          []byte{},
+
 		// Add fields in AS-03
 	}
 	bk.ThisBlockHash = hash.HashOf(SearalizeBlock(bk))
@@ -60,7 +72,9 @@ func IsGenesisBlock(bk *BlockType) bool {
 	return false
 }
 
-// SearalizeBlock searializes into bytes the fields that will be hashed.
+// SearalizeBlock searializes into bytes the fields that will be hashed the hash of the block.
+// This is the hash that the next block will use to point to this block and the hash that
+// this block will be saved as.
 func SearalizeBlock(bk *BlockType) []byte {
 	var buf bytes.Buffer
 
@@ -69,11 +83,14 @@ func SearalizeBlock(bk *BlockType) []byte {
 	buf.Write([]byte(bk.Desc))
 
 	// Additional fields will need to be added at this point. (AS-03)
+	// MerkleHash:          []byte{},
+
+	// Additional fields will need to be added at this point. (AS-04)
 
 	return buf.Bytes()
 }
 
-// SearalizeForSeal searializes into bytes the fields that will be hashed.
+// SearalizeForSeal searializes into bytes the fields that will be hashed for the mining seal.
 func SearalizeForSeal(bk *BlockType) []byte {
 	var buf bytes.Buffer
 
@@ -88,6 +105,9 @@ func SearalizeForSeal(bk *BlockType) []byte {
 	binary.Write(&buf, binary.BigEndian, bk.Nonce)
 
 	// Additional fields will need to be added at this point. (AS-03)
+	// MerkleHash:          []byte{},
+
+	// Additional fields will need to be added at this point. (AS-04)
 
 	return buf.Bytes()
 }

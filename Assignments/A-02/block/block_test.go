@@ -1,7 +1,6 @@
 package block
 
 import (
-	"encoding/json"
 	"fmt"
 	"testing"
 )
@@ -28,17 +27,22 @@ func Test_InitBlock(t *testing.T) {
 	}
 }
 
-func SVarI(v interface{}) string {
-	// s, err := json.Marshal ( v )
-	s, err := json.MarshalIndent(v, "", "\t")
-	if err != nil {
-		return fmt.Sprintf("Error:%s", err)
+func Test_SearilizeBlock(t *testing.T) {
+	bk := InitBlock(12, "Good Morning 4010/5010 class", []byte{1, 2, 3, 4})
+	data := SearalizeBlock(bk)
+	dataStr := fmt.Sprintf("%x", data)
+	testDataStr := "476f6f64204d6f726e696e6720343031302f3530313020636c617373"
+	if dataStr != testDataStr {
+		t.Errorf("Invalid data for block, expected %s got %s", testDataStr, dataStr)
 	}
-	return string(s)
 }
 
-/*
-// xyzzy - todo - test of
-func SearalizeBlock(bk *BlockType) []byte {
-func SearalizeForSeal(bk *BlockType) []byte {
-*/
+func Test_SearilizeForSeal(t *testing.T) {
+	bk := InitBlock(12, "Good Morning 4010/5010 class", []byte{1, 2, 3, 4})
+	data := SearalizeForSeal(bk)
+	dataStr := fmt.Sprintf("%x", data)
+	testDataStr := "476f6f64204d6f726e696e6720343031302f3530313020636c617373855dacd594fe8549500a64210b373222f9c06ecc2a25b3530334b404081166bc010203040000000000000000"
+	if dataStr != testDataStr {
+		t.Errorf("Invalid data for block, expected %s got %s", testDataStr, dataStr)
+	}
+}

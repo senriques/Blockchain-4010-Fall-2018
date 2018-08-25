@@ -1,28 +1,21 @@
 What is Mining?
 =============================================================
 
-At the root of our blockchain is a special block called a "genesis" block.  
-Basically the "genesis" block is the beginning block in our block chain.  It is
-special because it will not point back to any previous block.
+At the root of our blockchain is a special block called a "genesis" block.  Basically the "genesis" block is the
+beginning block in our block chain. It is special because it will not point back to any previous block.
 
-The code that you are given can write out the genesis block.  And
-an index to where to find it.   In most blockchains like Bitcoin 
-some sort of a database is used for storing the blocks.
+The code that you are given can write out the genesis block. And an index to where to find it. In most blockchains like
+Bitcoin  some sort of a database is used for storing the blocks.
 
-We are not going to do that.  We are going to store all of them
-in files in the file system.   This is so you can see the blocks.
-Also we are going to store the blocks in JSON as text so you can
-read the blocks.  Using a database is faster but has lots of overhead.
-It can also be very frustrating when you are attempting to determine
-if the block is correct and you can't easily see what is in the 
-block.
+We are not going to do that. We are going to store all of them in files in the file system. This is so you can see the
+blocks. Also we are going to store the blocks in JSON as text so you can read the blocks. Using a database is faster but
+has lots of overhead. It can also be very frustrating when you are attempting to determine if the block is correct and
+you can't easily see what is in the  block.
 
-Our blocks will be written (by default) in the `./data` directory.
-The format for the blocks is `hash.json`, where hash is the block
-hash.
+Our blocks will be written (by default) in the `./data` directory. The format for the blocks is `hash.json`, where hash
+is the block hash.
 
-To get started, first checkout the code for Assignment 2 - this 
-can be done by:
+To get started, first checkout the code for Assignment 2 - this  can be done by:
 
 ```sh
 	cd ~/go/src/github.com/
@@ -35,7 +28,7 @@ If you have already done this you should update your copy of the class
 repository with:
 
 ```sh
-	cd ~/go/src/github.com/Univ-Wyo-Education
+	cd ~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
 	git pull
 ```
 
@@ -47,7 +40,7 @@ Then change directory into assignment 2.
 
 Our starting code is in this directory.  Specifically we will want to
 compile the main program.  It is in ./main.  Cd to that directory.
-You shoud end up in:
+You shooed end up in:
 `~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-02`
 
 
@@ -63,26 +56,25 @@ Run main to create the genesis block and the initial index.
 ```
 
 This should create a directory with 2 files in it.  The default 
-is in the ./data irectory.  The files are:
+is in the `./data` directory.  The files are:
 
 ```
 	136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e.json
 	index.json
 ```
 
-You should look at the contents of the 2 files.  The one with the long name
-is our genesis block.  The `index.json` is an index that will allow us to
-find data blocks as we are building the this blockchain.
+You should look at the contents of the 2 files. The one with the long name is our genesis block. The `index.json` is an
+index that will allow us to find data blocks as we are building the this blockchain.
 
-The code is missing the chunk that will do the block mining.  The stubbed
-out function is in ./mine/mine.go.  Your assignment is to implement the
-body of the function.  You will want to verify that it works by running
+The code is missing the chunk that will do the block mining. The stubbed out function is in ./mine/mine.go. Your
+assignment is to implement the body of the function. You will want to verify that it works by running
 
 ```sh
 	go test
 ```
 
-int the `./mine` directory.
+in the `./mine` directory.  If you run that now you should get `FAIL`
+because you have not implemented it yet.
 
 Take the time to go and poke through the code.  This code is the basis
 for your mid-term project.  You are going to need to be familiar with
@@ -111,8 +103,9 @@ In the file ./mine/mine.go, implement the function MineBlock.
   6. Back to the top of the loop for another try at finding a seal for this block.
 
 
-In the ./mine directory there is a test.  Complete the MineBlock function.  Run the
-test.
+In the ./mine directory there is a test.  Implement the MineBlock function.  Run the
+test.  Remove the `InstructorImplementationMineBlock(bk) // TODO: Replace this line with your code.`
+Put your code in place of it.
 
 Submit your completed ./mine/mine.go file.  
 
@@ -137,5 +130,10 @@ goimpors every time you save a go file.  I have this setup in `vim`.  Other edit
 do this also.
 
 Run `go vet` and `golint *.go` on it.  Fix any errors.
+
+### Submit
+
+1. mine.go
+2. a copy of your output from running `go test` in the `./mine` directory.
 
 

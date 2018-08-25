@@ -57,5 +57,7 @@ func (cc *CLI) TestReadBlock(args []string) {
 
 func (cc *CLI) TestWriteBlock(args []string) {
 	// Initialize a block
+	bk := block.InitBlock(12, "Good Morning 4010/5010 class", []byte{1, 2, 3, 4})
 	// Write out that block
+	block.WriteBlock("./data/TestWriteBlock.json", bk)
 }
