@@ -1,0 +1,263 @@
+
+Todo
+----------------------------------------------------------------------------------------------------
+
+1. Problem with back arrow key - why -
+2. Rotate/left/right 
+3. Delete
+4. Hide
+5. Save rotated
+6. Package as .app for mac
+7. Package as .exe for Win
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Later
+----------------------------------------------------------------------------------------------------
+
+2. Check to see if file is missing
+6. Build for Apple/Mac-os
+7. Build for Windows
+8. Build for Linux
+9. Create a www.2c-why.com git thing
+10. Create a .zip/.tar arcive with all of it - deployable.
+11. Put on our servers and our systems.
+
+Display info on image (size, date, file-name etc - as a bottom border info)
+Add notes on image, title, description
+
+
+Automatic Update
+if $ - then licensing
+support
+Move-To - set desination then 'M' makes move, or 1,2,3,4,5 - move to different destinations.
+6- open with Gimp/Photoshop
+7- Open with other applicaiton
+8- Handling of "raw" camera stuff
+	- rotate and perserve EXIF info
+	- set GPS coordinates
+	- set date 
+9- resize to a standard size
+
+
+review all image viewers and create a set of features that this should have.
+	https://theunarchiver.com/xee
+
+send file to - for later processing
+group file together -	
+
+handle menues - like "Close"
+	
+-- Add "--pos" to position image at a specific locaiton on screen 	-- backgrond image for class.
+-- add "--border" to add a border to image
+-- add "--slide" to add a timeout to move to next image in set.  Slide Show.
+
+/Pattern/ - filter file names with pattern
+/Pattern/ - search notes, titles, etc.
+
+Allow .JPG, etc.
+
+Add "notes" file - in a directory { .img-note } -> fn ---> "title" "note" }
+
+Fix file name - .JPG, etc -> .jpg
+
+?+6. Figure out packaging
+
+1. Add "p" for properties of image - height/width
+1. Add "r" for rotate by 90
+1. add 'X' for remove file - dialog to verify
+
+https://github.com/electron/electron/issues/4690 -- Command Line Arguments
+
+	- Test on Windows -
+
+EXIF headers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+
+*1. Turn off debug
+*2. Find size of screen
+*3. Open window to full screen
+*4. Display image in full window
+
+http://electron.rocks/different-ways-to-communicate-between-main-and-renderer-process/
+
++++5. Css/HTML for image to cover window - w/o distorsion
+*1. Fix image - rotate
+	<!-- <img src="file:///Users/corwin/go/src/www.2c-why.com/electron0/electron-quick-start/bob.png" /> -->
+	<!-- <img src="atom:./bob.png" /> -->
+*1. Center image
+0.
+	+++0. Start with 0th image - not 1st
+	- should fix to display based on message from client.
+
+	// Should replace this with a "get-img" IPC call.
+		// Send async message to main process
+		// ipcRenderer.send('get-0th-img', 0);
+		// See: http://electron.rocks/different-ways-to-communicate-between-main-and-renderer-process/
+	//	setTimeout ( function() {
+	//		console.log ( "Sending Message" );
+	//		mainWindow.webContents.send('set-screen-width', width);
+	//		mainWindow.webContents.send('set-screen-height', height);
+	//		mainWindow.webContents.send('show-img', imgArr.images[0].image);
+	//		imgNo = 1;
+	//	}, 1200 );
+
+listener.simple_combo("shift s", function() {
+    console.log("You pressed shift and s");
+});
+
+https://dmauro.github.io/Keypress/
+	https://www.npmjs.com/package/keypress
+	Move keypress to the render side - use "keypress" to capture? -- Let's try it.
+2. Cleanup
+	screen-size: { height: X, width: y }
+	display { "type", "title", "file_name", "url" }
+
+0. Cleanup of screen size -															1hr
+	- fix image width issues
+	- Pick out image size from file - do better calculation - in main.
+
+	Ratio of Image iX/y
+	Ratio of Screen X/y
+	if iX < sX && iY < sY - center image
+	if iX > sX && iY < sY - pad 1
+	if iX < sX && iY > sY - pad 2
+	if iX/y < sX/y
+	if iX/y > sX/y
+
+
+1. Display "title" / Display file name												1/2hr
+	t - title
+		main.js : // xyzzy - send message - toggle title
+		- toggle on/off CSS using jQuery to do it.
+
+1. read input file - if .json - then "set"											1hr
+	if .jpg/.jpeg/.png etc - then get directory above and read that
+	set position to start with that image.
+	-- Assume command line arg - then if .jpg/... file read directory, if .json - then read config
+	-- Args are accessable.
+0. Process of non-image items
+	- .json file -- Read in
+
+https://stackoverflow.com/questions/15630770/node-js-check-if-path-is-file-or-directory 
+	- if click on directory - then do the search for directory files.
+
+	*1. 1st arrow key is on wong slide.
+*1. Convert over to the "react" version of this (image-viewer2)
+
+*1. Process of non-image items
+	- other formats -- Allow display of "html" 
+		html
+		pdf
+		webm, .mp4 - video
+
+*3. add " " (space) for next file
+*4. Test with multiple directories / multiple config files
+	1. Title page for presentation
+		-- HTML -> Image
+	5. add in "HELP" if ? typed
+	1. If 1st is .html - then error.  Why
+Defects
+----------------------------------------------------------------------------------------------------
