@@ -1,5 +1,6 @@
 package merkle
 
+// TODO - uncomment the imports when you build your code.
 /*
 import (
 	"fmt"
@@ -9,5 +10,5 @@ import (
 */
 
 func MerkleHash(data [][]byte) []byte {
-	return InstructorMerkleHash(data)
+	return InstructorMerkleHash(data) // TODO: Replace this line with your code.
 }
