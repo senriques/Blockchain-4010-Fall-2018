@@ -18,24 +18,30 @@ you can't easily see what is in the  block.
 Our blocks will be written (by default) in the `./data` directory. The format for the blocks is `hash.json`, where hash
 is the block hash.
 
-To get started, first checkout the code for Assignment 2 - this  can be done by:
+To get started, first checkout the code for Assignment 2 - this can be done by: (You can go online to it and cut-paste
+the link - that is what I usually do. In the browser go to
+[https://github.com/Univ-Wyo-Education](https://github.com/Univ-Wyo-Education). Then click on the
+`Blockchain-4010-Fall-2018` repository. When that comes up there is a green button on the left that says `Clone or
+download`. Click on that. Cut and paste the URL.)
 
 ```sh
 	cd ~/go/src/github.com/
 	mkdir Univ-Wyo-Education
 	cd Univ-Wyo-Education
-	git clone github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
+	git clone https://github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
+	cd Blockchain-4010-Fall-2018
 ```
 
 If you have already done this you should update your copy of the class
 repository with:
 
 ```sh
-	cd ~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
+	cd ~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018
 	git pull
 ```
 
-Then change directory into assignment 2.
+Then from the `~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018` directory
+change directory into assignment 2.
 
 ```sh
 	cd Assignments/A-02
@@ -45,7 +51,6 @@ Our starting code is in this directory.  Specifically we will want to
 compile the main program.  It is in ./main.  Cd to that directory.
 You shooed end up in:
 `~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-02`
-
 
 ```sh
 	cd ./main

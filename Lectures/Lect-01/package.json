@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "description": "An image vewer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://www.2c-why.com/electron-image-vewer",
+  "keywords": [
+    "Electron",
+    "demo",
+    "image",
+    "tutorial",
+    "viewer"
+  ],
+  "author": "Philip Schlump",
+  "license": "Copyright (C) Philip Schlump, 2017.",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  },
+  "dependencies": {
+    "image-size": "^0.6.1"
+  }
+}

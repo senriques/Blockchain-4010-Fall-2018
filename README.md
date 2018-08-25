@@ -131,6 +131,8 @@ Overview
 3. Good and bad about Go
 4. Go
 
+#### References
+	[Go](https://docs.google.com/presentation/d/1EwuJhEHR5Trr2aXBPQajZ2Hcoh29tm_LQCpgfrCnuRk/preview?slide=id.g33148270ac_0_143)
 
 
 ### Lecture 03 - Sep 3 - Monday
