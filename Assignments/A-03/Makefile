@@ -2,7 +2,7 @@
 all: Merkle.html build
 
 build:
-	( cd main ; go build )
+	( cd merkle ; go test )
 
 # You can get markdown-cli and compile it yourself.
 #

@@ -39,5 +39,6 @@ func MineBlock(bk *block.BlockType) {
 	// For the genesis block, when I do this it requires 54586 trips through the loop to calculate the
 	// proof of work.
 	//
-	InstructorImplementationMineBlock(bk) // TODO: Replace this line with your code.
+
+	// TODO: Replace this line with your code.
 }

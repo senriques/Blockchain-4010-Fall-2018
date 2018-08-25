@@ -1,10 +1,13 @@
 What is Mining?
 =============================================================
 
-At the root of our blockchain is a special block called a "genesis" block.  Basically the "genesis" block is the
-beginning block in our block chain. It is special because it will not point back to any previous block.
+In this assignment you will implement proof-of-work mining.  Before we get to the details on mining 
+let's start at the beginning of our blockchain.
 
-The code that you are given can write out the genesis block. And an index to where to find it. In most blockchains like
+At the root of our blockchain is a special block called the "genesis" block.  Basically the "genesis" block is the
+beginning block in our blockchain. It is special because it will not point back to any previous block.
+
+The code that you are given can write out the genesis block, and an index to where to find it. In most blockchains like
 Bitcoin  some sort of a database is used for storing the blocks.
 
 We are not going to do that. We are going to store all of them in files in the file system. This is so you can see the
@@ -80,6 +83,23 @@ Take the time to go and poke through the code.  This code is the basis
 for your mid-term project.  You are going to need to be familiar with
 all of it.  Run all the tests.   If you have questions about it now is
 the time to be asking them.
+
+## Mining
+
+Mining is the process of doing some hard work that anybody can easily check to verify that
+a digital seal has been put on a block.  The seals that we will use are hashes with special
+properties.  In our case the property will be that the first 4 characters of the hex
+string representation of the hash will need to be zeros.  "0000" at the beginning of 
+the hash.   To generate a hash with this pattern we will include a 64 bit integer in
+the data.  Each time we hash the data if we do not get a hash with our special property
+we will increment the integer and try again.  After enough increments we will stumble
+upon a hash with the properly.
+
+The difficulty is controlled by the number of 0's at the beginning of our hash.
+If we want to increases the difficulty we can go to 00000 or 000000 zeros.  In
+Bitcoin this difficulty automatically increases.  In Ethereum this difficulty is
+set by group consensus.
+
 
 ### Pseudo Code for the mining.
 

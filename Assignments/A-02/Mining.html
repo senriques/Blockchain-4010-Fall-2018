@@ -1,26 +1,105 @@
 <h1>What is Mining?</h1>
 
-<p>At the root of our blockchain is a special block called a &ldquo;genesis&rdquo; block.<br />
-Basically the &ldquo;genesis&rdquo; block is the beginning block in our block chain.  It is
-special because it will not point back to any previous block.</p>
+<p>In this assignment you will implement proof-of-work mining.  Before we get to the details on mining
+let&rsquo;s start at the beginning of our blockchain.</p>
 
-<p>The code that you are given can write out the genesis block.</p>
+<p>At the root of our blockchain is a special block called the &ldquo;genesis&rdquo; block.  Basically the &ldquo;genesis&rdquo; block is the
+beginning block in our blockchain. It is special because it will not point back to any previous block.</p>
 
-<p>xyzzy</p>
+<p>The code that you are given can write out the genesis block, and an index to where to find it. In most blockchains like
+Bitcoin  some sort of a database is used for storing the blocks.</p>
 
-<p>xyzzy</p>
+<p>We are not going to do that. We are going to store all of them in files in the file system. This is so you can see the
+blocks. Also we are going to store the blocks in JSON as text so you can read the blocks. Using a database is faster but
+has lots of overhead. It can also be very frustrating when you are attempting to determine if the block is correct and
+you can&rsquo;t easily see what is in the  block.</p>
 
-<p>xyzzy</p>
+<p>Our blocks will be written (by default) in the <code>./data</code> directory. The format for the blocks is <code>hash.json</code>, where hash
+is the block hash.</p>
+
+<p>To get started, first checkout the code for Assignment 2 - this  can be done by:</p>
+
+<pre><code class="language-sh">	cd ~/go/src/github.com/
+	mkdir Univ-Wyo-Education
+	cd Univ-Wyo-Education
+	git clone github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
+</code></pre>
+
+<p>If you have already done this you should update your copy of the class
+repository with:</p>
+
+<pre><code class="language-sh">	cd ~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
+	git pull
+</code></pre>
+
+<p>Then change directory into assignment 2.</p>
+
+<pre><code class="language-sh">	cd Assignments/A-02
+</code></pre>
+
+<p>Our starting code is in this directory.  Specifically we will want to
+compile the main program.  It is in ./main.  Cd to that directory.
+You shooed end up in:
+<code>~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-02</code></p>
+
+<pre><code class="language-sh">	cd ./main
+	go build
+</code></pre>
+
+<p>Run main to create the genesis block and the initial index.</p>
+
+<pre><code class="language-sh">	./main --create-genesis
+</code></pre>
+
+<p>This should create a directory with 2 files in it.  The default
+is in the <code>./data</code> directory.  The files are:</p>
+
+<pre><code>	136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e.json
+	index.json
+</code></pre>
+
+<p>You should look at the contents of the 2 files. The one with the long name is our genesis block. The <code>index.json</code> is an
+index that will allow us to find data blocks as we are building the this blockchain.</p>
+
+<p>The code is missing the chunk that will do the block mining. The stubbed out function is in ./mine/mine.go. Your
+assignment is to implement the body of the function. You will want to verify that it works by running</p>
+
+<pre><code class="language-sh">	go test
+</code></pre>
+
+<p>in the <code>./mine</code> directory.  If you run that now you should get <code>FAIL</code>
+because you have not implemented it yet.</p>
+
+<p>Take the time to go and poke through the code.  This code is the basis
+for your mid-term project.  You are going to need to be familiar with
+all of it.  Run all the tests.   If you have questions about it now is
+the time to be asking them.</p>
+
+<h2>Mining</h2>
+
+<p>Mining is the process of doing some hard work that anybody can easily check to verify that
+a digital seal has been put on a block.  The seals that we will use are hashes with special
+properties.  In our case the property will be that the first 4 characters of the hex
+string representation of the hash will need to be zeros.  &ldquo;0000&rdquo; at the beginning of
+the hash.   To generate a hash with this pattern we will include a 64 bit integer in
+the data.  Each time we hash the data if we do not get a hash with our special property
+we will increment the integer and try again.  After enough increments we will stumble
+upon a hash with the properly.</p>
+
+<p>The difficulty is controlled by the number of 0&rsquo;s at the beginning of our hash.
+If we want to increases the difficulty we can go to 00000 or 000000 zeros.  In
+Bitcoin this difficulty automatically increases.  In Ethereum this difficulty is
+set by group consensus.</p>
 
 <h3>Pseudo Code for the mining.</h3>
 
-<p>In the file ./mine/mine.go, implment the function MineBlock.</p>
+<p>In the file ./mine/mine.go, implement the function MineBlock.</p>
 
 <ol>
 <li>Use an infinite loop to:
 
 <ol>
-<li>Searilize the data from the block for hasing, Call block.SearilizeForSeal to do this.</li>
+<li>Serialize the data from the block for hashing, Call block.SearilizeForSeal to do this.</li>
 <li>Calculate the hash of the data, Call hash.HashOf to do this. This is the slow part.  What would happen if we
 replaced the software with a hash calculator on a graphics card where you could run 4096 hahes at once?
 What would happen if we replaced the graphics card with an ASIC - so you had dedicated hardware to do
@@ -30,7 +109,7 @@ the hash and you could run 4 billion hashes a second?</li>
 <li>See if the first 4 characters of the hash are 0&rsquo;s. - if so we have met the work criteria.
 In go this is <code>if theHashAsAString[0:4] == &quot;0000&quot; {</code>.  This is create a slice, 4 long from
 character 0 with length of 4, then compare that to the string <code>&quot;0000&quot;</code>.</li>
-<li>Set the blcoks &ldquo;Seal&rdquo; to the hash</li>
+<li>Set the block&rsquo;s &ldquo;Seal&rdquo; to the hash</li>
 <li><code>fmt.Printf(&quot;((Mining)) Hash for Block [%s] nonce [%8d]\n&quot;, theHashAsAString, bk.Nonce)</code></li>
 <li>return</li>
 <li>Increment the Nonce in the block, and&hellip;</li>
@@ -38,8 +117,9 @@ character 0 with length of 4, then compare that to the string <code>&quot;0000&q
 </ol></li>
 </ol>
 
-<p>In the ./mine directory there is a test.  Complete the MineBlock function.  Run the
-test.</p>
+<p>In the ./mine directory there is a test.  Implement the MineBlock function.  Run the
+test.  Remove the <code>InstructorImplementationMineBlock(bk) // TODO: Replace this line with your code.</code>
+Put your code in place of it.</p>
 
 <p>Submit your completed ./mine/mine.go file.</p>
 
@@ -55,3 +135,18 @@ test.</p>
 
 <p>The grader has a somewhat more comprehensive automated test to run with this code (There is one more block
 to mine).   You get all the points for the assignment when it passes the test.</p>
+
+<h3>Before you submit your code!</h3>
+
+<p>Use the go formatter on your code.  Either <code>goimports -w *.go</code> or setup your editor to run
+goimpors every time you save a go file.  I have this setup in <code>vim</code>.  Other editors can
+do this also.</p>
+
+<p>Run <code>go vet</code> and <code>golint *.go</code> on it.  Fix any errors.</p>
+
+<h3>Submit</h3>
+
+<ol>
+<li>mine.go</li>
+<li>a copy of your output from running <code>go test</code> in the <code>./mine</code> directory.</li>
+</ol>
