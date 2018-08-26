@@ -1,24 +1,22 @@
 {
+  "name": "Iamge Viewer",
   "version": "1.0.0",
-  "description": "An image vewer",
+  "description": "An Image Viewer as an Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://www.2c-why.com/electron-image-vewer",
+  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
-    "demo",
-    "image",
+    "quick",
+    "start",
     "tutorial",
-    "viewer"
+    "demo"
   ],
-  "author": "Philip Schlump",
-  "license": "Copyright (C) Philip Schlump, 2017.",
+  "author": "GitHub",
+  "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.7.8"
-  },
-  "dependencies": {
-    "image-size": "^0.6.1"
+    "electron": "^2.0.0"
   }
 }
