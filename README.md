@@ -17,7 +17,7 @@ Overview
 1. A little bit of background on the instructor
 	1. pschlump@uwyo.edu
 	1. https://github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018
-	2. (for emergencies between 7:00AM and 9:00PM) 720-209-7888 (cell) 
+	2. (for emergencies between 7:30AM and 9:00PM) 720-209-7888 (cell) 
 	3. This is a "practical" class.
 	4. Class Goal - have every student in this class be able to work effectively
 		in the Blockchain/Ethereum world.   There are students in this class
@@ -40,7 +40,8 @@ Overview
  	3 late coupons - I will send them to you in email.  You can use
 	them for handing in homework 1 week after the due date.  Late 
 	coupons will be tracked on a semi-private Ethereum Blockchian
-	with a Smart Contract.	
+	with a Smart Contract.	Your tokens, pin, password will be
+	given to you in a week or so.
 
 	Application: http://www.2c-why.com/UW-dApp/
 
@@ -132,65 +133,18 @@ Overview
 4. Go
 
 #### References
-	[Go](https://docs.google.com/presentation/d/1EwuJhEHR5Trr2aXBPQajZ2Hcoh29tm_LQCpgfrCnuRk/preview?slide=id.g33148270ac_0_143)
 
-
-### Lecture 03 - Sep 3 - Monday
-
-1. What is a Wallet
-2. What is a Smart Contact
-3. Into the Grunge - how to implement a blockchain
-4. More Go
-5. Overview of Blocks / Transactions / Storage for our blockchain
+[Go](https://docs.google.com/presentation/d/1EwuJhEHR5Trr2aXBPQajZ2Hcoh29tm_LQCpgfrCnuRk/preview?slide=id.g33148270ac_0_143)
 
 
 
-### Lecture 04 - Sep 5 - Wednesday
 
-1. Mining - what is it?
-2. Smart Contracts - what are tye?
+### Sep 3 - Labor Day - Day Off
 
 
+### Future lectures will be added....
 
-### Lecture 04 - Sep 7 - Friday
-
-1. Overview of Blocks / Transactions / Storage for our blockchain
-2. What is a blockchain?
-
-
-
-### Lecture 05 - Sep 10
-
-1. Stocks, Bonds, Futures, Forward Sales, Contracts
-2. ICO's and raising capital. 
-	1. [Reg D](https://www.sec.gov/fast-answers/answers-rule506htm.html)
-	2. [Reg S](https://www.bizjournals.com/atlanta/stories/2003/08/25/smallb6.html)
-3. Why ICO
-4. ERC 20 Contract
-5. How much money is out there?
-
-
-
-### Lecture 06 - Sep 12 - Wednesday - Assignment 1 due.
-
-
-
-### Lecture 07 - Sep 14
-
-
-
-### Lecture 08 - Sep 17
-
-
-
-### Lecture 09 - Sep 19 - Wednesday - Assignment 2 due.
-
-
-
-### Lecture 10 - Sep 21
-
-
-
+Yep - schedule is not set in stone yet.
 
 
 
@@ -198,7 +152,7 @@ Overview
 Assignments and Due Dates
 --------------------------------
 
-This is a tentative schedule:
+This is a tentative schedule (Subject to change by the instructor):
 
 | Assignment                     | Due Date           | Points |
 |:-------------------------------|:-------------------|:------:|
