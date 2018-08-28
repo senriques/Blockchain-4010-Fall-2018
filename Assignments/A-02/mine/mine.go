@@ -27,11 +27,13 @@ func MineBlock(bk *block.BlockType) {
 	//      the hash and you could run 4 billion hashes a second?
 	//   3. Convert the hash (it is []byte) to a hex string.  Use the `hex.EncodeToString` standard go library function.
 	//   4. `fmt.Printf("((Mining)) Hash for Block [%s] nonce [%8d]\r", theHashAsAString, bk.Nonce)`
+	//			`\r` will overwrite the same line instead of advancing to the next.
 	//   5. See if the first 4 characters of the hash are 0's. - if so we have met the work criteria.
 	//      In go this is `if theHashAsAString[0:4] == "0000" {`.  This is create a slice, 4 long from
 	//      character 0 with length of 4, then compare that to the string `"0000"`.
 	//    - Set the block's "Seal" to the hash
 	//    - `fmt.Printf("((Mining)) Hash for Block [%s] nonce [%8d]\n", theHashAsAString, bk.Nonce)`
+	//			  `\n` will overwrite the same *and then advance* to the next line.
 	//    - return
 	//   5. Increment the Nonce in the block, and...
 	//   6. Back to the top of the loop for another try at finding a seal for this block.
