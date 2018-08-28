@@ -40,5 +40,5 @@ func MineBlock(bk *block.BlockType) {
 	// proof of work.
 	//
 
-	// TODO: Replace this line with your code.
+	// TODO: Start coding here.
 }
