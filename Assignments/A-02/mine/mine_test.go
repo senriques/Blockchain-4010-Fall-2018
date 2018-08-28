@@ -54,7 +54,7 @@ func TestMineBlock(t *testing.T) {
 	}
 
 	for ii, test := range tests {
-		test.bk.ThisBlockHash = hash.HashOf(block.SearalizeBlock(&test.bk))
+		test.bk.ThisBlockHash = hash.HashOf(block.SerializeBlock(&test.bk))
 		tests[ii] = test
 	}
 

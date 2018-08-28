@@ -41,7 +41,7 @@ func InitGenesisBlock() (gb *BlockType) {
 
 		// Add fields in AS-04
 	}
-	gb.ThisBlockHash = hash.HashOf(SearalizeBlock(gb))
+	gb.ThisBlockHash = hash.HashOf(SerializeBlock(gb))
 	return
 }
 
@@ -60,7 +60,7 @@ func InitBlock(ii int, dd string, prev hash.BlockHashType) (bk *BlockType) {
 
 		// Add fields in AS-03
 	}
-	bk.ThisBlockHash = hash.HashOf(SearalizeBlock(bk))
+	bk.ThisBlockHash = hash.HashOf(SerializeBlock(bk))
 	return
 }
 
@@ -75,7 +75,7 @@ func IsGenesisBlock(bk *BlockType) bool {
 // SearalizeBlock searializes into bytes the fields that will be hashed the hash of the block.
 // This is the hash that the next block will use to point to this block and the hash that
 // this block will be saved as.
-func SearalizeBlock(bk *BlockType) []byte {
+func SerializeBlock(bk *BlockType) []byte {
 	var buf bytes.Buffer
 
 	binary.Write(&buf, binary.BigEndian, bk.Index)
@@ -91,7 +91,7 @@ func SearalizeBlock(bk *BlockType) []byte {
 }
 
 // SearalizeForSeal searializes into bytes the fields that will be hashed for the mining seal.
-func SearalizeForSeal(bk *BlockType) []byte {
+func SerializeForSeal(bk *BlockType) []byte {
 	var buf bytes.Buffer
 
 	binary.Write(&buf, binary.BigEndian, bk.Index)

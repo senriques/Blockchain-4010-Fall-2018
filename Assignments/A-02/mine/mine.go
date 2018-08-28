@@ -20,12 +20,12 @@ func MineBlock(bk *block.BlockType) {
 	// Pseudo-Code
 	//
 	// 1. Use an infinite loop to:
-	//   1. Serialize the data from the block for hashing, Call block.SearilizeForSeal to do this.
-	//   2. Calculate the hash of the data, Call hash.HashOf to do this. This is the slow part.  What would happen if we
+	//   1. Serialize the data from the block for hashing, Call `block.SearilizeForSeal` to do this.
+	//   2. Calculate the hash of the data, Call `hash.HashOf` to do this. This is the slow part.  What would happen if we
 	//      replaced the software with a hash calculator on a graphics card where you could run 4096 hahes at once?
 	//      What would happen if we replaced the graphics card with an ASIC - so you had dedicated hardware to do
 	//      the hash and you could run 4 billion hashes a second?
-	//   3. Convert the hash (it is []byte) to a hex string.  Use the hex.EncodeToString standard go library function.
+	//   3. Convert the hash (it is []byte) to a hex string.  Use the `hex.EncodeToString` standard go library function.
 	//   4. `fmt.Printf("((Mining)) Hash for Block [%s] nonce [%8d]\r", theHashAsAString, bk.Nonce)`
 	//   5. See if the first 4 characters of the hash are 0's. - if so we have met the work criteria.
 	//      In go this is `if theHashAsAString[0:4] == "0000" {`.  This is create a slice, 4 long from

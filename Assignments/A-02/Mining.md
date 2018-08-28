@@ -110,15 +110,33 @@ set by group consensus.
 
 ### Pseudo Code for the mining.
 
-In the file ./mine/mine.go, implement the function MineBlock.
+Code that I have supplied you with: 
+
+	| go Package        | Description                                                      |
+	|------------------:|------------------------------------------------------------------|
+	| block             | Operations on blocks like initialization and searilization.      |
+	|                   | Look in the `.../Assignments/A-02/block/block.go` file.          |
+	| hash              | Convience functions to work with keccak256 hash.                 |
+	|                   | Look in the `.../Assignments/A-02/hash/hash.go` file.            |
+
+`go` Library functions you will need to use:
+
+	| go Package        | Description                                                                   |
+	|------------------:|-------------------------------------------------------------------------------|
+	| hex               | Convert from/to base 16 strings.                                              |
+	|                   | [https://golang.org/pkg/encoding/hex/](https://golang.org/pkg/encoding/hex/)  |
+	| fmt               | Generate formatted output.                                                    |
+	|                   | [https://golang.org/pkg/fmt](https://golang.org/pkg/fmt/)                     |
+
+In the file `./mine/mine.go`, implement the function MineBlock.
 
 1. Use an infinite loop to:
-  1. Serialize the data from the block for hashing, Call block.SearilizeForSeal to do this.
-  2. Calculate the hash of the data, Call hash.HashOf to do this. This is the slow part.  What would happen if we
+  1. Serialize the data from the block for hashing, Call `block.SerializeForSeal` to do this.
+  2. Calculate the hash of the data, Call `hash.HashOf` to do this. This is the slow part.  What would happen if we
      replaced the software with a hash calculator on a graphics card where you could run 4096 hahes at once?
      What would happen if we replaced the graphics card with an ASIC - so you had dedicated hardware to do
      the hash and you could run 4 billion hashes a second?
-  3. Convert the hash (it is []byte) to a hex string.  Use the hex.EncodeToString standard go library function.
+  3. Convert the hash (it is []byte) to a hex string.  Use the `hex.EncodeToString` standard go library function.
   4. `fmt.Printf("((Mining)) Hash for Block [%s] nonce [%8d]\r", theHashAsAString, bk.Nonce)`
   5. See if the first 4 characters of the hash are 0's. - if so we have met the work criteria.
      In go this is `if theHashAsAString[0:4] == "0000" {`.  This is create a slice, 4 long from
@@ -153,7 +171,7 @@ to mine).   You get all the points for the assignment when it passes the test.
 ### Before you submit your code!
 
 Use the go formatter on your code.  Either `goimports -w *.go` or setup your editor to run
-goimpors every time you save a go file.  I have this setup in `vim`.  Other editors can
+`goimpors` every time you save a go file.  I have this setup in `vim`.  Other editors can
 do this also.
 
 Run `go vet` and `golint *.go` on it.  Fix any errors.
