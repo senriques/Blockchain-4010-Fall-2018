@@ -6,6 +6,12 @@ Class 4010 and 5010.
 
 Time: 12:00 (noon) till 12:50 PM, Monday, Wednesday, Friday.
 
+Office Hours:
+
+Tuesday 12:00 to 1:30 PM 
+
+Thrusday 5:00 to 6:30 PM
+
 Lecture 01 - Aug 29, 2018
 --------------------------
 

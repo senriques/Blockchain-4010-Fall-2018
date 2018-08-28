@@ -27,6 +27,7 @@ download</code>. Click on that. Cut and paste the URL.)</p>
 	mkdir Univ-Wyo-Education
 	cd Univ-Wyo-Education
 	git clone https://github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018.git
+	cd Blockchain-4010-Fall-2018
 </code></pre>
 
 <p>If you have already done this you should update your copy of the class
@@ -36,7 +37,8 @@ repository with:</p>
 	git pull
 </code></pre>
 
-<p>Then change directory into assignment 2.</p>
+<p>Then from the <code>~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018</code> directory
+change directory into assignment 2.</p>
 
 <pre><code class="language-sh">	cd Assignments/A-02
 </code></pre>
@@ -47,6 +49,7 @@ You shooed end up in:
 <code>~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-02</code></p>
 
 <pre><code class="language-sh">	cd ./main
+	go get
 	go build
 </code></pre>
 
@@ -56,7 +59,7 @@ You shooed end up in:
 </code></pre>
 
 <p>This should create a directory with 2 files in it.  The default
-is in the <code>./data</code> directory.  The files are:</p>
+is in the <code>./data</code> directory ( <code>.../Assignments/A-02/main/data</code> ).  The files are:</p>
 
 <pre><code>	136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e.json
 	index.json
@@ -65,13 +68,14 @@ is in the <code>./data</code> directory.  The files are:</p>
 <p>You should look at the contents of the 2 files. The one with the long name is our genesis block. The <code>index.json</code> is an
 index that will allow us to find data blocks as we are building the this blockchain.</p>
 
-<p>The code is missing the chunk that will do the block mining. The stubbed out function is in ./mine/mine.go. Your
+<p>The code is missing the chunk that will do the block mining. The stubbed out function is in
+<code>.../Assignments/A-02/mine/mine.go</code>. Your
 assignment is to implement the body of the function. You will want to verify that it works by running</p>
 
 <pre><code class="language-sh">	go test
 </code></pre>
 
-<p>in the <code>./mine</code> directory.  If you run that now you should get <code>FAIL</code>
+<p>in the <code>.../Assignments/A-02/mine</code> directory.  If you run that now you should get <code>FAIL</code>
 because you have not implemented it yet.</p>
 
 <p>Take the time to go and poke through the code.  This code is the basis
@@ -121,7 +125,7 @@ character 0 with length of 4, then compare that to the string <code>&quot;0000&q
 </ol></li>
 </ol>
 
-<p>In the ./mine directory there is a test.  Implement the MineBlock function.  Run the
+<p>In the <code>./mine</code> directory there is a test.  Implement the MineBlock function.  Run the
 test.  Remove the <code>InstructorImplementationMineBlock(bk) // TODO: Replace this line with your code.</code>
 Put your code in place of it.</p>
 

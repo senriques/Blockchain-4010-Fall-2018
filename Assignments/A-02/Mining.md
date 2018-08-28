@@ -54,6 +54,7 @@ You shooed end up in:
 
 ```sh
 	cd ./main
+	go get
 	go build
 ```
 
@@ -64,7 +65,7 @@ Run main to create the genesis block and the initial index.
 ```
 
 This should create a directory with 2 files in it.  The default 
-is in the `./data` directory.  The files are:
+is in the `./data` directory ( `.../Assignments/A-02/main/data` ).  The files are:
 
 ```
 	136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e.json
@@ -74,14 +75,15 @@ is in the `./data` directory.  The files are:
 You should look at the contents of the 2 files. The one with the long name is our genesis block. The `index.json` is an
 index that will allow us to find data blocks as we are building the this blockchain.
 
-The code is missing the chunk that will do the block mining. The stubbed out function is in ./mine/mine.go. Your
+The code is missing the chunk that will do the block mining. The stubbed out function is in
+`.../Assignments/A-02/mine/mine.go`. Your
 assignment is to implement the body of the function. You will want to verify that it works by running
 
 ```sh
 	go test
 ```
 
-in the `./mine` directory.  If you run that now you should get `FAIL`
+in the `.../Assignments/A-02/mine` directory.  If you run that now you should get `FAIL`
 because you have not implemented it yet.
 
 Take the time to go and poke through the code.  This code is the basis
@@ -128,7 +130,7 @@ In the file ./mine/mine.go, implement the function MineBlock.
   6. Back to the top of the loop for another try at finding a seal for this block.
 
 
-In the ./mine directory there is a test.  Implement the MineBlock function.  Run the
+In the `./mine` directory there is a test.  Implement the MineBlock function.  Run the
 test.  Remove the `InstructorImplementationMineBlock(bk) // TODO: Replace this line with your code.`
 Put your code in place of it.
 
