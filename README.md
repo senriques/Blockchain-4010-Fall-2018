@@ -220,4 +220,22 @@ Textbook
 [An Introduction to Programming in Go](https://www.golang-book.com/public/pdf/gobook.0.pdf)  The link is to the free PDF of the text.
 The book is out of print.
 
+ 
+
+Title IX – Duty to Report
+----------------------------
+ 
+The University of Wyoming faculty are committed to helping create a safe learning environment for all students and for
+the university as a whole. If you have experienced any form of gender or sex-based discrimination or harassment,
+including sexual assault, sexual harassment, relationship violence, or stalking, know that help and support are
+available. The University has staff members trained to support survivors in navigating campus life, accessing health and
+counseling services, providing academic and housing accommodations, and more. The University strongly encourages all
+students to report any such incidents to the University. Please be aware that all University of Wyoming employees,
+including student staff, are required to report all Title IX related concerns to the Title IX Coordinator or their
+supervisor. This means that if you tell a faculty member about a situation of sexual harassment or sexual violence, or
+other related misconduct, the faculty member must share that information with the University’s Title IX Coordinator.
+UW’s Title IX Coordinator is Jim Osborn (Manager of Investigations, Equal Opportunity Report and Response). He is
+located in Room 320 of the Bureau of Mines Building, and can be reached via email at report-it@uwyo.edu or via phone at
+766-5200 or 766-5228. For more information, go to:
+[http://www.uwyo.edu/reportit/learn-more/faqs.html](http://www.uwyo.edu/reportit/learn-more/faqs.html) .
 
