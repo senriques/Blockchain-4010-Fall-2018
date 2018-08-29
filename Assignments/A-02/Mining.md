@@ -40,6 +40,15 @@ repository with:
 	git pull
 ```
 
+After you have a copy of the code checked out you should create a branch in Git to work on.
+
+```
+	git checkout -b implement-hw2
+```
+
+Having your own branch (you can name it other than implement-hw2) will allow you to 
+switch back and forth between the original code and your modified code.
+
 Then from the `~/go/src/github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018` directory
 change directory into assignment 2.
 
@@ -112,21 +121,21 @@ set by group consensus.
 
 Code that I have supplied you with: 
 
-	| go Package        | Description                                                      |
-	|------------------:|------------------------------------------------------------------|
-	| block             | Operations on blocks like initialization and searilization.      |
-	|                   | Look in the `.../Assignments/A-02/block/block.go` file.          |
-	| hash              | Convience functions to work with keccak256 hash.                 |
-	|                   | Look in the `.../Assignments/A-02/hash/hash.go` file.            |
+| go Package        | Description                                                      |
+|------------------:|------------------------------------------------------------------|
+| block             | Operations on blocks like initialization and searilization.      |
+|                   | Look in the `.../Assignments/A-02/block/block.go` file.          |
+| hash              | Convience functions to work with keccak256 hash.                 |
+|                   | Look in the `.../Assignments/A-02/hash/hash.go` file.            |
 
 `go` Library functions you will need to use:
 
-	| go Package        | Description                                                                   |
-	|------------------:|-------------------------------------------------------------------------------|
-	| hex               | Convert from/to base 16 strings.                                              |
-	|                   | [https://golang.org/pkg/encoding/hex/](https://golang.org/pkg/encoding/hex/)  |
-	| fmt               | Generate formatted output.                                                    |
-	|                   | [https://golang.org/pkg/fmt](https://golang.org/pkg/fmt/)                     |
+| go Package        | Description                                                                   |
+|------------------:|-------------------------------------------------------------------------------|
+| hex               | Convert from/to base 16 strings.                                              |
+|                   | [https://golang.org/pkg/encoding/hex/](https://golang.org/pkg/encoding/hex/)  |
+| fmt               | Generate formatted output.                                                    |
+|                   | [https://golang.org/pkg/fmt](https://golang.org/pkg/fmt/)                     |
 
 In the file `./mine/mine.go`, implement the function MineBlock.
 

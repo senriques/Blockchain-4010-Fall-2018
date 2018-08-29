@@ -14,6 +14,10 @@ build:
 # $ cd markdown-cli
 # $ go build
 #
+FR=../../Lectures/Lect-01
+
 Mining.html: Mining.md
 	markdown-cli --input=./Mining.md --output=Mining.html
+	cat ${FR}/css/pre ${FR}/css/markdown.css ${FR}/css/post ../../md.css ${FR}/css/hpre Mining.html ${FR}/css/hpost >/tmp/Mining.html
+	mv /tmp/Mining.html ./Mining.html
 
