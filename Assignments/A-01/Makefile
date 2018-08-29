@@ -1,8 +1,12 @@
 
 all: Intro-To-Go.html
 
+FR=../../Lectures/Lect-01
+
 Intro-To-Go.html: Intro-To-Go.md
 	markdown-cli --input=./Intro-To-Go.md --output=Intro-To-Go.html
+	cat ${FR}/css/pre ${FR}/css/markdown.css ${FR}/css/post ../../md.css ${FR}/css/hpre Intro-To-Go.html ${FR}/css/hpost >/tmp/Intro-To-Go.html
+	mv /tmp/Intro-To-Go.html ./Intro-To-Go.html
 
 test: test01 test02
 .PHONEY: test test01 test02
