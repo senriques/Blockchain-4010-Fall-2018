@@ -3,6 +3,8 @@ github.com Site:  [https://github.com/Univ-Wyo-Education/Blockchain-4010-Fall-20
 
 Instructor: Philip Schlump
 
+Class: 3105 Main Engineering Building
+
 Office: `_________`
 
 Email: pschlump@uwyo.edu

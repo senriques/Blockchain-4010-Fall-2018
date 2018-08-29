@@ -2,7 +2,8 @@
 
 Class at UW (University of Wyoming) for blockchain.
 
-Class 4010 and 5010.
+Class No: 4010 and 5010.
+Class: 3105 Main Engineering Building
 
 Time: 12:00 (noon) till 12:50 PM, Monday, Wednesday, Friday.
 
