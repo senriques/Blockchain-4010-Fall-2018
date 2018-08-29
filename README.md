@@ -12,6 +12,10 @@ Tuesday 12:00 to 1:30 PM
 
 Thursday 5:00 to 6:30 PM
 
+Email: pschlump@uwyo.edu (or pschlump@gmail.com )
+
+
+
 Lecture 01 - Aug 29, 2018
 --------------------------
 
@@ -95,7 +99,16 @@ Overview
 	source of where you got your copy.  I expect an explanation of what and 
 	why you are grabbing someting from the web.  I expect an analysis of
 	what license the content is under, MIT, GPL2, GPL3, CC, CC-BY etc.
-	
+
+	Official Acedemic Policy Statment: “Academic dishonesty will not be tolerated in this class. Cases of academic
+	dishonesty will be treated in accordance with UW Regulation 2-114. The penalties for academic dishonesty can include, at
+	my discretion, an “F” on an exam, an “F” on the class component exercise, and/or an “F” in the entire
+	course. Academic dishonesty means anything that represents someone else’s ideas as your own without attribution. It is
+	intellectual theft – stealing - and includes (but is not limited to) unapproved assistance on examinations, plagiarism
+	(use of any amount of another person’s writings, blog posts, publications, and other materials without attributing
+	that material to that person with citations), or fabrication of referenced information. Facilitation of another
+	person’s academic dishonesty is also considered academic dishonesty and will be treated identically.”
+		
 3. Late Policy and (3) Late Coupons
 	I have a grader - most of the grading will be automated.  You get
  	3 late coupons - I will send them to you in email.  You can use
@@ -105,6 +118,12 @@ Overview
 	given to you in a week or so.
 
 	Application: http://www.2c-why.com/UW-4010-dApp/ (Available Sep. 10)
+
+3. Attendance: You are expected to show up for class. 
+	Most of the material for this class and the tests will be from the lectures.
+	If you miss class you need to contact me to find out what to do and how to catch up.
+
+3. Reading.  There will be required reading from things on the web.
 
 4. 70% from homework, 40% from tests.  Midterm and Final.
 	There will be 2 projects for the class.
@@ -239,3 +258,33 @@ located in Room 320 of the Bureau of Mines Building, and can be reached via emai
 766-5200 or 766-5228. For more information, go to:
 [http://www.uwyo.edu/reportit/learn-more/faqs.html](http://www.uwyo.edu/reportit/learn-more/faqs.html) .
 
+
+Classroom Behavior Policy
+---------------------------
+
+At all times, treat your presence in the classroom and your enrollment in this course as you would a job. Act
+professionally, arrive on time, pay attention, complete your work in a timely and professional manner, and treat all
+deadlines seriously. You will be respectful towards you classmates and instructor. Spirited debate and disagreement are
+to be expected in any classroom and all views will be heard fully, but at all times we will behave civilly and with
+respect towards one another. Personal attacks, offensive language, name-calling, and dismissive gestures are not
+warranted in a learning atmosphere. As the instructor, I have the right to dismiss you from the classroom, study
+sessions, electronic forums, and other areas where disruptive behavior occurs.
+
+Electronic devices such as mobile phones should be turned off.  Laptops / notepads are a bad choice for taking notes.
+
+Classroom Statement on Diversity
+----------------------------------
+
+The University of Wyoming values an educational environment that is diverse, equitable, and inclusive. The diversity
+that students and faculty bring to class, including age, country of origin, culture, disability, economic class,
+ethnicity, gender identity, immigration status, linguistic, political affiliation, race, religion, sexual orientation,
+veteran status, worldview, and other social and cultural diversity is valued, respected, and considered a resource for
+learning. 
+
+Disability Support
+---------------------
+
+If you have a physical, learning, sensory or psychological disability and require accommodations, please register as
+soon as possible and provide documentation of your disability to Disability Support Services (DSS), Room 109 Knight
+Hall. You may also contact DSS at (307) 766-3073 or udss@uwyo.edu. Visit their website for more
+information: www.uwyo.edu/udss
