@@ -1,5 +1,9 @@
 
-attestation - Definition of attestation
+## attestation - Definition of attestation - From Websters Dictionary.
+
+[https://www.merriam-webster.com/dictionary/attestation](https://www.merriam-webster.com/dictionary/attestation)
+Faire Use - this is a quote.
+
 1. an act or instance of attesting something: such as
 	1. : a proving of the existence of something through evidence
 	  … a complete and formal attestation of your innocence. —Edward Bulwer-Lytton
