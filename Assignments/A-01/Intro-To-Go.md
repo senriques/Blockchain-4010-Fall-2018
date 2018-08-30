@@ -30,6 +30,10 @@ Search google for "download golang".  Go is usually referred to as "golang" when
 You should find: [https://golang.org/dl/](https://golang.org/dl/).  The page should look like
 ![Go Download Page](go-download.png)
 
+For Windows there is a `.msi` installer that is very good.  It will automatically install
+go into `C:\go\` and setup your permissions.  You can choose a different path for the install.
+Follow the instructions on the download site for Windows.
+
 Install at least version 1.10.3 of the language.   On mac you download .pkg and click on it.
 On windows the .msi and run it (double click).  On Linux...  Follow the instructions on the
 download page for your flavor of Linux.
@@ -59,8 +63,8 @@ need to delete the old version of go.
 
 #### Windows
 
-Bring up the file explorer.  Navigate to the C:\ drive.  Drag `go` folder into
-the trash.
+The latest version of the Go installer for windows will offer to automatically delete
+an old version from the system.  Choose this in the installer.
 
 
 Submit:
@@ -74,6 +78,16 @@ in it.  You can cut paste or pipe the output to a file.  You should see a versio
 (1.2) Verify that you can compile and run (Hello-World.go) (5pts)
 -----------------------------------------------------------------------------------------------------------------------------
 
+For this class you will need to have `git` installed.  On Mac you should be able to use `brew` to install git.
+
+```SH
+	brew install git
+```
+
+On Windows download from [https://git-scm.com/download/win](https://git-scm.com/download/win) and install git.
+This will put a funny 4 square icon on your desktop that says 'bash' in it.  Click on that to bring up a
+`bash` shell.
+
 Let's put our code in the right place from the very start.  On a mac that is `~/go/src/github.com/[Your Github Account]/`.
 In this case go to that directory - or build it.  Then create a directory called `hello-world`.
 I used my username in this.  You need to use your github.com username.
@@ -85,6 +99,9 @@ I used my username in this.  You need to use your github.com username.
 	mkdir hello-world
 	cd hello-world
 ```
+
+In Windows you should be in your home directory xyzzy or a similar directory.  In the bash shell from git 
+the same commands as on Mac should work (the did for me a few minutes ago).
 
 Cut and paste - or type in (probably better for you) the following program.   These instructions are
 also on the Go download page.  Put it into a file called `main.go`.
@@ -107,6 +124,13 @@ To run it:
 ```SH
 	go build 
 	./hello-world
+```
+
+or on Windows
+
+```SH
+	go build
+	./hello-world.exe
 ```
 
 If you get an error about access an un-exported function, then you failed to capitalize the first
@@ -146,12 +170,16 @@ This is the set of commands for setting up your Go environment.
 
 ### PC / Windows
 
+You are probably in a directory something like `C:\home\your-name`.  I also have a copy of Vi for windows
+installed.  You can use your favorite text editor instead.  I installed vim using the gvim81.exe from
+[https://www.vim.org/download.php#pc](https://www.vim.org/download.php#pc).
+
 ```
-	E:\ mkdir hello-world
-	E:\hello-world\ cd hello-world
-	E:\hello-world\ vim hw.go
-	E:\hello-world\ go build
-	E:\hello-world\ hello-world.exe
+	$ mkdir hello-world
+	$ cd hello-world
+	$ vi hw.go
+	$ go build
+	$ hello-world.exe
 	Hello Wonderful World
 ```
 
@@ -161,6 +189,9 @@ that you create in Go.
 If you have a different text editor that you like better than vim - then install it - use it (Microsoft
 Word is not an editor!  It will not create files that you can compile with Go.)
 
+I worked through the rest of the homework on a Windows 10 system with very little Windows related difficulty.
+Using the git-bash your `C:\` drive is `/c/`, your `E:\` drive is `/e/`.  You use `/` for all the directory
+separators.
 
 
 

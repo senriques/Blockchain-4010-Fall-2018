@@ -739,6 +739,10 @@ to keep an old version of the compiler around.</p>
 <p>You should find: <a href="https://golang.org/dl/">https://golang.org/dl/</a>.  The page should look like
 <img src="go-download.png" alt="Go Download Page" /></p>
 
+<p>For Windows there is a <code>.msi</code> installer that is very good.  It will automatically install
+go into <code>C:\go\</code> and setup your permissions.  You can choose a different path for the install.
+Follow the instructions on the download site for Windows.</p>
+
 <p>Install at least version 1.10.3 of the language.   On mac you download .pkg and click on it.
 On windows the .msi and run it (double click).  On Linux&hellip;  Follow the instructions on the
 download page for your flavor of Linux.</p>
@@ -767,8 +771,8 @@ need to delete the old version of go.</p>
 
 <h4>Windows</h4>
 
-<p>Bring up the file explorer.  Navigate to the C:\ drive.  Drag <code>go</code> folder into
-the trash.</p>
+<p>The latest version of the Go installer for windows will offer to automatically delete
+an old version from the system.  Choose this in the installer.</p>
 
 <p>Submit:</p>
 
@@ -778,6 +782,15 @@ in it.  You can cut paste or pipe the output to a file.  You should see a versio
 </ol>
 
 <h2>(1.2) Verify that you can compile and run (Hello-World.go) (5pts)</h2>
+
+<p>For this class you will need to have <code>git</code> installed.  On Mac you should be able to use <code>brew</code> to install git.</p>
+
+<pre><code class="language-SH">	brew install git
+</code></pre>
+
+<p>On Windows download from <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> and install git.
+This will put a funny 4 square icon on your desktop that says &lsquo;bash&rsquo; in it.  Click on that to bring up a
+<code>bash</code> shell.</p>
 
 <p>Let&rsquo;s put our code in the right place from the very start.  On a mac that is <code>~/go/src/github.com/[Your Github Account]/</code>.
 In this case go to that directory - or build it.  Then create a directory called <code>hello-world</code>.
@@ -789,6 +802,9 @@ I used my username in this.  You need to use your github.com username.</p>
 	mkdir hello-world
 	cd hello-world
 </code></pre>
+
+<p>In Windows you should be in your home directory xyzzy or a similar directory.  In the bash shell from git
+the same commands as on Mac should work (the did for me a few minutes ago).</p>
 
 <p>Cut and paste - or type in (probably better for you) the following program.   These instructions are
 also on the Go download page.  Put it into a file called <code>main.go</code>.</p>
@@ -809,6 +825,12 @@ also on the Go download page.  Put it into a file called <code>main.go</code>.</
 
 <pre><code class="language-SH">	go build 
 	./hello-world
+</code></pre>
+
+<p>or on Windows</p>
+
+<pre><code class="language-SH">	go build
+	./hello-world.exe
 </code></pre>
 
 <p>If you get an error about access an un-exported function, then you failed to capitalize the first
@@ -850,11 +872,15 @@ help with this class.</p>
 
 <h3>PC / Windows</h3>
 
-<pre><code>	E:\ mkdir hello-world
-	E:\hello-world\ cd hello-world
-	E:\hello-world\ vim hw.go
-	E:\hello-world\ go build
-	E:\hello-world\ hello-world.exe
+<p>You are probably in a directory something like <code>C:\home\your-name</code>.  I also have a copy of Vi for windows
+installed.  You can use your favorite text editor instead.  I installed vim using the gvim81.exe from
+<a href="https://www.vim.org/download.php#pc">https://www.vim.org/download.php#pc</a>.</p>
+
+<pre><code>	$ mkdir hello-world
+	$ cd hello-world
+	$ vi hw.go
+	$ go build
+	$ hello-world.exe
 	Hello Wonderful World
 </code></pre>
 
@@ -863,6 +889,10 @@ that you create in Go.</p>
 
 <p>If you have a different text editor that you like better than vim - then install it - use it (Microsoft
 Word is not an editor!  It will not create files that you can compile with Go.)</p>
+
+<p>I worked through the rest of the homework on a Windows 10 system with very little Windows related difficulty.
+Using the git-bash your <code>C:\</code> drive is <code>/c/</code>, your <code>E:\</code> drive is <code>/e/</code>.  You use <code>/</code> for all the directory
+separators.</p>
 
 <h2>(1.3) Echo command line arguments (echo1.go) (5pts)</h2>
 
