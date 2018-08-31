@@ -31,6 +31,31 @@ Faire Use - this is a quote.
 
 ## Economics of Blockchain
 
+In 2009 - bitcoin invented.  
+In 2013 - smart contracts - Ethereum.
+
+Ability to create trust between non-trusting parties.
+Ability to create economic systems.
+
+Merick - shipping 40% decrease in shipping times.  World wide $380 Billion in trade.  90% of all the goods
+in the world are moved by ship.  38 days average shipping time. A 40% reduction is dropping that to 23 days.
+Difference is 15 days.  40% of 380 billion is 152 billion in capital that is not tied up - at an average
+capital cost of 10% = 15.2 billion - over the 23 days.  15/365 * 15.2 billion. -- About 0.62 billion.
+
+Estonia - All titles and property on the chain.  In US 5.51 Million Houses.  Average title search $3821.
+Title search in Estonia, $23.33 each.  Title insurance $1408.  My calculation $28 billion a year.
+
+Marshal Islands - off of the dollar and onto a blockchain.   The estimate is that the government will
+save around $5M a year or about $90 per resident a year.  For entire US 327 million - that is $29 billion
+dollars.
+
+Australian University is issuing certificates based on blockchain.
+(Especial Interest in this because this is our project)
+
+
+Perspective on 28 or 29 billion - free college tuition for all students in the United States is
+estimated to cost 75 billion.
+
 ## Go - Intro
 
 
