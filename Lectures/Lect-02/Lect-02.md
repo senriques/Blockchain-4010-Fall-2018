@@ -58,4 +58,9 @@ estimated to cost 75 billion.
 
 ## Go - Intro
 
+Assignment 1 - Due Sep 12
+
+1. Hello World - walk through
+2. Echo - walk through
+3. Marshal and Unmarshal of data - walk through
 
