@@ -1,7 +1,7 @@
 Lecture 02
 ----------------
 
-## Question: What is a *hash*?
+## Question: What is a **hash**?
 
 1. (math) a mapping form a range to a domain.
 
@@ -17,7 +17,7 @@ Lecture 02
 
 
 
-## *attestation* - Definition of attestation - From Websters Dictionary.
+## **attestation** - Definition of attestation - From Websters Dictionary.
 
 [https://www.merriam-webster.com/dictionary/attestation](https://www.merriam-webster.com/dictionary/attestation)
 Faire Use - this is a quote.
