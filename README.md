@@ -56,22 +56,22 @@ Overview
 		If you have a limited programming background I will work with you.
 
 0. What this class will cover
-	1. What is Blockchain - what is Bitcoin / Ethereum / Other token systems
-	2. The worlds worst, most expensive database
+	1. What is Blockchain - what is Bitcoin / Ethereum / Other token systems.
+	2. The worlds worst, most expensive database.
 	3. What is the "hype" - what is real about blockchain.
-	4. Economics - Coin, ICO, Stocks, Bonds, Tokens, Utility Tokens, A Security
-	5. Legal Ramifications.  ICOs 506(d), Subpart (s)
+	4. Economics - Coin, ICO, Stocks, Bonds, Tokens, Utility Tokens, A Security.
+	5. Legal Ramifications.  ICOs 506(d), Subpart (s).
 	6. Programming - 1/2 in go, 1/2 in Solidity (Ethereum) and Web front end (JavaScript/HTML/CSS).
-	7. Some Homework
-	8. Write a Paper - How will blockchain effect the economy.
-	9. 2 tests (Midterm and Final)
-	10. Why Go
-	11. What is Proof of work
-	12. What is Proof of stake
-	13. Enough Go to make it through this class (and be able to convincingly tell an employer that you have programmed in Go)
+	7. Some Homework.
+	8. Write a Paper - How will Blockchain affect the economy.
+	9. 2 tests (Midterm and Final).
+	10. Why Go.
+	11. What is Proof of work.
+	12. What is Proof of stake.
+	13. Enough Go to make it through this class (and be able to convincingly tell an employer that you have programmed in Go).
 	14. Why Ethereum? Solidity?
 	15. dApp - what is that?  What is web3?
-	16. A detailed understanding of the security model behind Blockchain
+	16. A detailed understanding of the security model behind Blockchain.
 	17. Some advanced stuff on security - distributed computation and public/private keys, distributed key generation.
 	18. What is a "tangle" - why is a blockchain called a "chain".
 	19. Why is blockchain so slow?
@@ -226,7 +226,7 @@ This is a tentative schedule (Subject to change by the instructor):
 | Midterm and Demo Proj 1.       | Week of Oct 29     | 400    |
 | AS-07 Solidity & Truffle       | Nov 7              | 100    |
 | AS-08 dApp calls Contract      | Nov 14             | 100    |
-| AS-09 Grades Contract          | Nov 21             | 100    |
+| AS-09 Transcripts Contract     | Nov 21             | 100    |
 | AS-10 Web Front End (pt1)      | Nov 28             | 100    |
 | AS-11 Web Front End (pt2)      | Dec 7              | 200    |
 | Demo Proj. 2 start Dec 5       |                    |        |
