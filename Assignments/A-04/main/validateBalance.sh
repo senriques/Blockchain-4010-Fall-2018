@@ -8,8 +8,8 @@
 # $3 - balance fiel after - do calculation to see if it adds up.
 #
 
-bef=$(cat $1)
-aft=$(cat $3)
+bef=$(cat $1 | awk '{print $4}')
+aft=$(cat $3 | awk '{print $4}')
 delta=$2
 let "calc=$bef+($delta)"
 if (( $calc == $aft )) ; then

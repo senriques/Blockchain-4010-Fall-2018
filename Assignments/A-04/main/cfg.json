@@ -18,5 +18,6 @@
 		{ "AcctStr":"0x7e3aFEc048bC7be745d0fA0F5af97D3978C40E9A", "Value": 500000 },
 		{ "AcctStr":"0xDb180Da9A8982C7Bb75Ca40039f959CB959c62e8", "Value": 500000 }
 	],
-	"MiningRewardAcct":"0xDb180Da9A8982C7Bb75Ca40039f959CB959c62e8"
+	"MiningRewardAcct":"0xDb180Da9A8982C7Bb75Ca40039f959CB959c62e8",
+	"MiningDifficulty":"0"
 }
