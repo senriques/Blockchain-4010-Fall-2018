@@ -58,7 +58,7 @@ func InitBlock(ii int, dd string, prev hash.BlockHashType) (bk *BlockType) {
 		// Add fields in AS-03
 		// MerkleHash:          []byte{},
 
-		// Add fields in AS-03
+		// Add fields in AS-04
 	}
 	bk.ThisBlockHash = hash.HashOf(SerializeBlock(bk))
 	return

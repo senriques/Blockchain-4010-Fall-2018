@@ -2,13 +2,13 @@
 	"Index": [
 		"136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e"
 	],
-	"TxHashIndex": {
-		"136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e": {
-			"Index": 0,
-			"BlockHash": "136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e"
-		}
+	"BlockHashToIndex": {
+		"136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e": 0
 	},
 	"AddrData": {
+		"AddrIndex": null
+	},
+	"FindValue": {
 		"AddrIndex": null
 	}
 }

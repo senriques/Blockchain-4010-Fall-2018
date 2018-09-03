@@ -39,3 +39,10 @@ x:
 
 y:
 	./validateBalance.sh ./out/bal6E0.bef.out  33 ./out/bal6E0.aft.out
+
+test_list_acct:
+	go build
+	rm -f ./data/*.json
+	./main --create-genesis
+	./main --list-accounts
+

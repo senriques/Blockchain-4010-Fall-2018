@@ -13,15 +13,17 @@ import (
 type InitialAccountType struct {
 	AcctStr string
 	Value   int
-	acct    addr.AddressType // Converted from AcctStr above with validation.
+	Acct    addr.AddressType `json:"-"` // Converted from AcctStr above with validation.
 }
 
 // GlobalConfigData is the gloal configuration data.
 // It holds all the data from the cfg.json file.
 type GlobalConfigData struct {
-	DataDir         string
-	MiningReward    int
-	InitialAccounts []InitialAccountType
+	DataDir          string
+	MiningReward     int
+	InitialAccounts  []InitialAccountType
+	MiningRewardAcct string
+	AcctCoinbase     addr.AddressType `json:"-"`
 }
 
 var gCfg GlobalConfigData // global configuration data.
@@ -39,14 +41,22 @@ func ReadConfig(filename string) (err error) {
 	for ii, aa := range gCfg.InitialAccounts {
 		if !lib.IsValidAddress(aa.AcctStr) {
 			fmt.Fprintf(os.Stderr, "Invalid initializeation - invalid account at [%d] value [%s] in list of initial account values\n", ii, aa.AcctStr)
+			os.Exit(1)
 		}
 		tmp, _ := lib.ConvAddrStrToAddressType(aa.AcctStr)
-		aa.acct = tmp
+		aa.Acct = tmp
 		gCfg.InitialAccounts[ii] = aa
 		if aa.Value < 0 {
 			fmt.Fprintf(os.Stderr, "Invalid initializeation - invalid alue at [%d] value [%d] in list of initial account values\n", ii, aa.Value)
+			os.Exit(1)
 		}
 	}
+	tmp, err := lib.ConvAddrStrToAddressType(gCfg.MiningRewardAcct)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Invalid initializeation - invalid account for MiningRewardAcct value [%s]\n", gCfg.MiningRewardAcct)
+		os.Exit(1)
+	}
+	gCfg.AcctCoinbase = tmp
 	return err
 }
 

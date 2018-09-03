@@ -14,14 +14,14 @@ const GenesisDesc = "GenesisBlock Fri Aug 17 23:16:12 MDT 2018"
 
 // BlockType is a single block in the block chain.
 type BlockType struct {
-	Index         int                            // position of this block in the chain, 0, 1, 2, ...
-	Desc          string                         // if "genesis" string then this is a genesis block.
-	ThisBlockHash hash.BlockHashType             //
-	PrevBlockHash hash.BlockHashType             // This is 0 length if this is a "genesis" block
-	Nonce         uint64                         //
-	Seal          hash.SealType                  //
-	MerkleHash    hash.MerkleHashType            // AS-03
-	Tx            []transactions.TransactionType // Add Transactions to Block Later, (AS-04 will do this)
+	Index         int                             // position of this block in the chain, 0, 1, 2, ...
+	Desc          string                          // if "genesis" string then this is a genesis block.
+	ThisBlockHash hash.BlockHashType              //
+	PrevBlockHash hash.BlockHashType              // This is 0 length if this is a "genesis" block
+	Nonce         uint64                          //
+	Seal          hash.SealType                   //
+	MerkleHash    hash.MerkleHashType             // AS-03
+	Tx            []*transactions.TransactionType // Add Transactions to Block Later, (AS-04 will do this)
 }
 
 // InitGenesisBlock create and return a genesis block.   This is a special
@@ -35,7 +35,7 @@ func InitGenesisBlock() (gb *BlockType) {
 		Nonce:         0,
 		Seal:          []byte{},
 		MerkleHash:    []byte{},
-		Tx:            make([]transactions.TransactionType, 0, 1), // Add Transactions to Block Later, (AS-04 will do this)
+		Tx:            make([]*transactions.TransactionType, 0, 1), // Add Transactions to Block Later, (AS-04 will do this)
 	}
 	gb.ThisBlockHash = hash.HashOf(SerializeBlock(gb))
 	return
@@ -51,7 +51,7 @@ func InitBlock(ii int, dd string, prev hash.BlockHashType) (bk *BlockType) {
 		Nonce:         0,
 		Seal:          []byte{},
 		MerkleHash:    []byte{},
-		Tx:            make([]transactions.TransactionType, 0, 1), // Add Transactions to Block Later, (AS-04 will do this)
+		Tx:            make([]*transactions.TransactionType, 0, 1), // Add Transactions to Block Later, (AS-04 will do this)
 	}
 	bk.ThisBlockHash = hash.HashOf(SerializeBlock(bk))
 	return
@@ -75,7 +75,7 @@ func SerializeBlock(bk *BlockType) []byte {
 	if len(bk.Tx) > 0 {
 		mData := make([][]byte, 0, len(bk.Tx))
 		for _, tx := range bk.Tx {
-			it := transactions.SerializeForSeal(&tx)
+			it := transactions.SerializeForSeal(tx)
 			buf.Write(it)
 			mData = append(mData, it)
 		}
@@ -96,7 +96,7 @@ func SerializeForSeal(bk *BlockType) []byte {
 	if len(bk.Tx) > 0 {
 		mData := make([][]byte, 0, len(bk.Tx))
 		for _, tx := range bk.Tx {
-			it := transactions.SerializeForSeal(&tx)
+			it := transactions.SerializeForSeal(tx)
 			buf.Write(it)
 			mData = append(mData, it)
 		}
