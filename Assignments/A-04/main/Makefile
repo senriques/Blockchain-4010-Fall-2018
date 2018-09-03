@@ -46,3 +46,15 @@ test_list_acct:
 	./main --create-genesis
 	./main --list-accounts
 
+test_show_balance:
+	go build
+	rm -f ./data/*.json
+	./main --create-genesis
+	./main --show-balance 0x885765a2fcfB72e68D82D656C6411b7D27BacDD7 
+
+test_send_funds:
+	go build
+	rm -f ./data/*.json
+	./main --create-genesis
+	./main --test-send-funds 0x885765a2fcfB72e68D82D656C6411b7D27BacDD7 0x6E06bF940bb57adE69Cb03153d1C3842411bD3c1 33 x x x 
+

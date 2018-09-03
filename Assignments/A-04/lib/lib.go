@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/pschlump/MiscLib"
+	"github.com/pschlump/godebug"
 )
 
 // SVarI  marshals and indents a data structure into JSON.
@@ -24,4 +27,11 @@ func Exists(name string) bool {
 		}
 	}
 	return true
+}
+
+func Assert(assertion bool) {
+	if !assertion {
+		fmt.Fprintf(os.Stderr, "%sFatal: Failed Assertion AT: %s%s\n", MiscLib.ColorRed, godebug.LF(2), MiscLib.ColorReset)
+		os.Exit(2)
+	}
 }
