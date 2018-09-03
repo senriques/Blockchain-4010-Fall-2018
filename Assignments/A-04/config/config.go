@@ -1,0 +1,56 @@
+package config
+
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+
+	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/addr"
+	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/lib"
+)
+
+type InitialAccountType struct {
+	AcctStr string
+	Value   int
+	acct    addr.AddressType // Converted from AcctStr above with validation.
+}
+
+// GlobalConfigData is the gloal configuration data.
+// It holds all the data from the cfg.json file.
+type GlobalConfigData struct {
+	DataDir         string
+	MiningReward    int
+	InitialAccounts []InitialAccountType
+}
+
+var gCfg GlobalConfigData // global configuration data.
+
+// ReadConfig will read a configuration file into the global congiguration structure.
+func ReadConfig(filename string) (err error) {
+	var buf []byte
+	buf, err = ioutil.ReadFile(filename)
+	if err != nil {
+	}
+	err = json.Unmarshal(buf, &gCfg)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Invalid initializeation - Unable to parse JSON file, %s\n", err)
+	}
+	for ii, aa := range gCfg.InitialAccounts {
+		if !lib.IsValidAddress(aa.AcctStr) {
+			fmt.Fprintf(os.Stderr, "Invalid initializeation - invalid account at [%d] value [%s] in list of initial account values\n", ii, aa.AcctStr)
+		}
+		tmp, _ := lib.ConvAddrStrToAddressType(aa.AcctStr)
+		aa.acct = tmp
+		gCfg.InitialAccounts[ii] = aa
+		if aa.Value < 0 {
+			fmt.Fprintf(os.Stderr, "Invalid initializeation - invalid alue at [%d] value [%d] in list of initial account values\n", ii, aa.Value)
+		}
+	}
+	return err
+}
+
+// GetGlobalConfig returns a copy of the global config structure.
+func GetGlobalConfig() (rv GlobalConfigData) {
+	return gCfg
+}
