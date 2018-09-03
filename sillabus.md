@@ -40,7 +40,7 @@
 | Nov  2   | 26 | Advanced Security: zero-knowledge-proofs.                                         |
 | Nov  5   | 27 | Advanced Security: distributed key generation.                                    |
 | Nov  7   | 28 | Metamask - Setting up Ethereum Accounts - Get Ether                               |
-|          |    | Assignment 07 Due - Solidity & Truffle (ERC 20 Based Contrat)                     |
+|          |    | Assignment 07 Due - Solidity & Truffle (ERC 20 Based Contract)                    |
 | Nov  9   | 29 | Loading contracts - using web3                                                    |
 | Nov 12   | 30 | Testing with "mocha" v.s. testing with solidity.                                  |
 | Nov 14   | 31 | Sharing Transcripts - Contract Overview                                           |
