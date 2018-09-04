@@ -31,6 +31,7 @@ test_sf0:
 	mkdir -p ./out
 	./main --create-genesis
 
+# You can run this test multiple times after 'test_sf0' has setup the ./data directory.
 test_sf1:
 	go build
 	mkdir -p ./out
