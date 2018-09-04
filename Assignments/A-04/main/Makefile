@@ -4,22 +4,32 @@ all:
 
 .PHONY: test test001 test_sf1
 
-test: test001 test_sf1
+test: test001 test_sf0 test_sf1
+
+T1=29e68e530d0718dd01759e8c9a5276d20687bc5ec23e60dce063c2b97ba6b04f.json
 
 test001:
 	go build
 	mkdir -p data
-	rm -f data/136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e.json 
+	rm -f ./data/*.json
+	rm -f data/${T1}
 	rm -f data/index.json
 	rm -f data/TestWriteBlock.json
 	./main --cfg test-genesis.json --create-genesis
 	diff data/index.json ref
-	diff data/136c53391115ab7ff717bd24e62dd0df2c270500d7194290169a83488022548e.json ref
+	diff data/${T1} ref
 	./main --test-read-block
 	./main --test-write-block
 	diff data/TestWriteBlock.json ref
 	@echo 
 	@echo PASS
+
+test_sf0:
+	go build
+	mkdir -p data
+	rm -f ./data/*.json
+	mkdir -p ./out
+	./main --create-genesis
 
 test_sf1:
 	go build
