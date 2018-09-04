@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/pschlump/godebug"
 )
@@ -12,13 +13,13 @@ import (
 func ReadBlock(fn string) (bk *BlockType, err error) {
 	data, err := ioutil.ReadFile(fn)
 	if err != nil {
-		fmt.Printf("Unable to read genesis block %s [at %s], %s\n", fn, godebug.LF(), err)
+		fmt.Fprintf(os.Stderr, "Unable to read block %s [at %s], %s\n", fn, godebug.LF(), err)
 		return nil, err
 	}
 	bk = &BlockType{}
 	err = json.Unmarshal(data, bk)
-	if !IsGenesisBlock(bk) {
-		fmt.Printf("Unable to read genesis block %s [at %s], %s\n", fn, godebug.LF(), err)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to read block %s [at %s], %s\n", fn, godebug.LF(), err)
 		return nil, err
 	}
 	return bk, nil

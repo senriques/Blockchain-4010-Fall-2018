@@ -57,30 +57,31 @@ type TransactionType struct {
 }
 
 type TxInputType struct {
-	BlockHash   string // Which block is this from
-	TxOffset    int    // The transaction in the block. In the block[BlockHash].Tx[TxOffset]
-	TxOutputPos int    // Position of the output in the transaction. In the  block[BlockHash].Tx[TxOffset].Output[TxOutptuPos]
-	Amount      int    // Value
+	BlockNo     int // Which block is this from
+	TxOffset    int // The transaction in the block. In the block[BlockHash].Tx[TxOffset]
+	TxOutputPos int // Position of the output in the transaction. In the  block[BlockHash].Tx[TxOffset].Output[TxOutptuPos]
+	Amount      int // Value
 }
 
 type TxOutputType struct {
+	BlockNo     int              // Which block is this in
 	TxOffset    int              // Which transaction in this block.  block[this].Tx[TxOffset]
 	TxOutputPos int              // Position of the output in this block. In the  block[this].Tx[TxOffset].Output[TxOutptuPos]
 	Account     addr.AddressType // Acctount funds go to (If this is ""chagne"" then this is the same as TransactionType.Account
 	Amount      int              // Amoutn to go to accoutn
 }
 
-func NewEmptyTx() *TransactionType {
+func NewEmptyTx(memo string, passedAcct addr.AddressType) *TransactionType {
 	return &TransactionType{
 		Input:          make([]TxInputType, 0, 1),  // Set of inputs to a transaction
 		Output:         make([]TxOutputType, 0, 1), // Set of outputs to a tranaction
 		SCOwnerAccount: []byte{},
 		SCAddress:      []byte{},
 		SCOutputData:   "",
-		Account:        []byte{},
+		Account:        passedAcct,
 		Signature:      lib.SignatureType([]byte{}),
 		Message:        "",
-		Comment:        "",
+		Comment:        memo,
 	}
 }
 
@@ -114,14 +115,42 @@ func SerializeForSeal(tx *TransactionType) []byte {
 
 func SerializeTransactionInput(buf *bytes.Buffer, inp *TxInputType) {
 	// binary.Write(buf, binary.BigEndian, inp.BlockNo)
-	buf.Write([]byte(inp.BlockHash))
+	// buf.Write([]byte(inp.BlockHash))
+	binary.Write(buf, binary.BigEndian, inp.BlockNo)
 	binary.Write(buf, binary.BigEndian, inp.TxOffset)
 	binary.Write(buf, binary.BigEndian, inp.TxOutputPos)
 	binary.Write(buf, binary.BigEndian, inp.Amount)
 }
 
 func SerializeTransactionOutput(buf *bytes.Buffer, out *TxOutputType) {
+	binary.Write(buf, binary.BigEndian, out.BlockNo)
 	binary.Write(buf, binary.BigEndian, out.TxOffset)
+	binary.Write(buf, binary.BigEndian, out.TxOutputPos)
 	buf.Write([]byte(out.Account))
 	binary.Write(buf, binary.BigEndian, out.Amount)
+}
+
+func CreateTxOutputWithFunds(to addr.AddressType, amount int) (txo *TxOutputType, err error) {
+	txo = &TxOutputType{
+		Account: to,
+		Amount:  amount,
+	}
+	return
+}
+
+func AppendTxOutputToTx(tx *TransactionType, txo *TxOutputType) {
+	txo.TxOutputPos = len(tx.Output)
+	tx.Output = append(tx.Output, *txo)
+}
+
+func CreateTxInputsFromOldOutputs(oldOutput []*TxOutputType) (txIn []TxInputType, err error) {
+	for _, vv := range oldOutput {
+		txIn = append(txIn, TxInputType{
+			BlockNo:     vv.BlockNo,
+			TxOffset:    vv.TxOffset,
+			TxOutputPos: vv.TxOutputPos,
+			Amount:      vv.Amount,
+		})
+	}
+	return
 }

@@ -72,6 +72,7 @@ func SerializeBlock(bk *BlockType) []byte {
 	var buf bytes.Buffer
 	binary.Write(&buf, binary.BigEndian, bk.Index)
 	buf.Write([]byte(bk.Desc))
+	buf.Write([]byte(bk.PrevBlockHash))
 	if len(bk.Tx) > 0 {
 		mData := make([][]byte, 0, len(bk.Tx))
 		for _, tx := range bk.Tx {

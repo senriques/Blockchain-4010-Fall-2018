@@ -60,7 +60,7 @@ func TestMineBlock(t *testing.T) {
 
 	for ii, test := range tests {
 		bk := &test.bk
-		MineBlock(bk)
+		MineBlock(bk, "0000")
 		SealString := hex.EncodeToString(bk.Seal)
 		if SealString != test.expectedSealHash {
 			t.Errorf("Test %d, expected %s got %s\n", ii, test.expectedSealHash, SealString)

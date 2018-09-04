@@ -60,6 +60,7 @@ test_show_balance:
 test_send_funds:
 	go build
 	rm -f ./data/*.json
+	mkdir -p ./out
 	./main --create-genesis
 	./main --test-send-funds 0x885765a2fcfB72e68D82D656C6411b7D27BacDD7 0x6E06bF940bb57adE69Cb03153d1C3842411bD3c1 33 x x x "Memo 02"
 	./main --show-balance 0xdb180da9a8982c7bb75ca40039f959cb959c62e8 >./out/tsf.out
