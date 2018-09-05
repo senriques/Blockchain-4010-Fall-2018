@@ -723,15 +723,18 @@ It is the one that is the most adaptable to change.&rdquo;
 
 <h2>2nd. Purpose of a business</h2>
 
-<p>To make $.</p>
+<p>To make a profit for the owners of the business.</p>
 
-<p>What is &ldquo;Fiduciary Responsibility&rdquo;.</p>
+<p>What is &ldquo;Fiduciary Responsibility&rdquo;.  It means that you have been placed / are in a
+position of legal responsibility for managing somebody else&rsquo;s money.</p>
 
 <h2>Go</h2>
 
 <ol>
 <li>Functions</li>
 </ol>
+
+<p>Parts of a function</p>
 
 <pre><code>	// Name will do a b c d.
 	func Name ( i1 Type1, i2 Type2 ) ( o1 Type1, o2 Type2 ) {
@@ -746,12 +749,55 @@ It is the one that is the most adaptable to change.&rdquo;
     4. Comments on functions need to start with the name of the function.</p>
 
 <ol>
-<li><p>Maps</p></li>
-
-<li><p>Slices (Arrays)</p></li>
-
-<li><p>io &amp; cli</p></li>
+<li>Maps</li>
 </ol>
+
+<p>Go has dictionary/maps</p>
+
+<pre><code>	var m1 map[string]int
+	m1 = make(map[string]int)
+	m1[&quot;abc&quot;] = 12
+	k := m1[&quot;abc&quot;]
+	k2 := m1[&quot;xyz&quot;]
+	k3, ok_t := m1[&quot;abc&quot;]
+	k4, ok_f := m1[&quot;xyz&quot;]
+</code></pre>
+
+<p>Observations
+    1. memory is not allocated to a map when it is declared.
+    2. You can just use <code>make</code> and <code>:=</code> to declare a map.
+    3. You can test to see if you have an un-allocated map by comparing to <code>nil</code>.
+    4. You can find out if a value is in a map.</p>
+
+<ol>
+<li>Slices (Arrays)</li>
+</ol>
+
+<p>An Array</p>
+
+<pre><code>	var a1 [4]int
+</code></pre>
+
+<p>A slice</p>
+
+<pre><code>	var s1 []int
+</code></pre>
+
+<p>What is a slice?</p>
+
+<ol>
+<li>io &amp; cli</li>
+</ol>
+
+<p>Output:</p>
+
+<pre><code>	fmt.Printf ( &quot;Format %s\n&quot;, &quot;string&quot; )
+</code></pre>
+
+<p>CLI</p>
+
+<pre><code>	fmt.Printf ( &quot;%s\n&quot;, os.Args[] )
+</code></pre>
 
 </div>
 
