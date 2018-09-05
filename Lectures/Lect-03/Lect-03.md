@@ -10,8 +10,8 @@ It is the one that is the most adaptable to change."
 
 1. AU - Research - linear scaling (similar to blockchain) 8000 tx per sec, don't specify latency.
 2. Java 4th garbage collector - tried it.  Provision at 20% before, now at 25% ok, at 30% boom.
-3. Did everybody in the class get a "key"
-4. xyzzy
+3. Did everybody in the class get a "key".
+4. California bill passed that defines things like "digital signature".
 
 
 
