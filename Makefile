@@ -1,12 +1,18 @@
 
 
-all: README.html sillabus.html Handout01.html attestation.html
+all: README.html sillabus.html Handout01.html attestation.html class-summary.html
+
 FR=./Lectures/Lect-01
 
 README.html: README.md
 	markdown-cli --input=./README.md --output=README.html
 	cat ${FR}/css/pre ${FR}/css/markdown.css ${FR}/css/post ./md.css ${FR}/css/hpre README.html ${FR}/css/hpost >/tmp/README.html
 	mv /tmp/README.html ./README.html
+
+class-summary.html: class-summary.md
+	markdown-cli --input=./class-summary.md --output=class-summary.html
+	cat ${FR}/css/pre ${FR}/css/markdown.css ${FR}/css/post ./md.css ${FR}/css/hpre class-summary.html ${FR}/css/hpost >/tmp/class-summary.html
+	mv /tmp/class-summary.html ./class-summary.html
 
 
 sillabus.html: sillabus.md
