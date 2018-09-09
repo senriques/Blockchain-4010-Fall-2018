@@ -23,20 +23,20 @@ Make this slice of slice of byte then length of the data.  That would be <code>l
 <li>Create a <code>[][]byte</code> slice to hold the intermediate hashes in the tree.
 This will need to be no more than <code>len(data)/2+1</code> in length.  The plus 1 is so that 0 blocks of hasing or an odd
 number of blocks will have enough space.  Let&rsquo;s call this <code>hMid</code>.</li>
-<li>Start with <code>ln = len(data)/2+1</code></li>
-<li>While <code>ln &gt;= 1</code>
+<li>Declare a variable <code>ln</code>, and set it to  <code>len(data)/2+1</code></li>
+<li>While <code>ln &gt;= 1</code> (Hint: the language only has <code>for</code> loops with lots of different ways of doing it)
 
 <ol>
 <li>For each pair of hashes (if you have an odd number just use the single hash)
 
 <ul>
-<li>Calculate the hash of the pair using <code>hash.Keccak256</code>.  It takes a variable number of arguments so you can
+<li>Calculate the hash of the pair using <code>hash.Keccak256()</code>.  It takes a variable number of arguments so you can
 pass 1 or 2 arguments to it.</li>
 <li>Append this to <code>hMid</code>.</li>
 </ul></li>
 <li>Replace hTmp with hMid</li>
-<li>Recalculate <code>ln = len(hTmp)/2</code></li>
-<li>Generate a new empty hMId of length ln</li>
+<li>Recalculate <code>ln</code> set it to <code>len(hTmp)/2</code></li>
+<li>Generate a new empty hMid of allocated space of <code>len(hTmp)/2</code>.</li>
 </ol></li>
 <li>Return <code>hTmp[0]</code></li>
 </ol>
