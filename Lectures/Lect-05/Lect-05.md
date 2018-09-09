@@ -45,15 +45,15 @@ Two uses for interfaces (Actually more than 2 but 2 primary uses).
 ## Variable parameter list functions.
 
 ```Go
-func vexample ( a int,  b... interface{} ) {
+func vexample(a int, b ...interface{}) {
 	for pos, bVal := range b {
-		switch bVal.(type):
+		switch v := bVal.(type) {
 		case int:
-			fmt.Printf ( "It's an int\n" )
+			fmt.Printf("It's an int, %d at %d\n", v, pos)
 		case []int:
-			fmt.Printf ( "It's a slice of int\n" )
+			fmt.Printf("It's a slice of int\n")
 		default:
-			fmt.Printf ( "It's a something else\n" )
+			fmt.Printf("It's a something else\n")
 		}
 	}
 }
@@ -63,9 +63,9 @@ func vexample ( a int,  b... interface{} ) {
 ## Interfaces to sets of functions.
 
 ```
-type InterfaceSpecType interface{
-	func DoFirstThing ( p1 int, p2 int) error
-	func DoSomthingElse ( ) error
+type InterfaceSpecType interface {
+	DoFirstThing(p1 int, p2 int) error
+	DoSomethingElse() error
 }
 
 type ImplementationType struct {
@@ -73,21 +73,30 @@ type ImplementationType struct {
 	BB int
 }
 
-func NewImplementationType () *InterfaceSpecType {
-	return &ImplementationType {
+var _ InterfaceSpecType = (*ImplementationType)(nil)
+
+func NewImplementationType() InterfaceSpecType {
+	return &ImplementationType{
 		AA: 1,
 		BB: 2,
 	}
 }
 
-func ( ImplementationType * xy ) DoFirstThing ( p1 int, p2 int) error {
+func (xy *ImplementationType) DoFirstThing(p1 int, p2 int) error {
 	// ... do something ...
+	return nil
 }
 
-func ( ImplementationType xy ) DoSomethingElse ( ) error {
+func (xy *ImplementationType) DoSomethingElse() error {
 	// ... do something ...
+	return nil
 }
 
+func Demo() {
+	var dd InterfaceSpecType
+	dd = NewImplementationType()
+	_ = dd.DoSomethingElse()
+}
 ```
 
 
