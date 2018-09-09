@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dApp: Coupons for 4010 CoSci, University of Wyoming, Fall 2018</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="container">
+	<h1>Blockchain Late Coupon dApp</h1>
+	<img src="Ethereum_logo_2014.svg" height="150" style="padding:20px;"><br>
+	<div id="p_Login" class="my_page">
+		User Address: <input type="text" size=40 id="username" name="username" class="input_data" /> <br>
+		User Pin Code: <input type="text" size=10 id="pin" name="pin" class="input_data" /> <br>
+		<a href="#" onclick="doLogin()" class="btn btn-primary">Login</a> <br>
+	</div>
+	<div id="p_Main" class="my_page">
+		<a href="#" onclick="doLogout()" class="btn btn-primary">Logout</a> <br>
+		<a href="#" onclick="doShowBalance()" class="btn btn-primary">Show Balance</a> <br>
+		<a href="#" onclick="doRedeamCoupon()" class="btn btn-primary">Redeam Coupon</a> <br>
+		<a href="#" onclick="doTransferToken()" class="btn btn-primary">Transfer Token</a> <br>
+		<a href="#" onclick="doPage('a_NewStudent')" class="btn btn-primary my_admin">New Student</a> <br>
+		<a href="#" onclick="doPage('a_WithdrawStudent')" class="btn btn-primary my_admin">Student Withdraw</a> <br>
+		<a href="#" onclick="doPage('a_UpdatePin')" class="btn btn-primary my_admin">Update Pin</a> <br>
+		<a href="#" onclick="doPage('a_ActivityList')" class="btn btn-primary my_admin">Activity List (Redeamed Coupons)</a> <br>
+	</div>
+	<div id="p_Logout" class="my_page">
+		<h2> You are now logged out </h2>
+		<a href="#" onclick="doPage('p_Login')" class="btn btn-primary">Backto Login Page</a> <br>
+	</div>
+	<div id="p_ShowBalance" class="my_page">
+		<h2> Number of Tokens (Late Coupons) You Have </h2>
+		You have <span id="outToken" class="output_data"></span> Tokens. <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<div id="p_RedeamCoupon" class="my_page">
+		<h2> Redeam Coupon </h2>
+		<h3> Redeam one of your late coupons for a specific assignment </h3>
+		<!-- Assignment: <input type="text" id="assignment" name="assignment" class="input_data" /> <br> -->
+		<h4> Assignment <h4>
+		<div>
+			<input type="radio" name="assignment" id="assignment_a_01" class="id_radio"  value="A-01" /> A-01 <br>
+			<input type="radio" name="assignment" id="assignment_a_02" class="id_radio"  value="A-02" /> A-02 <br>
+			<input type="radio" name="assignment" id="assignment_a_03" class="id_radio"  value="A-03" /> A-03 <br>
+			<input type="radio" name="assignment" id="assignment_a_04" class="id_radio"  value="A-04" /> A-04 <br>
+			<input type="radio" name="assignment" id="assignment_a_05" class="id_radio"  value="A-05" /> A-05 <br>
+			<input type="radio" name="assignment" id="assignment_a_06" class="id_radio"  value="A-06" /> A-06 <br>
+			<input type="radio" name="assignment" id="assignment_paper" class="id_radio" value="A-paper" /> Paper <br>
+			<input type="radio" name="assignment" id="assignment_a_07" class="id_radio"  value="A-07" /> A-07 <br>
+			<input type="radio" name="assignment" id="assignment_a_08" class="id_radio"  value="A-08" /> A-08 <br>
+			<input type="radio" name="assignment" id="assignment_a_09" class="id_radio"  value="A-09" /> A-09 <br>
+			<input type="radio" name="assignment" id="assignment_a_10" class="id_radio"  value="A-10" /> A-10 <br>
+			<input type="radio" name="assignment" id="assignment_a_11" class="id_radio"  value="A-11" /> A-11 <br>
+		</div>
+		Account Password (not the pin): <input type="text" id="pwRA" name="pwRA" class="input_data" /> <br>
+		<a href="#" onclick="doRedeamCouponSubmit()" class="btn btn-primary">Redeam Now</a> <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<div id="p_TransferToken" class="my_page">
+		Transfer To (Account Number): <input type="text" size=40 id="toTT" name="toTT" class="input_data" /> <br>
+		Account Password (not the pw): <input type="text" id="pwTT" name="pwTT" class="input_data" /> <br>
+		<a href="#" onclick="doTransferTokenSubmit()" class="btn btn-primary">Transfer Token</a> <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<!-- ============================================================================================================================== -->
+	<div id="a_NewStudent" class="my_page my_admin">
+		xyzzy <br>
+		NewStudent Page <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<div id="a_WithdrawStudent" class="my_page my_admin">
+		xyzzy <br>
+		WithdrawStudent Page <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<div id="a_UpdatePin" class="my_page my_admin">
+		xyzzy <br>
+		UpdatePin Page <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<div id="a_ActivityList" class="my_page my_admin">
+		xyzzy - list out all of the redeamed coupons by student <br>
+		ActivityList Page <br>
+		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
+	</div>
+	<div id="outErr" class="output_data"></div>
+</body>
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="./js/index.js?v=0015"></script>
+<!--
+
+contract_data.transfer(receiver,amount,{from:web3.eth.accounts[0]});
+
+Transfer Tokens													(( 30min ))
+
+	- # of Tokens You Have [ output ]
+	- List of Accounts to Transfer to [ Drop down ]
+	- Transfer [button]
+
+	-> Confirm [ data + hash / password ] = Go
+
+
+[ Teacher/Admin ] newStudent 									(( 1hr ))
+
+	- Create an account
+		- Show Info
+
+	-> Confirm [ data + hash / password ] = Go
+
+		-> Output 	- Student Key
+					- Student Password
+
+ 
+
+[ Teacher/Admin ] activity list 								(( 30min ))
+
+	- Fetch a list of all the accounts - display it.
+
+	- Fetch a list of all the redeemed/burnt coupons - display it.
+
+
+[ Teacher/Admin ] updatePin										(( 30min ))
+[ Teacher/Admin ] reset password 
+
+	- List of Accounts - and Student Names [ Drop down ]
+	- New Password Field [ Input ]
+	- Reset [Button]
+
+		-> Output 	- Student Key
+					- Student Password
+
+-->
+</html>
