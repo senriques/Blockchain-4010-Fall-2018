@@ -1,4 +1,5 @@
 UTC--2018-03-11T01-56-42.511489695Z--9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f
+,*
 todo.1
 dApp-coupons.tar
 unlock-50c-1.sh
@@ -14,3 +15,10 @@ go-svr.linux
 m.out
 node_modules/
 openzeppelin-solidity/
+dApp-coupons/.marker.1
+dApp-coupons/note.1
+dApp-coupons/ofn.png
+dApp-coupons/old.1
+dApp-coupons/page-design.md
+dApp-coupons/sig.1
+dApp-coupons/mk-favicon.sh
