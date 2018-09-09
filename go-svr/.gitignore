@@ -7,3 +7,10 @@ unlock-6ff-3.sh
 unlock-9a6-1.sh
 lib
 build
+setup-env.sh
+gcall.log
+go-svr
+go-svr.linux
+m.out
+node_modules/
+openzeppelin-solidity/
