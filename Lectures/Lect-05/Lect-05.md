@@ -5,9 +5,9 @@ News
 ------------------------------
 
 1. Hack-A-Thon
-2. todo
-3. todo
-4. todo
+2. Hack-A-Thon
+3. China is accepting digital digests (hash) as evidence in a court of law.
+4. Australia is putting drivers licenses on the blockchain
 
 Detailed walk through of mining.
 ------------------------------
