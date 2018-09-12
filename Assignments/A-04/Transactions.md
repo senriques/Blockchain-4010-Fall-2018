@@ -62,3 +62,57 @@ is reproduced below.
 	// 10. Return
 	//
 ```
+
+## Steps that you will want to use
+
+First you need to get the main program in `.../A-04/main` to compile.  This means having
+the solution to assignment 3 in the `.../A-04/merkle` directory.   Also you will need to
+fix `.../A-04/cli.go` around line 190 to `return` and take out the code that is 
+incomplete.  Go to the `.../A-04/main` directory and:
+
+```
+	go build
+```
+
+You should end up with a `main` program or `main.exe` to run.
+
+Now you need to have a genesis block.  The code for this is already built.  You just have
+to run it.  In the `main` directory run:
+
+```
+	./main --create-genesis
+```
+
+This should create a directory `.../A-04/main/data` with 2 files in it.  The file are 
+in JSON format.  You should be able to edit the files with a text editor (vi or vim 
+for example) and take a look at them.   The file with the long name (it is the
+hash of the block) is the first block in the chain.  This is the "genesis" block.
+A bunch of accounts have been created with 50000 tokens each.  The other file is
+`index.json`.  It is our index to finding stuff in the set of blocks.  Take a
+look at both files.
+
+If you need to run `./main --create-genesis` again (so that you are starting over
+with a fresh chain) then you will need to manually delete all the files in the
+`.../A-04/main/data` directory.   I had to do this a bunch of times before I got
+the transaction code to work.
+
+### Other commands that are useful.
+
+You can take a look at the accounts that have been created with:
+
+```
+	./main --list-accounts
+```
+
+and you can find out how much funds are in an account with:
+
+```
+	./main --show-balance 0x00000SomeAccountNumber
+```
+
+When you start out you should have a bunch of accounts with 50000 
+tokens in each account.  The account numbers should look familiar.
+They are specified in the `./main/cfg.json` file and match with
+the accounts that Sasha emailed out.
+
+

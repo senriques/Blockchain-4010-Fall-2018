@@ -713,7 +713,7 @@ This activity is captured in a transaction.</p>
 
 <p>In this assignment we are going to add transactions to our blockchain.</p>
 
-<p>You will need to implement code in ./cli/cli.go starting at line 200.
+<p>You will need to implement code in ./cli/cli.go starting at line 183.
 The function is <code>func (cc *CLI) SendFundsTransaction(</code></p>
 
 <p>Side Note: notice how line continuation works in go with the
@@ -738,7 +738,84 @@ transferred amount then some &ldquo;change&rdquo; is owed back to the &ldquo;fro
 account.  If &ldquo;change&rdquo; is needed then create a transaction output
 with the &ldquo;change&rdquo;.</p>
 
-<p>The pseudo code is in a comment in the file <code>./cli/cli.go</code>.</p>
+<p>The pseudo code is in a comment in the file <code>./cli/cli.go</code> and it
+is reproduced below.</p>
+
+<pre><code>	//
+	// Pseudo Code:
+	// 1. Calcualte the total value of the account 'from'.  Call this 'tot'.
+	//    You can do this by calling `cc.GetTotalValueForAccount(from)`.
+	// 2. If the total, `tot` is less than the amount that is to be transfered,
+	//	  `amount` then fail.  Return an error &quot;Insufficient funds&quot;.  The person
+	//    is trying to bounce a check.
+	// 3. Get the list of output tranactions ( ../transactions/tx.go TxOutputType ).
+	//    Call this 'oldOutputs'.
+	// 4. Find the set of (may be empty - check for that) values that are pointed
+	//    to in the index - from the 'from' account.  Delete this from the
+	//    index.
+	// 5. Create a new empty transaction.  Call `transctions.NewEmptyTx` to create.
+	//	  Pass in the 'memo' and the 'from' for this tranaction.
+	// 6. Convert the 'oldOutputs' into a set of new inputs.  The type is
+	//    ../transctions/tx.go TxInputType.  Call `transactions.CreateTxInputsFromOldOutputs`
+	//	  to do this.
+	// 7. Save the new inputs in the tx.Input.
+	// 8. Create the new output for the 'to' address.  Call `transactions.CreateTxOutputWithFunds`.
+	//    Call this `txOut`.    Take `txOut` and append it to the tranaction by calling
+	//    `transactions.AppendTxOutputToTx`.
+	// 9. Calcualte the amount of &quot;change&quot; - if it is larger than 0 then we owe 'from'
+	//    change.  Create a 2nd tranaction with the change.  Append to the tranaction the
+	//    TxOutputType.
+	// 10. Return
+	//
+</code></pre>
+
+<h2>Steps that you will want to use</h2>
+
+<p>First you need to get the main program in <code>.../A-04/main</code> to compile.  This means having
+the solution to assignment 3 in the <code>.../A-04/merkle</code> directory.   Also you will need to
+fix <code>.../A-04/cli.go</code> around line 190 to <code>return</code> and take out the code that is
+incomplete.  Go to the <code>.../A-04/main</code> directory and:</p>
+
+<pre><code>	go build
+</code></pre>
+
+<p>You should end up with a <code>main</code> program or <code>main.exe</code> to run.</p>
+
+<p>Now you need to have a genesis block.  The code for this is already built.  You just have
+to run it.  In the <code>main</code> directory run:</p>
+
+<pre><code>	./main --create-genesis
+</code></pre>
+
+<p>This should create a directory <code>.../A-04/main/data</code> with 2 files in it.  The file are
+in JSON format.  You should be able to edit the files with a text editor (vi or vim
+for example) and take a look at them.   The file with the long name (it is the
+hash of the block) is the first block in the chain.  This is the &ldquo;genesis&rdquo; block.
+A bunch of accounts have been created with 50000 tokens each.  The other file is
+<code>index.json</code>.  It is our index to finding stuff in the set of blocks.  Take a
+look at both files.</p>
+
+<p>If you need to run <code>./main --create-genesis</code> again (so that you are starting over
+with a fresh chain) then you will need to manually delete all the files in the
+<code>.../A-04/main/data</code> directory.   I had to do this a bunch of times before I got
+the transaction code to work.</p>
+
+<h3>Other commands that are useful.</h3>
+
+<p>You can take a look at the accounts that have been created with:</p>
+
+<pre><code>	./main --list-accounts
+</code></pre>
+
+<p>and you can find out how much funds are in an account with:</p>
+
+<pre><code>	./main --show-balance 0x00000SomeAccountNumber
+</code></pre>
+
+<p>When you start out you should have a bunch of accounts with 50000
+tokens in each account.  The account numbers should look familiar.
+They are specified in the <code>./main/cfg.json</code> file and match with
+the accounts that Sasha emailed out.</p>
 
 </div>
 
