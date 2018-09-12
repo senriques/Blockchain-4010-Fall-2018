@@ -10,11 +10,12 @@ var TheContract = web3.eth.contract(abi);
 
 var contractInstance = TheContract.at(
 	// "0xb6c75ddf7ae39046f60c3ed3b6d17a4682083fd2"	// .199
-	"0xec849736cb876eb6050afe2886abb7f8a6582abc"	// new network	// xyzzy
+	"0xc7f5737f2d42913c71a850a4c5aeda9b1a619c34" // on new system through proxy
 );
 
 // var ownerAddr = "0x6ffba2d0f4c8fd7961f516af43c55fe2d56f6044";
-var ownerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";		// xyzzy
+var ownerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";		// Checked.
+var origOwnerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";	// Used later.
 
 var _origPin = "";			// Xyzzy - pull sha1 from static/srp/Client/lib/sjcl - and use to store/compare.
 var _LoginAddress = "";
@@ -238,7 +239,8 @@ function doLogout( ) {
 	_origPin = "";
 	_LoginAddress = "";
 	// ownerAddr = "0x6ffba2d0f4c8fd7961f516af43c55fe2d56f6044";
-	ownerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";
+	// ownerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";
+	ownerAddr = origOwnerAddr;
 	$(".id_radio").prop('checked', false);
 	setTimeout ( function() {
 		doPage ( 'p_Login' );
