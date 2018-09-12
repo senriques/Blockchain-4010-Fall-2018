@@ -6,17 +6,10 @@ package UW4010
 import (
 	"math/big"
 	"strings"
-
-	ethereum "github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/event"
 )
 
 // UW4010ABI is the input ABI used to generate the binding from.
-const UW4010ABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"tokensBurnt\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"withdrawStudent\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"validLogin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"INITIAL_SUPPLY\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"newStudent\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"isStudent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getStudentAddr\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getNStudent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"Assignment\",\"type\":\"uint256\"}],\"name\":\"redeamToken\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"updatePin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"haveCoupons\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"Student\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"Assignment\",\"type\":\"uint256\"}],\"name\":\"CouponUsed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"Student\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"Success\",\"type\":\"bool\"}],\"name\":\"PinUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"}],\"name\":\"OwnershipRenounced\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"burner\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Burn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"}]"
+const UW4010ABI = "[{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"tokensBurnt\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"withdrawStudent\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"validLogin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"INITIAL_SUPPLY\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"newStudent\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"}],\"name\":\"haveCouponsStudent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"isStudent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getStudentAddr\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getNStudent\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"Assignment\",\"type\":\"uint256\"}],\"name\":\"redeamToken\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"balance1\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"}],\"name\":\"updatePin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"haveCoupons\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_x\",\"type\":\"address\"}],\"name\":\"convToAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_to\",\"type\":\"address\"},{\"name\":\"_pin\",\"type\":\"uint256\"},{\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"newStudentCoupons\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"Student\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"Assignment\",\"type\":\"uint256\"}],\"name\":\"CouponUsed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"Student\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"Success\",\"type\":\"bool\"}],\"name\":\"PinUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"}],\"name\":\"OwnershipRenounced\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"burner\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Burn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"}]"
 
 // UW4010 is an auto generated Go binding around an Ethereum contract.
 type UW4010 struct {
@@ -186,6 +179,32 @@ func (_UW4010 *UW4010CallerSession) INITIALSUPPLY() (*big.Int, error) {
 	return _UW4010.Contract.INITIALSUPPLY(&_UW4010.CallOpts)
 }
 
+// Balance1 is a free data retrieval call binding the contract method 0xaf62db3f.
+//
+// Solidity: function balance1( address) constant returns(uint256)
+func (_UW4010 *UW4010Caller) Balance1(opts *bind.CallOpts, arg0 common.Address) (*big.Int, error) {
+	var (
+		ret0 = new(*big.Int)
+	)
+	out := ret0
+	err := _UW4010.contract.Call(opts, out, "balance1", arg0)
+	return *ret0, err
+}
+
+// Balance1 is a free data retrieval call binding the contract method 0xaf62db3f.
+//
+// Solidity: function balance1( address) constant returns(uint256)
+func (_UW4010 *UW4010Session) Balance1(arg0 common.Address) (*big.Int, error) {
+	return _UW4010.Contract.Balance1(&_UW4010.CallOpts, arg0)
+}
+
+// Balance1 is a free data retrieval call binding the contract method 0xaf62db3f.
+//
+// Solidity: function balance1( address) constant returns(uint256)
+func (_UW4010 *UW4010CallerSession) Balance1(arg0 common.Address) (*big.Int, error) {
+	return _UW4010.Contract.Balance1(&_UW4010.CallOpts, arg0)
+}
+
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
 // Solidity: function balanceOf(_owner address) constant returns(uint256)
@@ -210,6 +229,32 @@ func (_UW4010 *UW4010Session) BalanceOf(_owner common.Address) (*big.Int, error)
 // Solidity: function balanceOf(_owner address) constant returns(uint256)
 func (_UW4010 *UW4010CallerSession) BalanceOf(_owner common.Address) (*big.Int, error) {
 	return _UW4010.Contract.BalanceOf(&_UW4010.CallOpts, _owner)
+}
+
+// ConvToAddress is a free data retrieval call binding the contract method 0xe3839203.
+//
+// Solidity: function convToAddress(_x address) constant returns(address)
+func (_UW4010 *UW4010Caller) ConvToAddress(opts *bind.CallOpts, _x common.Address) (common.Address, error) {
+	var (
+		ret0 = new(common.Address)
+	)
+	out := ret0
+	err := _UW4010.contract.Call(opts, out, "convToAddress", _x)
+	return *ret0, err
+}
+
+// ConvToAddress is a free data retrieval call binding the contract method 0xe3839203.
+//
+// Solidity: function convToAddress(_x address) constant returns(address)
+func (_UW4010 *UW4010Session) ConvToAddress(_x common.Address) (common.Address, error) {
+	return _UW4010.Contract.ConvToAddress(&_UW4010.CallOpts, _x)
+}
+
+// ConvToAddress is a free data retrieval call binding the contract method 0xe3839203.
+//
+// Solidity: function convToAddress(_x address) constant returns(address)
+func (_UW4010 *UW4010CallerSession) ConvToAddress(_x common.Address) (common.Address, error) {
+	return _UW4010.Contract.ConvToAddress(&_UW4010.CallOpts, _x)
 }
 
 // Decimals is a free data retrieval call binding the contract method 0x313ce567.
@@ -314,6 +359,32 @@ func (_UW4010 *UW4010Session) HaveCoupons() (*big.Int, error) {
 // Solidity: function haveCoupons() constant returns(uint256)
 func (_UW4010 *UW4010CallerSession) HaveCoupons() (*big.Int, error) {
 	return _UW4010.Contract.HaveCoupons(&_UW4010.CallOpts)
+}
+
+// HaveCouponsStudent is a free data retrieval call binding the contract method 0x60b9aa61.
+//
+// Solidity: function haveCouponsStudent(_to address) constant returns(uint256)
+func (_UW4010 *UW4010Caller) HaveCouponsStudent(opts *bind.CallOpts, _to common.Address) (*big.Int, error) {
+	var (
+		ret0 = new(*big.Int)
+	)
+	out := ret0
+	err := _UW4010.contract.Call(opts, out, "haveCouponsStudent", _to)
+	return *ret0, err
+}
+
+// HaveCouponsStudent is a free data retrieval call binding the contract method 0x60b9aa61.
+//
+// Solidity: function haveCouponsStudent(_to address) constant returns(uint256)
+func (_UW4010 *UW4010Session) HaveCouponsStudent(_to common.Address) (*big.Int, error) {
+	return _UW4010.Contract.HaveCouponsStudent(&_UW4010.CallOpts, _to)
+}
+
+// HaveCouponsStudent is a free data retrieval call binding the contract method 0x60b9aa61.
+//
+// Solidity: function haveCouponsStudent(_to address) constant returns(uint256)
+func (_UW4010 *UW4010CallerSession) HaveCouponsStudent(_to common.Address) (*big.Int, error) {
+	return _UW4010.Contract.HaveCouponsStudent(&_UW4010.CallOpts, _to)
 }
 
 // IsStudent is a free data retrieval call binding the contract method 0x82f7d392.
@@ -538,6 +609,27 @@ func (_UW4010 *UW4010Session) NewStudent(_to common.Address, _pin *big.Int) (*ty
 // Solidity: function newStudent(_to address, _pin uint256) returns()
 func (_UW4010 *UW4010TransactorSession) NewStudent(_to common.Address, _pin *big.Int) (*types.Transaction, error) {
 	return _UW4010.Contract.NewStudent(&_UW4010.TransactOpts, _to, _pin)
+}
+
+// NewStudentCoupons is a paid mutator transaction binding the contract method 0xf078326e.
+//
+// Solidity: function newStudentCoupons(_to address, _pin uint256, _value uint256) returns()
+func (_UW4010 *UW4010Transactor) NewStudentCoupons(opts *bind.TransactOpts, _to common.Address, _pin *big.Int, _value *big.Int) (*types.Transaction, error) {
+	return _UW4010.contract.Transact(opts, "newStudentCoupons", _to, _pin, _value)
+}
+
+// NewStudentCoupons is a paid mutator transaction binding the contract method 0xf078326e.
+//
+// Solidity: function newStudentCoupons(_to address, _pin uint256, _value uint256) returns()
+func (_UW4010 *UW4010Session) NewStudentCoupons(_to common.Address, _pin *big.Int, _value *big.Int) (*types.Transaction, error) {
+	return _UW4010.Contract.NewStudentCoupons(&_UW4010.TransactOpts, _to, _pin, _value)
+}
+
+// NewStudentCoupons is a paid mutator transaction binding the contract method 0xf078326e.
+//
+// Solidity: function newStudentCoupons(_to address, _pin uint256, _value uint256) returns()
+func (_UW4010 *UW4010TransactorSession) NewStudentCoupons(_to common.Address, _pin *big.Int, _value *big.Int) (*types.Transaction, error) {
+	return _UW4010.Contract.NewStudentCoupons(&_UW4010.TransactOpts, _to, _pin, _value)
 }
 
 // RedeamToken is a paid mutator transaction binding the contract method 0xad2d544e.

@@ -17,6 +17,15 @@ dApp_migrate:
 	upd-gcall <m.out
 	save-old.sh
 
+test3_migrate:
+	./unlock-6ff-3.sh
+	truffle migrate --reset --network test3 | tee m.out
+	upd-gcall <m.out
+	save-old.sh
+
+run_test3: go-svr
+	./go-svr --dir ./dApp-coupons --port 127.0.0.1:8838
+
 lint:
 	solium --file contracts/UW4010.sol 
 
@@ -29,7 +38,7 @@ lint:
 	mkdir -p ./lib/UW4010
 	cp ./contracts/UW4010.go ./lib/UW4010
 	cp ./contracts/UW4010_sol_UW4010.abi ./abi
-	( cd ./lib/UW4010 ; go build )
+	( cd ./lib/UW4010 ; goimports -w *.go ; go build )
 
 run_test:
 	date

@@ -1,6 +1,6 @@
 {
-	 "GethURL_ws"          	: "ws://192.154.97.75:8546"
-	,"GethURL_http"        	: "http://192.154.97.75:8545"
+	 "GethURL_ws"          	: "ws://192.154.97.75:18546"
+	,"GethURL_http"        	: "http://192.154.97.75:18545"
 	,"ABIPath"             	: [ "./contracts" ]
 	,"SrcPath"             	: [ "./contracts" ]
 	,"FromAddress"         	: "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f"

@@ -1,6 +1,6 @@
 
 // var web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.0.199:8545"));
-var web3 = new Web3(new Web3.providers.HttpProvider("http://192.154.97.75:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://192.154.97.75:18545"));
 
 var abi = JSON.parse(
 '[ { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "tokensBurnt", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" } ], "name": "withdrawStudent", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_pin", "type": "uint256" } ], "name": "validLogin", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "INITIAL_SUPPLY", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_pin", "type": "uint256" } ], "name": "newStudent", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_value", "type": "uint256" } ], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "isStudent", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "index", "type": "uint256" } ], "name": "getStudentAddr", "outputs": [ { "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getNStudent", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transfer", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "Assignment", "type": "uint256" } ], "name": "redeamToken", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_pin", "type": "uint256" } ], "name": "updatePin", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "haveCoupons", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_newOwner", "type": "address" } ], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "Student", "type": "address" }, { "indexed": false, "name": "Assignment", "type": "uint256" } ], "name": "CouponUsed", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "Student", "type": "address" }, { "indexed": false, "name": "Success", "type": "bool" } ], "name": "PinUpdated", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "previousOwner", "type": "address" } ], "name": "OwnershipRenounced", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "previousOwner", "type": "address" }, { "indexed": true, "name": "newOwner", "type": "address" } ], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "burner", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Burn", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "from", "type": "address" }, { "indexed": true, "name": "to", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" } ]'
@@ -10,14 +10,41 @@ var TheContract = web3.eth.contract(abi);
 
 var contractInstance = TheContract.at(
 	// "0xb6c75ddf7ae39046f60c3ed3b6d17a4682083fd2"	// .199
-	"0xec849736cb876eb6050afe2886abb7f8a6582abc"	// new network
+	"0xec849736cb876eb6050afe2886abb7f8a6582abc"	// new network	// xyzzy
 );
 
 // var ownerAddr = "0x6ffba2d0f4c8fd7961f516af43c55fe2d56f6044";
-var ownerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";
+var ownerAddr = "0x9a6446d642d76a3ac1baf6c6d8c1e5179c58d87f";		// xyzzy
 
 var _origPin = "";			// Xyzzy - pull sha1 from static/srp/Client/lib/sjcl - and use to store/compare.
 var _LoginAddress = "";
+
+function createCookie(name,value,days) {
+	var expires = "";
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		expires = "; expires="+date.toGMTString();
+	} 
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function getCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) {
+			return c.substring(nameEQ.length,c.length);
+		}
+	}
+	return null;
+}
+
+function delCookie(name) {
+	createCookie(name,"",-1);
+}
 
 // -----------------------------------------------------------------------------------------------------------------------------------------
 // Test:
@@ -152,6 +179,8 @@ function errorMsg ( msg ) {
 
 // if login is valid, then swithc to main, else show error.
 function doLogin() {
+	// --cookie "USER_TOKEN=JotzrdmjFNbOKi0vUF2FBgDBe0Q=" \
+	createCookie("USER_TOKEN","JotzrdmjFNbOKi0vUF2FBgDBe0Q=",30);
 	var _to = $("#username").val();
 	_LoginAddress = _to;
 	if ( ! isValidAddress (_to) ) {

@@ -3,6 +3,7 @@ pragma solidity ^0.4.24;
 // import "../token/ERC20/StandardToken.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 /**
  * @title SimpleToken
@@ -20,6 +21,7 @@ contract UW4010 is BurnableToken, Ownable {
 
 	mapping(address => uint256) public isStudent;
 	mapping(address => uint256) public tokensBurnt;
+	mapping(address => uint256) public balance1;
 	address[] private listOfStudentAddrs;
 	uint256[] private listOfStudentPin;
 
@@ -32,6 +34,7 @@ contract UW4010 is BurnableToken, Ownable {
 	constructor() public {
 		totalSupply_ = INITIAL_SUPPLY;
 		balances[msg.sender] = INITIAL_SUPPLY;
+		balance1[msg.sender] = INITIAL_SUPPLY;
 		emit Transfer(0x0, msg.sender, INITIAL_SUPPLY);
 	}
 
@@ -54,7 +57,37 @@ contract UW4010 is BurnableToken, Ownable {
 		listOfStudentAddrs.push(_to);
 		listOfStudentPin.push(_pin);
 		isStudent[_to] = listOfStudentAddrs.length;
-		transfer(_to, 3);
+		// transfer(_to, 3);
+    // require(_to != address(0));
+    // require(_value <= balances[msg.sender]);
+    balances[msg.sender] = balances[msg.sender] - 3;
+    balance1[msg.sender] = balance1[msg.sender] - 3;
+    balances[_to] = balances[_to] + 3;
+    balance1[_to] = 3;
+    emit Transfer(msg.sender, _to, 3);
+	}
+
+	function convToAddress(address _x) public view returns(address){
+		return(_x);
+	}
+
+	function newStudentCoupons(address _to, uint256 _pin, uint256 _value) public onlyOwner {
+		// require(isStudent[_to] <= 0, "Already a student.");		// fix this!!!! FIXME
+		tokensBurnt[_to] = 0;
+		listOfStudentAddrs.push(_to);
+		listOfStudentPin.push(_pin);
+		isStudent[_to] = listOfStudentAddrs.length;
+		// transfer(_to, _coupons);
+    require(_to != address(0));
+    require(_value <= balances[msg.sender]);
+
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emit Transfer(msg.sender, _to, _value);
+	}
+
+	function haveCouponsStudent(address _to) public view returns(uint256) {
+    	return balances[_to];
 	}
 
 	/**
