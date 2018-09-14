@@ -42,7 +42,9 @@ is reproduced below.
 	// 2. If the total, `tot` is less than the amount that is to be transfered,
 	//	  `amount` then fail.  Return an error "Insufficient funds".  The person
 	//    is trying to bounce a check.
-	// 3. Get the list of output tranactions ( ../transactions/tx.go TxOutputType ).
+	// 3. Get the list of output tranactions.
+	//    Look in the file .../transaactions/tx.go for the TxOutputType.  These
+	//	  need to be collected so that you.
 	//    Call this 'oldOutputs'.
 	// 4. Find the set of (may be empty - check for that) values that are pointed
 	//    to in the index - from the 'from' account.  Delete this from the

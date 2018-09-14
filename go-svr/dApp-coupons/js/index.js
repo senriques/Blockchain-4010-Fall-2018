@@ -2,6 +2,13 @@
 // var web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.0.199:8545"));
 var web3 = new Web3(new Web3.providers.HttpProvider("http://192.154.97.75:18545"));
 
+function preflight() {
+	// --cookie "USER_TOKEN=JotzrdmjFNbOKi0vUF2FBgDBe0Q=" \
+	jQuery.get("http://192.154.97.75:18545/preflight?USER_TOKEN=JotzrdmjFNbOKi0vUF2FBgDBe0Q=",function(data,status){
+		console.log ( "data=", data, "status=", status );
+	});
+}
+
 var abi = JSON.parse(
 '[ { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "tokensBurnt", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" } ], "name": "withdrawStudent", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_pin", "type": "uint256" } ], "name": "validLogin", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "INITIAL_SUPPLY", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_pin", "type": "uint256" } ], "name": "newStudent", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_value", "type": "uint256" } ], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "isStudent", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "index", "type": "uint256" } ], "name": "getStudentAddr", "outputs": [ { "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getNStudent", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transfer", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "Assignment", "type": "uint256" } ], "name": "redeamToken", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_pin", "type": "uint256" } ], "name": "updatePin", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "haveCoupons", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_newOwner", "type": "address" } ], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "Student", "type": "address" }, { "indexed": false, "name": "Assignment", "type": "uint256" } ], "name": "CouponUsed", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "Student", "type": "address" }, { "indexed": false, "name": "Success", "type": "bool" } ], "name": "PinUpdated", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "previousOwner", "type": "address" } ], "name": "OwnershipRenounced", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "previousOwner", "type": "address" }, { "indexed": true, "name": "newOwner", "type": "address" } ], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "burner", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Burn", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "from", "type": "address" }, { "indexed": true, "name": "to", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" } ]'
 );
@@ -80,6 +87,7 @@ function doTransferToken() {
 }
 
 function doTransferTokenSubmit() {
+	preflight();
 	var _to =$("#toTT").val();
 	var _pw = $("#pwTT").val();
 	if ( _to === _LoginAddress ) {
@@ -124,6 +132,7 @@ var mapAssignmentToNumber = {
 };
 
 function doRedeamCouponSubmit() {
+	preflight();
 	var _assignment = $('input[name=assignment]:checked').val(); 
 	var _pw = $("#pwRA").val();
 	// function redeamToken(uint256 Assignment) public {
@@ -146,6 +155,7 @@ function doRedeamCouponSubmit() {
 
 // function getNStudent() public view onlyOwner returns (uint256) {
 function getNStudent() {
+	preflight();
 	contractInstance.getNStudent({gas:300000, from: ownerAddr}, function(err, result) {
 		console.log ( "err=", err, "result=", result );
 		$("#outErr").html(result.c[0]);
@@ -154,6 +164,7 @@ function getNStudent() {
 
 // function newStudent(address _to) public onlyOwner {
 function newStudent(_to,_pin) {
+	preflight();
 	// var to = web3.eth.accounts[0];
 	contractInstance.newStudent(_to, _pin, {gas:300000, from: ownerAddr}, function(err, result) {
 		console.log ( "err=", err, "result=", result );
@@ -181,6 +192,7 @@ function errorMsg ( msg ) {
 // if login is valid, then swithc to main, else show error.
 function doLogin() {
 	// --cookie "USER_TOKEN=JotzrdmjFNbOKi0vUF2FBgDBe0Q=" \
+	preflight();
 	createCookie("USER_TOKEN","JotzrdmjFNbOKi0vUF2FBgDBe0Q=",30);
 	var _to = $("#username").val();
 	_LoginAddress = _to;
@@ -196,6 +208,7 @@ function doLogin() {
 			// xyzzy - return
 		}
 	}
+	$(".my_admin").hide();
 	contractInstance.validLogin( _to, _pin, {gas:300000, from: ownerAddr}, function(err, result) {
 		console.log ( "err=", err, "result=", result );
 		if ( err ) {
@@ -215,6 +228,7 @@ function doLogin() {
 
 function doShowBalance() {
 	doPage( 'p_ShowBalance' );
+	preflight();
 	contractInstance.balanceOf(_LoginAddress, {gas:300000, from: ownerAddr}, function(err, result) {
 		console.log ( "err=", err, "result=", result );
 		$("#outToken").html(result.c[0]);
@@ -223,6 +237,7 @@ function doShowBalance() {
 
 function doShowNoOfStudetns() {
 	doPage( 'p_ShowBalance' );
+	preflight();
 	contractInstance.getNStudent({gas:300000, from: ownerAddr}, function(err, result) {
 		console.log ( "err=", err, "result=", result );
 		$("#outToken").html(result.c[0]);

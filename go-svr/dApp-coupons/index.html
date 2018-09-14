@@ -10,7 +10,7 @@
 	<img src="Ethereum_logo_2014.svg" height="150" style="padding:20px;"><br>
 	<div id="p_Login" class="my_page">
 		User Address: <input type="text" size=40 id="username" name="username" class="input_data" /> <br>
-		User Pin Code: <input type="text" size=10 id="pin" name="pin" class="input_data" /> <br>
+		User Pin Code: <input type="text" size=10 id="pin" name="pin" class="input_data" /> hint 6 digits <br>
 		<a href="#" onclick="doLogin()" class="btn btn-primary">Login</a> <br>
 	</div>
 	<div id="p_Main" class="my_page">
@@ -18,10 +18,12 @@
 		<a href="#" onclick="doShowBalance()" class="btn btn-primary">Show Balance</a> <br>
 		<a href="#" onclick="doRedeamCoupon()" class="btn btn-primary">Redeam Coupon</a> <br>
 		<a href="#" onclick="doTransferToken()" class="btn btn-primary">Transfer Token</a> <br>
+		<!--
 		<a href="#" onclick="doPage('a_NewStudent')" class="btn btn-primary my_admin">New Student</a> <br>
 		<a href="#" onclick="doPage('a_WithdrawStudent')" class="btn btn-primary my_admin">Student Withdraw</a> <br>
 		<a href="#" onclick="doPage('a_UpdatePin')" class="btn btn-primary my_admin">Update Pin</a> <br>
 		<a href="#" onclick="doPage('a_ActivityList')" class="btn btn-primary my_admin">Activity List (Redeamed Coupons)</a> <br>
+		-->
 	</div>
 	<div id="p_Logout" class="my_page">
 		<h2> You are now logged out </h2>
@@ -57,11 +59,12 @@
 	</div>
 	<div id="p_TransferToken" class="my_page">
 		Transfer To (Account Number): <input type="text" size=40 id="toTT" name="toTT" class="input_data" /> <br>
-		Account Password (not the pw): <input type="text" id="pwTT" name="pwTT" class="input_data" /> <br>
+		Account Password (not the pin): <input type="text" id="pwTT" name="pwTT" class="input_data" /> hint: 16 chars long <br>
 		<a href="#" onclick="doTransferTokenSubmit()" class="btn btn-primary">Transfer Token</a> <br>
 		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
 	</div>
 	<!-- ============================================================================================================================== -->
+	<!--
 	<div id="a_NewStudent" class="my_page my_admin">
 		xyzzy <br>
 		NewStudent Page <br>
@@ -82,11 +85,12 @@
 		ActivityList Page <br>
 		<a href="#" onclick="doPage('p_Main')" class="btn btn-primary">Return To Menu</a> <br>
 	</div>
+	-->
 	<div id="outErr" class="output_data"></div>
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-<script src="./js/index.js?v=0017"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="./js/index.js?v=0024"></script>
 <!--
 
 contract_data.transfer(receiver,amount,{from:web3.eth.accounts[0]});

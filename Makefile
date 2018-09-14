@@ -1,6 +1,6 @@
 
 
-all: README.html sillabus.html Handout01.html attestation.html class-summary.html
+all: README.html sillabus.html Handout01.html attestation.html class-summary.html Security.html
 
 FR=./Lectures/Lect-01
 
@@ -32,4 +32,9 @@ attestation.html: attestation.md
 	markdown-cli --input=./attestation.md --output=attestation.html
 	cat ${FR}/css/pre ${FR}/css/markdown.css ${FR}/css/post ./md.css ${FR}/css/hpre attestation.html ${FR}/css/hpost >/tmp/attestation.html
 	mv /tmp/attestation.html ./attestation.html
+
+Security.html: Security.md
+	markdown-cli --input=./Security.md --output=Security.html
+	cat ${FR}/css/pre ${FR}/css/markdown.css ${FR}/css/post ./md.css ${FR}/css/hpre Security.html ${FR}/css/hpost >/tmp/Security.html
+	mv /tmp/Security.html ./Security.html
 
