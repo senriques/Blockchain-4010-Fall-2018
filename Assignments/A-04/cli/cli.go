@@ -12,10 +12,10 @@ import (
 	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/hash"
 	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/index"
 	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/lib"
-	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/mine"
+//	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/mine"
 	"github.com/Univ-Wyo-Education/Blockchain-4010-Fall-2018/Assignments/A-04/transactions"
-	"github.com/pschlump/MiscLib"
-	"github.com/pschlump/godebug"
+//	"github.com/pschlump/MiscLib"
+//	"github.com/pschlump/godebug"
 )
 
 type CLI struct {
@@ -39,15 +39,14 @@ func (cc *CLI) BuildIndexFileName() (fnIndexPath string) {
 }
 
 // BuildBlockFileName takes a hashStr that is the name of the JSON
-// file withouth the path and `.json` and combines to make a full
-// file name.
+// file withouth the path and `.json` and combines to make a full file name.
 func (cc *CLI) BuildBlockFileName(hashStr string) (fnBlockPath string) {
 	fnBlockPath = filepath.Join(cc.GCfg.DataDir, hashStr+".json") //
 	return
 }
 
 // CreateGenesis creates and writes out the genesis block and the
-// initial index.json files.  Theis is the ""genesis"" of the
+// initial index.json files.  This is the ""genesis"" of the
 // blockchain.
 func (cc *CLI) CreateGenesis(args []string) {
 	gb := block.InitGenesisBlock()
@@ -85,9 +84,7 @@ func (cc *CLI) CreateGenesis(args []string) {
 		os.Exit(1)
 		return
 	}
-
 	cc.AppendBlock(gb) // Append block to list of blocks, set the index postion.  Write block and index.
-
 }
 
 // TestReadBlock Test code for command line.
@@ -118,21 +115,17 @@ func (cc *CLI) TestWriteBlock(args []string) {
 	fmt.Printf("PASS\n")
 }
 
-// TestSendFunds will process command argumetns and walk through the transaction process of sending funds
+// TestSendFunds will process command arguments and walk through the transaction process of sending funds
 // once.  This is essentially the transaction process - but driven from the command line.
 func (cc *CLI) TestSendFunds(args []string) {
-
 	// In Assignment 5: args should be 6 - FromAddress, ToAddress, AmountToSend, Signature, MsgHash, Msg, Memo
 	//			Last 4 args can just be 'x' for the moment - placeholders - not checked - not used.
-	if len(args) != 7 {
-		fmt.Fprintf(os.Stderr, "Should have 6 argumetns after the flag.  FromAddress, ToAddress, AmountToDend, x, x, x\n")
+	if len(args) != 9 {
+		fmt.Fprintf(os.Stderr, "index.json, TestSendFunds, From, Sig, Hash, Msg, To, Amt, Memo\n")
 		os.Exit(1)
 		return
 	}
-
-	// -----------------------------------------------------------------------------
 	// Read in index and all of the blocks.
-	// -----------------------------------------------------------------------------
 	cc.ReadGlobalConfig()
 
 	// fmt.Printf("%sSUCCESS #1 - Read in the index and the blocks!%s\n", MiscLib.ColorGreen, MiscLib.ColorReset)
@@ -141,11 +134,11 @@ func (cc *CLI) TestSendFunds(args []string) {
 	// -----------------------------------------------------------------------------
 	// Do the send funds stuff
 	// -----------------------------------------------------------------------------
-	from := addr.MustParseAddr(args[0])
-	to := addr.MustParseAddr(args[1])
-	amt64, err := strconv.ParseInt(args[2], 10, 64)
+	from := addr.MustParseAddr(args[2])
+	to := addr.MustParseAddr(args[6])
+	amt64, err := strconv.ParseInt(args[7], 10, 64)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Invalid parse of amout [%s] error [%s]\n", args[2], err)
+		fmt.Fprintf(os.Stderr, "Invalid parse of amount [%s] error [%s]\n", args[2], err)
 		os.Exit(1)
 	}
 	amount := int(amt64) // type cast from int64 to int
@@ -153,33 +146,25 @@ func (cc *CLI) TestSendFunds(args []string) {
 		fmt.Fprintf(os.Stderr, "Amount is out of range - can not send 0 or negative amounts [%d]\n", amount)
 		os.Exit(1)
 	}
-
-	//
-
 	// bk := transactions.NewEmptyBlock()
 	bk := cc.NewEmptyBlock()
 	lib.Assert(bk.Index == len(cc.AllBlocks))
-
 	tx, err := cc.SendFundsTransaction(from, lib.SignatureType(args[3]), args[4], args[5], to, amount, args[6])
+
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to transfer error [%s]\n", err)
 		os.Exit(1)
 		return
 	}
 	cc.AppendTxToBlock(bk, tx)
-
 	// -----------------------------------------------------------------------------
 	// Write out updated index and new block at end.
 	// -----------------------------------------------------------------------------
 	cc.AppendBlock(bk)
-
 }
 
 // SendFundsTransaction is the core chunk of moving funds from one account to
 // another.
-//
-// This is your homework.  Finish out this function and test.
-//
 func (cc *CLI) SendFundsTransaction(
 	from addr.AddressType, // account to transfer from
 	sig lib.SignatureType, // not used yet - ditital signature - Assignment 5
@@ -189,45 +174,89 @@ func (cc *CLI) SendFundsTransaction(
 	amount int, //            Amount of funds to send
 	memo string, //           Memo to add to transaction (Comment)
 ) (
-	tx *transactions.TransactionType,
+  tx *transactions.TransactionType,
 	err error,
 ) {
 	if !lib.ValidSignature(sig, messageHash, from) { // Assignment 5 implements, just true for now.
 		return nil, fmt.Errorf("Signature not valid")
 	}
-	// TODO - validate that message - after it is parse, has from/to/amount - and
+	// TODO - validate that message - after it is parsed, has from/to/amount - and
 	// that the hash of messageHash is 'message'.  Assignment 5.
 
-	// --- Homework Section for Assignment 4 ----------------------------
-	// Replace the line below with code that performs a transaction
-	return cc.InstructorSendFundsTransaction(from, sig, messageHash, message, to, amount, memo)
-
-	//
-	// Pseudo Code:
 	// 1. Calcualte the total value of the account 'from'.  Call this 'tot'.
 	//    You can do this by calling `cc.GetTotalValueForAccount(from)`.
+	fromtotal := cc.GetTotalValueForAccount(from)
+	// fmt.Printf("fromtotal = %d\n",fromtotal)
+
 	// 2. If the total, `tot` is less than the amount that is to be transfered,
 	//	  `amount` then fail.  Return an error "Insufficient funds".  The person
 	//    is trying to bounce a check.
+	if (fromtotal < amount)	{
+		fmt.Printf("Insufficient Funds Available\n")
+		return nil, fmt.Errorf("Insufficient Funds")
+	}
+
 	// 3. Get the list of output tranactions ( ../transactions/tx.go TxOutputType ).
 	//    Call this 'oldOutputs'.
+	oldOutputs := cc.GetNonZeroForAccount(from)
+	lengthofslice := len(oldOutputs)
+
 	// 4. Find the set of (may be empty - check for that) values that are pointed
-	//    to in the index - from the 'from' account.  Delete this from the
-	//    index.
+	//    to in the index - from the 'from' account.
+	if lengthofslice < 1	{
+		fmt.Printf("Index/account issue\n")
+		return nil, fmt.Errorf("No entry in index found")
+	}
+	/*********************** Delete this from the index.************************/
+	fromkey := fmt.Sprintf("%s", from)
+	if _, ok := cc.BlockIndex.FindValue.AddrIndex[fromkey]; ok	{
+		delete(cc.BlockIndex.FindValue.AddrIndex, fromkey)
+	}
+	//for key := range cc.BlockIndex.FindValue.AddrIndex {
+	//	if (string(cc.BlockIndex.FindValue.AddrIndex[fmt.Sprintf("%s", key)].Addr) == string(from))	{
+	//		fmt.Printf("FOUND: %v\n", cc.BlockIndex.FindValue.AddrIndex[fmt.Sprintf("%s", key)].Value)
+  //		cc.BlockIndex.FindValue.AddrIndex[fmt.Sprintf("%s", key)].Value = 0 } }
+
 	// 5. Create a new empty transaction.  Call `transctions.NewEmptyTx` to create.
 	//	  Pass in the 'memo' and the 'from' for this tranaction.
+	//	  func NewEmptyTx(memo string, passedAcct addr.AddressType)
+	//		*TransactionType { return &TransactionType{
+	t0Transaction := transactions.NewEmptyTx(memo, from)
+	// fmt.Printf("t0Transaction = %v\n", *t0Transaction)
+
 	// 6. Convert the 'oldOutputs' into a set of new inputs.  The type is
-	//    ../transctions/tx.go TxInputType.  Call `transactions.CreateTxInputsFromOldOutputs`
-	//	  to do this.
+	//    ../transctions/tx.go TxInputType.
+	//	  Call `transactions.CreateTxInputsFromOldOutputs` to do this.
+	NewTxInput, err := transactions.CreateTxInputsFromOldOutputs(oldOutputs)
+
 	// 7. Save the new inputs in the tx.Input.
+	t0Transaction.Input = NewTxInput
+	//fmt.Printf("t0Transaction = %v\n", t0Transaction)
+
 	// 8. Create the new output for the 'to' address.  Call `transactions.CreateTxOutputWithFunds`.
 	//    Call this `txOut`.    Take `txOut` and append it to the tranaction by calling
 	//    `transactions.AppendTxOutputToTx`.
+	TxOut, err := transactions.CreateTxOutputWithFunds(to, amount)
+	fmt.Printf("Transfer to   = %v\n", TxOut)
+	transactions.AppendTxOutputToTx(t0Transaction, TxOut)
+
 	// 9. Calcualte the amount of "change" - if it is larger than 0 then we owe 'from'
 	//    change.  Create a 2nd tranaction with the change.  Append to the tranaction the
 	//    TxOutputType.
+	change := fromtotal - amount
+	if change >= 0	{
+//		fmt.Printf("fromtotal = %d, change = %d\n", fromtotal,change)
+		TxOut, err := transactions.CreateTxOutputWithFunds(from, change)
+		if err != nil		{
+		}
+		TxOut.Amount = change
+		fmt.Printf("Transfer from = %v\n", TxOut)
+		transactions.AppendTxOutputToTx(t0Transaction, TxOut)
+		//fmt.Printf("t0Transaction (new) = %v\n", *t0Transaction)
+	}
+
 	// 10. Return
-	//
+	return t0Transaction, nil
 }
 
 func (cc *CLI) NewEmptyBlock() (bk *block.BlockType) {
@@ -239,7 +268,6 @@ func (cc *CLI) NewEmptyBlock() (bk *block.BlockType) {
 
 // ListAccounts will walk through the index and find all the accounts, construct a non-dup
 // list the accounts and print it out.
-//
 // Improvement - this could be split into a library function to get the accoutns and
 // then just print.
 func (cc *CLI) ListAccounts(args []string) {
@@ -265,29 +293,24 @@ func (cc *CLI) ListAccounts(args []string) {
 // balance for that account.
 func (cc *CLI) ShowBalance(args []string) {
 	cc.ReadGlobalConfig()
-
-	if len(args) != 1 {
-		fmt.Fprintf(os.Stderr, "Should have 1 argumetn after the flag.  AcctToList\n")
+	if len(args) != 3 {
+		fmt.Fprintf(os.Stderr, "Should have 2 arguments after the flag.  AcctToList\n")
 		os.Exit(1)
 		return
 	}
-
-	acct := addr.MustParseAddr(args[0])
-
+	acct := addr.MustParseAddr(args[2])
 	fmt.Printf("Acct: %s Value: %d\n", acct, cc.GetTotalValueForAccount(acct))
 }
 
 // GetTotalValueForAccount walks the index finding all the non-zero tranactions for an
 // account and adds up the total value for the account.
 func (cc *CLI) GetTotalValueForAccount(acct addr.AddressType) (sum int) {
-
 	unusedOutput := cc.BlockIndex.FindValue.AddrIndex[fmt.Sprintf("%s", acct)]
 	// fmt.Fprintf(os.Stderr, "Acct: [%s] cc=%s AT:%s\n", acct, lib.SVarI(cc), godebug.LF())
-
 	sum = 0
 	for _, blockLoc := range unusedOutput.Value {
 		if db4 {
-			fmt.Fprintf(os.Stderr, "blocLoc: [%s] acct[%s] AT:%s\n", lib.SVarI(blockLoc), acct, godebug.LF())
+//			fmt.Fprintf(os.Stderr, "blocLoc: [%s] acct[%s] AT:%s\n", lib.SVarI(blockLoc), acct, godebug.LF())
 		}
 
 		lib.Assert(blockLoc.BlockIndex >= 0 && blockLoc.BlockIndex < len(cc.AllBlocks))
@@ -305,48 +328,34 @@ func (cc *CLI) GetTotalValueForAccount(acct addr.AddressType) (sum int) {
 
 				lib.Assert(out.Amount >= 0)
 				sum += out.Amount
-
 				// fmt.Printf("bottom of loop: sum=[%d] AT:%s\n", sum, godebug.LF())
 			}
 		}
 	}
-
 	lib.Assert(sum >= 0)
 	return
 }
 
-// GetNonZeroForAccount returns a slice of tranactions that have a positive (Non-Zero) balance.
-// This is the set of output tranactions that will need to be turned into input tranactions
-// to make a funds transfer occure.
 func (cc *CLI) GetNonZeroForAccount(acct addr.AddressType) (rv []*transactions.TxOutputType) {
-
 	unusedOutput := cc.BlockIndex.FindValue.AddrIndex[fmt.Sprintf("%s", acct)]
-
 	for _, blockLoc := range unusedOutput.Value {
 		if db6 {
-			fmt.Fprintf(os.Stderr, "blocLoc: [%s] acct[%s] AT:%s\n", lib.SVarI(blockLoc), acct, godebug.LF())
+			fmt.Fprintf(os.Stderr, "blocLoc: [%s] acct[%s]\n", lib.SVarI(blockLoc), acct)
 		}
-
 		lib.Assert(blockLoc.BlockIndex >= 0 && blockLoc.BlockIndex < len(cc.AllBlocks))
 		bk := cc.AllBlocks[blockLoc.BlockIndex]
-
 		if bk.Tx != nil {
-
 			lib.Assert(blockLoc.TxOffset >= 0 && blockLoc.TxOffset < len(bk.Tx))
 			tx := bk.Tx[blockLoc.TxOffset]
-
 			if tx.Output != nil {
-
 				lib.Assert(blockLoc.TxOutputPos >= 0 && blockLoc.TxOutputPos < len(tx.Output))
 				out := tx.Output[blockLoc.TxOutputPos]
-
 				if out.Amount > 0 {
 					rv = append(rv, &out)
 				}
 			}
 		}
 	}
-
 	return
 }
 
@@ -374,7 +383,7 @@ func (cc *CLI) AppendTxToBlock(bk *block.BlockType, tx *transactions.Transaction
 	hashKey := fmt.Sprintf("%s", tx.Account)
 	_, hasValueNow := cc.BlockIndex.FindValue.AddrIndex[hashKey]
 	if db2 {
-		fmt.Printf("Append: hasValueNow = %v, AT:%s\n", hasValueNow, godebug.LF())
+		fmt.Printf("Append: hasValueNow = %v, AT:%s\n", hasValueNow, /*godebug.LF()*/)
 	}
 
 	// Find all outputs - add them to index
@@ -403,11 +412,9 @@ func (cc *CLI) AppendTxToBlock(bk *block.BlockType, tx *transactions.Transaction
 
 // ReadGlobalConfig reads in the index and all of the blocks.
 func (cc *CLI) ReadGlobalConfig() {
-
 	// -------------------------------------------------------------------------------
 	// Read in index and blocks.
 	// -------------------------------------------------------------------------------
-
 	// Read in index so that we know what all the hashs for the blocks are.
 	fnIndexPath := cc.BuildIndexFileName()          //
 	BlockIndex, err := index.ReadIndex(fnIndexPath) //
@@ -418,7 +425,7 @@ func (cc *CLI) ReadGlobalConfig() {
 	cc.BlockIndex = *BlockIndex
 
 	if db5 {
-		fmt.Fprintf(os.Stderr, "dbg: AT: %s ->%s<-\n", godebug.LF(), cc.BlockIndex.Index)
+//		fmt.Fprintf(os.Stderr, "dbg: AT: %s ->%s<-\n", godebug.LF(), cc.BlockIndex.Index)
 	}
 	for ii, key := range cc.BlockIndex.Index {
 		// fmt.Printf("dbg: AT: %s ->%s<-\n", godebug.LF(), key)
@@ -469,7 +476,7 @@ func (cc *CLI) AppendBlock(bk *block.BlockType) {
 	bk.ThisBlockHash = hash.HashOf(block.SerializeBlock(bk))
 
 	if db6 {
-		fmt.Printf("%sbk.ThisBlockHash = %x, AT:%s%s\n", MiscLib.ColorCyan, bk.ThisBlockHash, godebug.LF(), MiscLib.ColorReset)
+//		fmt.Printf("%sbk.ThisBlockHash = %x, AT:%s%s\n", MiscLib.ColorCyan, bk.ThisBlockHash, godebug.LF(), MiscLib.ColorReset)
 	}
 
 	// Verify hash is unique - never seen before.
@@ -480,8 +487,7 @@ func (cc *CLI) AppendBlock(bk *block.BlockType) {
 	// -------------------------------------------------------------------------------
 	// Mine the block
 	// -------------------------------------------------------------------------------
-	mine.MineBlock(bk, cc.GCfg.MiningDifficulty)
-
+  //	mine.MineBlock(bk, /cc.GCfg.MiningDifficulty)		REMOVED TO COMPILE 102318 HW4
 	// -------------------------------------------------------------------------------
 	// Update the block index - this is the hard part.
 	// -------------------------------------------------------------------------------
