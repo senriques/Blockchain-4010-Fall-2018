@@ -1,0 +1,30 @@
+PS C:\Go\src\github.com\Univ-Wyo-Education\Blockchain-4010-Fall-2018\Assignments\A-09\main> go build
+PS C:\Go\src\github.com\Univ-Wyo-Education\Blockchain-4010-Fall-2018\Assignments\A-09\main> .\main
+Setup Complete :       v= 13136
+Send To Bob :          x= 20158
+Bob Challenges Alice : e= 1000
+Alice responds :       y= 5873
+Bob Verifies :         z= 20158
+Authorized! Yea
+PS C:\Go\src\github.com\Univ-Wyo-Education\Blockchain-4010-Fall-2018\Assignments\A-09\main> .\main
+Setup Complete :       v= 13136
+Send To Bob :          x= 82089
+Bob Challenges Alice : e= 1000
+Alice responds :       y= 1183
+Bob Verifies :         z= 82089
+Authorized! Yea
+
+PS C:\Go\src\github.com\Univ-Wyo-Education\Blockchain-4010-Fall-2018\Assignments\A-09\main> .\main Setup Complete :       v= 13136
+Send To Bob :          x= 27898
+Bob Challenges Alice : e= 1000
+Alice responds :       y= 3303
+Bob Verifies :         z= 27898
+Authorized! Yea
+PS C:\Go\src\github.com\Univ-Wyo-Education\Blockchain-4010-Fall-2018\Assignments\A-09\main> .\main
+Setup Complete :       v= 13136
+Send To Bob :          x= 55311
+Bob Challenges Alice : e= 1000
+Alice responds :       y= 6120
+Bob Verifies :         z= 55311
+Authorized! Yea
+PS C:\Go\src\github.com\Univ-Wyo-Education\Blockchain-4010-Fall-2018\Assignments\A-09\main>
